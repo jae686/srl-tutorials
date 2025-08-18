@@ -8,8 +8,8 @@
 - [SDK setup](https://github.com/ReyeMe/SaturnRingLib)
 
 ## A simple hello world
-- Anatomy of a SRL program
-- Best Parctices
+- Anatomy of a SRL project
+- Best Practices
 - Introduction to SRL::Debug
 
 ## Your First ~~triangle~~ point / line / quad / sprite (VDP1)
