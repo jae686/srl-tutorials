@@ -1,7 +1,7 @@
 # A Tutorial for SRL
 
 ## Sega Saturn Primer
-- Hardware Description
+- [Hardware Description](hardware.md)
 
 ## Introduction to SRL
 - Description Of Library
