@@ -1,4 +1,4 @@
-#SRL
+# SRL
 ## Description
 SRL is a wrapper , written in C++23 , that sits on top of SGL. SRL is opensource.
 
@@ -15,9 +15,8 @@ The library includes a class to deal with fixed point math, as efficently as pos
 + VDP2 wrapper functions make it fast and easy to set up NBG and RGB layers with tilemap and bitmap data. A custom CRAM manager allows for easier management of 16, 64, 128, and 256 color palettes.
 + Custom memory allocation with support for allocating in LWRAM and with ability to automatically determine size of the available dynamic memory.
 
-
 ## Alternatives
-+ [libyaul](https://github.com/yaul-org/libyaul). This is a opensource C library
++ [libyaul](https://github.com/yaul-org/libyaul). This is a opensource C library.
 
 
 
