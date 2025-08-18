@@ -1,33 +1,27 @@
-# A Tutorial for SRL
+# A Tutorial series for SRL
 
 ## Sega Saturn Primer
 - [Hardware Description](hardware.md)
 
 ## Introduction to SRL
-- Description Of Library
-- Alternatives
+- [Description Of Library, Features , Alternatives](srl_description.md)
 - [SDK setup](https://github.com/ReyeMe/SaturnRingLib)
 
-## Hello World
-- A simple hello world
-> - Anatomy of a SRL program
-> - Best Parctices
-> - Introduction to SRL::Debug
+## A simple hello world
+- Anatomy of a SRL program
+- Best Parctices
+- Introduction to SRL::Debug
 
-## Your First ~~triangle~~ point / line / quad (VDP1)
+## Your First ~~triangle~~ point / line / quad / sprite (VDP1)
 - Base Program Structure
 
-## Your First Sprite
-- 
-
 ## 3D Model pipeline
+- Description of the use of the tools for 3d mesh importing
+- the NYA Format
+- Limitations
+
+## Backgrounds and tilemaps (VDP2)
 - 
 
 ## Input Handling
-- 
-
-## 3D scenes
-- Description of the use of the tools for 3d mesh importing
-
-## Backgrounds and tilemaps (VDP2)
 - 
