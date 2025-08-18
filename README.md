@@ -5,8 +5,7 @@
 
 ## Introduction to SRL
 - Description Of Library
-- Requirementts
-- SDK setup
+- [SDK setup](https://github.com/ReyeMe/SaturnRingLib)
 
 ## Your First quad
 - Base Program Structure
