@@ -10,9 +10,9 @@
 
 ### Folder and File Structure :
 
-+ Your Project
++ `Your Project Folder`
   - `.gitignore`
-  - `Makefile`
+  - `Makefile` This makefile has configuration settings for SRL.
   - `compile.bat` compiles the project
   - `clean.bat` cleans the build directory
   - `run_with_mendafen.bat` runs the project inside mendafen emulator
