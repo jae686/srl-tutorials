@@ -24,14 +24,14 @@
 
 All programs using SRL must use the `srl.hpp` header at the start.
 
-``` 
+```cpp 
 #include <srl.hpp>
 ```
 
 Is is also recomended (but not mandatory), for legibility issues, to use the apropriate namespaces.
 SRL provides many datatypes designed to help with saturn development.
 
-```
+```cpp
 using namespace SRL::Types;
 using namespace SRL::Math::Types;
 ```
