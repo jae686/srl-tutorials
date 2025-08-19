@@ -17,6 +17,7 @@ The library includes a class to deal with fixed point math, as efficently as pos
 
 ## Alternatives
 + [libyaul](https://github.com/yaul-org/libyaul). This is a opensource C library.
++ [jo engine](https://www.jo-engine.org/). A C 2D / 3D game engine.
 
 
 

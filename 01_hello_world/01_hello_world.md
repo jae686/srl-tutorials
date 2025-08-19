@@ -47,15 +47,14 @@ Before the use of any SRL function, it must be initialized via the ``SRL::Core::
 
 The code, so far, looks like this
 
-```
+```cpp
 #include <srl.hpp>
 using namespace SRL::Types;
 using namespace SRL::Math::Types;
 
 int main()
 {
-   SRL::Core::Initialize(HighColor::Colors::Black);
-   
+   SRL::Core::Initialize(HighColor::Colors::Black); 
    return 0;
 }
 
@@ -79,7 +78,7 @@ This will print the "01_Tutorial" string at the x=1 ,y= 1 coordinates.
 
 This will be the resulting program :
 
-```
+```cpp
 #include <srl.hpp>
 
 // Using to shorten names for Vector and HighColor
@@ -91,11 +90,11 @@ int main()
 {
   SRL::Core::Initialize(HighColor::Colors::Black);
   SRL::Debug::Print(1,1, "01_Tutorial");
-	return 0;
+  return 0;
 }
 ```
 
-However this will not print anything on the screen.
+**However this will not print anything on the screen.**
 
 > [!IMPORTANT]
 > At the end of each frame the function [`SRL::Core::Synchronize()`](https://srl.reye.me/classSRL_1_1Core_a06c60715afe1f84b01286b5d7bc269e7.html#a06c60715afe1f84b01286b5d7bc269e7) must be called. Otherwise nothing will be drawn at the end of the frame.
@@ -103,7 +102,7 @@ However this will not print anything on the screen.
 
 The correct, working program looks like :
 
-```
+```cpp
 #include <srl.hpp>
 
 // Using to shorten names for Vector and HighColor
@@ -117,9 +116,11 @@ int main()
 	SRL::Core::Initialize(HighColor::Colors::Black);
   SRL::Debug::Print(1,1, "01_Tutorial");
   SRL::Core::Synchronize(); 
-	return 0;
+  return 0;
 }
 ```
+
+## Sumary
 
 
 
