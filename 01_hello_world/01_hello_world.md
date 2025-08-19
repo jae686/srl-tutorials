@@ -17,7 +17,7 @@
   - `clean.bat` cleans the build directory
   - `run_with_mendafen.bat` runs the project inside mendafen emulator
   - `src/` contains your project source files
-  - `cd/` files to be placed on the final, burned CD. File such as TGA files, NYA files, eyc
+  - `cd/` files to be placed on the final, burned CD. File such as TGA files, NYA files, etc
   - `BuildDrop/` contains the final build ISO
 
 ### Main.cxx
@@ -37,10 +37,10 @@ using namespace SRL::Math::Types;
 ```
 
 SRL program entry point is, as usual with C++ programs, the `int main()` function.
-Before the use of any SRL function, it must be initialized via the ``SRL::Core::Initialize`` function. A ´´SRL::Types::HighColor´´ containing the color must be provided.
+Before the use of any SRL function, it must be initialized via the ``SRL::Core::Initialize`` function. A [`SRL::Types::HighColor`](https://srl.reye.me/structSRL_1_1Types_1_1HighColor.html) containing the color must be provided.
 
 > [!TIP]
-> SRL already defines some colors that the programmer can use, without having to manually define its RGB values. For example `SRL::Types::HighColor::Colors::Black` for the back color. Now you can see why we define namespaces in order to ease the use of SRL defined types.
+> SRL already defines some [colors that the programmer can use](https://srl.reye.me/classSRL_1_1Types_1_1HighColor_1_1Colors.html), without having to manually define its RGB values. For example `SRL::Types::HighColor::Colors::Black` for the back color. Now you can see why we define namespaces in order to ease the use of SRL defined types.
 
 > [!IMPORTANT]
 > SRL *MUST* be initialized before the use of any SRL functionality.
@@ -63,9 +63,64 @@ int main()
 
 Now that we have the SRL initialized, we can start using it.
 
-We will begin how using the `SRL::Debug` class.
+We will begin how using the [`SRL::Debug`](https://srl.reye.me/classSRL_1_1Debug.html) class.
 
-This class and its member functions are used to print information to the screen, and it's meant to aid in debuging tasks.
+This class and its member functions are used to print information to the screen, and it's meant to aid in debuging tasks. In other words, you will be using it alot :) 
+
+To print a text to the screen, the [`SRL::Debug::Print`](https://srl.reye.me/classSRL_1_1Debug_afa892baf3e31d364ffe07350c916696f.html#afa892baf3e31d364ffe07350c916696f) function is used. There are 2 overloads : one that allows the print a simple string, and another that is a [variadic function](https://srl.reye.me/classSRL_1_1Debug_a4ab210527af751fedbbc8877a019252f.html#a4ab210527af751fedbbc8877a019252f) that takes arguments in the same way as the classic `printf()` function.
+
+Using this function can simply be done with :
+
+```
+SRL::Debug::Print(1,1, "01_Tutorial");
+```
+
+This will print the "01_Tutorial" string at the x=1 ,y= 1 coordinates.
+
+This will be the resulting program :
+
+```
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+// Main program entry
+int main()
+{
+  SRL::Core::Initialize(HighColor::Colors::Black);
+  SRL::Debug::Print(1,1, "01_Tutorial");
+	return 0;
+}
+```
+
+However this will not print anything on the screen.
+
+> [!IMPORTANT]
+> At the end of each frame the function [`SRL::Core::Synchronize()`](https://srl.reye.me/classSRL_1_1Core_a06c60715afe1f84b01286b5d7bc269e7.html#a06c60715afe1f84b01286b5d7bc269e7) must be called. Otherwise nothing will be drawn at the end of the frame.
+>
+
+The correct, working program looks like :
+
+```
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+// Main program entry
+int main()
+{
+  // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+  SRL::Debug::Print(1,1, "01_Tutorial");
+  SRL::Core::Synchronize(); 
+	return 0;
+}
+```
+
 
 
 
