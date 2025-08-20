@@ -3,7 +3,8 @@
 ## Author note
 
 > [!IMPORTANT]
-> As of August 2025, this tutorial series is a work in progress. New chaperts will be added as my personal time allows. 
+> As of August 2025, this tutorial series is a work in progress. New chapters will be added as my personal time allows. 
+> The Chapters as they are now may be changed as the tutorials are being written.
 
 
 ## Sega Saturn Primer
