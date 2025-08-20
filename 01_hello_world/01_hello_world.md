@@ -6,7 +6,7 @@
 > It is recomended to out your project files under `SaturnRingLib/Projects`
 
 > [!TIP]
-> It is more simple to copy a sample into the `Projects` folder and then add and change files as needed.
+> It is more simple to copy a sample into the `Projects` folder and then add or change files as needed.
 
 ### Folder and File Structure :
 
@@ -20,7 +20,7 @@
   - `cd/` files to be placed on the final, burned CD. File such as TGA files, NYA files, etc
   - `BuildDrop/` contains the final build ISO
 
-### src/Main.cxx
+### src/main.cxx
 
 > [!NOTE]
 > This tutorial assumes that a empty `main.cxx` file exists on the `<project folder>/src` folder.
@@ -116,7 +116,7 @@ using namespace SRL::Math::Types;
 int main()
 {
   // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+  SRL::Core::Initialize(HighColor::Colors::Black);
   SRL::Debug::Print(1,1, "01_Tutorial");
   SRL::Core::Synchronize(); 
   return 0;
@@ -129,7 +129,7 @@ To run the project inside an emulator with `run_with_mednafen.bat` in the projec
 ## Sumary
 
 On this short tutorial you learned that :
-- To start using the library its recomended that you copy a sample program in the `samples` folder into the `Projects` folder, and modify and add from there. This ensures the aid scripts and makefile are already in place.
+- To start using the library its recomended that you copy a sample program in the `samples` folder into the `Projects` folder, and modify and add from there. This ensures the helper scripts and makefile are already in place.
 - Every SRL project must:
   - Include `srl.hpp` header
   - Initialize the SRL library before using any `SRL` function
