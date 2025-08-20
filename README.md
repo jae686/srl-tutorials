@@ -22,10 +22,14 @@
 
 
 ## 02 - Your First ~~triangle~~ point / line / quad / sprite (VDP1)
+- Saturn HW drawing primer
+  - Screen Cordinates
+  - Primitives
+- Base Program Structure
 - Best Practices
   - dont use `double` , use `FXP` instead
 - Makefile parameters
-- Base Program Structure
+
 
 
 ## 03 - 3D Model pipeline
