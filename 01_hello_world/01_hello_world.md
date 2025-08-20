@@ -74,10 +74,10 @@ To print a text to the screen, the [`SRL::Debug::Print`](https://srl.reye.me/cla
 Using this function can simply be done with :
 
 ```cpp
-SRL::Debug::Print(1,1, "01_Tutorial");
+SRL::Debug::Print(1,1, "Hello World");
 ```
 
-This should print the "01_Tutorial" string at the x=1 ,y= 1 coordinates.
+This should print the "Hello World" string at the x=1 ,y= 1 coordinates.
 
 This will be the resulting program :
 
@@ -92,7 +92,7 @@ using namespace SRL::Math::Types;
 int main()
 {
   SRL::Core::Initialize(HighColor::Colors::Black);
-  SRL::Debug::Print(1,1, "01_Tutorial");
+  SRL::Debug::Print(1,1, "Hello World");
   return 0;
 }
 ```
@@ -117,7 +117,7 @@ int main()
 {
   // Initialize library
   SRL::Core::Initialize(HighColor::Colors::Black);
-  SRL::Debug::Print(1,1, "01_Tutorial");
+  SRL::Debug::Print(1,1, "Hello World");
   SRL::Core::Synchronize(); 
   return 0;
 }
