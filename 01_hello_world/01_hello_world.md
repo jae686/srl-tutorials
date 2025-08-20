@@ -20,7 +20,10 @@
   - `cd/` files to be placed on the final, burned CD. File such as TGA files, NYA files, etc
   - `BuildDrop/` contains the final build ISO
 
-### Main.cxx
+### src/Main.cxx
+
+> [!NOTE]
+> This tutorial assumes that a empty `main.cxx` file exists on the `<project folder>/src` folder.
 
 All programs using SRL must use the `srl.hpp` header at the start.
 
@@ -37,10 +40,10 @@ using namespace SRL::Math::Types;
 ```
 
 SRL program entry point is, as usual with C++ programs, the `int main()` function.
-Before the use of any SRL function, it must be initialized via the ``SRL::Core::Initialize`` function. A [`SRL::Types::HighColor`](https://srl.reye.me/structSRL_1_1Types_1_1HighColor.html) containing the color must be provided.
+Before the use of any SRL function, it must be initialized via the `SRL::Core::Initialize` function. A [`SRL::Types::HighColor`](https://srl.reye.me/structSRL_1_1Types_1_1HighColor.html) containing the color must be provided.
 
 > [!TIP]
-> SRL already defines some [colors that the programmer can use](https://srl.reye.me/classSRL_1_1Types_1_1HighColor_1_1Colors.html), without having to manually define its RGB values. For example `SRL::Types::HighColor::Colors::Black` for the back color. Now you can see why we define namespaces in order to ease the use of SRL defined types.
+> SRL already defines some [colors that the programmer can use](https://srl.reye.me/classSRL_1_1Types_1_1HighColor_1_1Colors.html), without having to manually define its RGB values. For example `SRL::Types::HighColor::Colors::Black` for the black color. Now you can see why we define namespaces in order to ease the use of SRL defined types.
 
 > [!IMPORTANT]
 > SRL *MUST* be initialized before the use of any SRL functionality.
@@ -70,11 +73,11 @@ To print a text to the screen, the [`SRL::Debug::Print`](https://srl.reye.me/cla
 
 Using this function can simply be done with :
 
-```
+```cpp
 SRL::Debug::Print(1,1, "01_Tutorial");
 ```
 
-This will print the "01_Tutorial" string at the x=1 ,y= 1 coordinates.
+This should print the "01_Tutorial" string at the x=1 ,y= 1 coordinates.
 
 This will be the resulting program :
 
@@ -120,7 +123,18 @@ int main()
 }
 ```
 
+To compile the project , in windows, you simple run the `compile.bat` in the project folder.
+To run the project inside an emulator with `run_with_mednafen.bat` in the project folder.
+
 ## Sumary
+
+On this short tutorial you learned that :
+- To start using the library its recomended that you copy a sample program in the `samples` folder into the `Projects` folder, and modify and add from there. This ensures the aid scripts and makefile are already in place.
+- Every SRL project must:
+  - Include `srl.hpp` header
+  - Initialize the SRL library before using any `SRL` function
+  - Call `SRL::Core::Synchronize();` at the end of each frame
+-  `SRL::Debug::Print(int x, int y, char* text)` can be used to print text into the screen.
 
 
 
