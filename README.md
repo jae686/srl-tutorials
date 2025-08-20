@@ -1,5 +1,10 @@
 # A Tutorial series for SRL
 
+## Author note
+
+> [!IMPORTANT]
+> As of August 2025, this tutorial series is a work in progress. New chaperts will be added as my personal time allows. 
+
 
 ## Sega Saturn Primer
 - [Hardware Description](hardware.md)
