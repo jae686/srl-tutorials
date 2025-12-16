@@ -3,7 +3,7 @@
 ## Anatomy of a SRL project
 
 > [!NOTE]
-> It is recomended to out your project files under `SaturnRingLib/Projects`
+> It is recommended to out your project files under `SaturnRingLib/Projects`
 
 > [!TIP]
 > It is more simple to copy a sample into the `Projects` folder and then add or change files as needed.
@@ -31,7 +31,7 @@ All programs using SRL must use the `srl.hpp` header at the start.
 #include <srl.hpp>
 ```
 
-Is is also recomended (but not mandatory), for legibility issues, to use the apropriate namespaces.
+Is is also recommended (but not mandatory), for legibility issues, to use the appropriate namespaces.
 SRL provides many datatypes designed to help with saturn development.
 
 ```cpp
@@ -67,7 +67,7 @@ Now that we have the SRL initialized, we can start using it.
 
 We will begin how using the [`SRL::Debug`](https://srl.reye.me/classSRL_1_1Debug.html) class.
 
-This class and its member functions are used to print information to the screen, and it's meant to aid in debuging tasks. In other words, you will be using it alot :) 
+This class and its member functions are used to print information to the screen, and it's meant to aid in debugging tasks. In other words, you will be using it a lot :) 
 
 To print a text to the screen, the [`SRL::Debug::Print`](https://srl.reye.me/classSRL_1_1Debug_afa892baf3e31d364ffe07350c916696f.html#afa892baf3e31d364ffe07350c916696f) function is used. There are 2 overloads : one that allows the print a simple string, and another that is a [variadic function](https://srl.reye.me/classSRL_1_1Debug_a4ab210527af751fedbbc8877a019252f.html#a4ab210527af751fedbbc8877a019252f) that takes arguments in the same way as the classic `printf()` function.
 
@@ -129,7 +129,7 @@ To run the project inside an emulator with `run_with_mednafen.bat` in the projec
 ## Sumary
 
 On this short tutorial you learned that :
-- To start using the library its recomended that you copy a sample program in the `samples` folder into the `Projects` folder, and modify and add from there. This ensures the helper scripts and makefile are already in place.
+- To start using the library its recommended that you copy a sample program in the `samples` folder into the `Projects` folder, and modify and add from there. This ensures the helper scripts and makefile are already in place.
 - Every SRL project must:
   - Include `srl.hpp` header
   - Initialize the SRL library before using any `SRL` function

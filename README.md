@@ -23,7 +23,7 @@
 
 ## 02 - Your First ~~triangle~~ point / line / quad / sprite (VDP1)
 - Saturn HW drawing primer
-  - Screen Cordinates
+  - Screen Coordinates
   - Primitives
 - Base Program Structure
 - Best Practices
