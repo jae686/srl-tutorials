@@ -48,11 +48,52 @@ int main()
 ```
 
 But before drawing the line we must describe the start and end points, its color and its Z coordinate. The Z coordinate is used for sorting.
-For this we can use the `` SRL::Scene2D::DrawLine() `` (documentation)[https://srl.reye.me/classSRL_1_1Scene2D_ad028a771e97b80710000c3d46e2f4e50.html#ad028a771e97b80710000c3d46e2f4e50]
+For this we can use the `` SRL::Scene2D::DrawLine() `` [documentation](https://srl.reye.me/classSRL_1_1Scene2D_ad028a771e97b80710000c3d46e2f4e50.html#ad028a771e97b80710000c3d46e2f4e50)
 
 To define the start and end points we use 2D vectors, via the `` SRL::Math::Types::Vector2D`` . Since we use `using namespace SRL::Math::Types;` at the start, we can just declare the vector by `Vector2D`.
 
-In this case, we want to draw a line from `(0,0)` to ``(319, 239)``
+In this case, we want to draw a line from `(0,0)` to `(319, 239)` , we want it to be white, and on top of the screen.
+
+```cpp
+
+Vector2D start = Vector2D(0.0);
+Vector2D start = Vector2D(319, 239);
+
+auto color = HighColor::Colors::White;
+
+```
+
+In the end we end with this code :
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+// Main program entry
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "02_Tutorial");
+    Vector2D start = Vector2D(0.0);
+    Vector2D end = Vector2D(319, 239);
+    auto color = HighColor::Colors::White;
+    // Main program loop
+	while(1)
+	{   
+        // Refresh screen
+         SRL::Scene2D::DrawLine(start, end, color, 500);
+         SRL::Core::Synchronize();
+	}
+
+	return 0;
+}
+``` 
+
+However, the output is not whats expected :![](img/first_screen.png)
 
 
 
