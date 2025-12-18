@@ -6,7 +6,12 @@
 
 ## 2D Coordinate system primer
 
-On the sega Saturn, the screen has a 320 x 240.
+> [!NOTE]
+> The resolution on the sega saturn is not fixed.
+> It is dependent of the Region the application is built
+> For example, if built on PAL the resolution is 320x256. If on NTSC (low Res) 320x256. There is a NTSC high res that uses (704x480).
+
+You can access the resolution information at run time via the `SRL::TV` class.
 
 For 2D Graphics, the sega saturn uses the following coordinate system :
 
@@ -94,6 +99,52 @@ int main()
 ``` 
 
 However, the output is not whats expected :![](img/first_screen.png)
+
+This is because SRL sets the center of screen at (0,0).
+
+Therefore, we must obtain the current resolution and recalculate the start and end points.
+
+The code now is :
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+// Main program entry
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    //get the screen resolution
+    auto h = SRL::TV::Height;
+    auto w = SRL::TV::Width;
+    SRL::Debug::Print(1,1, "02_Tutorial");
+    SRL::Debug::Print(1,2, "Width %d Height %d",w, h);
+    
+    //define the coords for start and end
+    auto half_h = Fxp::Convert(h) / 2;
+    auto half_w = Fxp::Convert(w) / 2;
+    Vector2D start = Vector2D(-(half_w), -half_h);
+    Vector2D end = Vector2D(half_w, (half_h));
+    //define the color of the line
+    auto color = HighColor::Colors::White;
+    // Main program loop
+	while(1)
+	{   
+        // Refresh screen
+         SRL::Scene2D::DrawLine(start, end, color, 500);
+         SRL::Core::Synchronize();
+	}
+
+	return 0;
+}
+
+```
+Now we get the expected result : 
+![](img/second_screen.png)
 
 
 
