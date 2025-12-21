@@ -10,7 +10,6 @@
 ## Sega Saturn Primer
 - [Hardware Description](hardware.md)
 
-
 ## Introduction to SRL
 - [Description Of Library, Features , Alternatives](00_srl/srl_description.md)
 - [SDK setup](https://github.com/ReyeMe/SaturnRingLib)
@@ -20,8 +19,7 @@
 - Anatomy of a SRL project
 - Introduction to `SRL::Debug`
 
-
-## [02 - Your First ~~triangle~~ point / line / quad (VDP1)](02_line_quad/02_line_quad.md)
+## [02 - Your First ~~triangle~~ ~~point~~ / line / quad (VDP1)](02_line_quad/02_line_quad.md)
 - 2D Screen Coordinates primer
   - Screen Coordinates
 - `SRL::Scene2D`
@@ -30,17 +28,13 @@
 
 ## 03 - Your First sprite (VDP1)
 
-
-
 ## 04 - 3D Model pipeline
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
 - Limitations
 
-
 ## 05 - Backgrounds and tilemaps (VDP2)
 - 
-
 
 ## 06 - Input Handling
 - 

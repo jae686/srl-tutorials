@@ -183,7 +183,6 @@ int main()
 	{   
         // Refresh screen
         SRL::Scene2D::DrawPolygon(points, fill, color, 50);
-        
         SRL::Core::Synchronize();
 	}
 
