@@ -21,7 +21,7 @@
 - Introduction to `SRL::Debug`
 
 
-## [02 - Your First ~~triangle~~ point / line / quad (VDP1)](02_)
+## [02 - Your First ~~triangle~~ point / line / quad (VDP1)](02_line_quad/02_line_quad.md)
 - 2D Screen Coordinates primer
   - Screen Coordinates
 - Vector Primer
