@@ -1,4 +1,4 @@
-# Your First ~~triangle~~ point / line / quad / sprite (VDP1)
+# Your First ~~triangle~~ ~~point~~ / line / quad / sprite (VDP1)
 
 > [!NOTE]
 > Since SRL is a SGL Wrapper , most of its concepts are interchangeable 
@@ -9,7 +9,7 @@
 > The resolution on the sega saturn is not fixed.
 > It is dependent of the Region the application is built
 > For example, if built on PAL the resolution is 320x256. 
-> If on NTSC (low Res) 320x256. There is also a NTSC high resolution mode : 704x480.
+> If on NTSC (low Res) 320x240. There is also a NTSC high resolution mode : 704x480.
 
 You can access the resolution information at run time via the `SRL::TV` class.
 
@@ -17,10 +17,11 @@ For 2D Graphics, SRL uses the following coordinate system :
 
 ![](img/Coordinate_System_2d.png)
 
-
 ## Vector Primer
 
-TODO : add a small vector primer
+SRL provides several [math types](https://srl.reye.me/namespaceSRL_1_1Math_1_1Types.html) optimized for use for the sega saturn hardware.
+
+
 
 ## SRL::Scene2D
 
