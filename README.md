@@ -12,16 +12,16 @@
 
 
 ## Introduction to SRL
-- [Description Of Library, Features , Alternatives](srl_description.md)
+- [Description Of Library, Features , Alternatives](00_srl/srl_description.md)
 - [SDK setup](https://github.com/ReyeMe/SaturnRingLib)
-- [Best Practices](srl_bestpractices.md)
+- [Best Practices](00_srl/srl_bestpractices.md)
 
 ## [01 - A simple hello world](01_hello_world/01_hello_world.md)
 - Anatomy of a SRL project
 - Introduction to `SRL::Debug`
 
 
-## 02 - Your First ~~triangle~~ point / line / quad (VDP1)
+## [02 - Your First ~~triangle~~ point / line / quad (VDP1)](02_)
 - 2D Screen Coordinates primer
   - Screen Coordinates
 - Vector Primer
@@ -33,15 +33,15 @@
 
 
 
-## 03 - 3D Model pipeline
+## 04 - 3D Model pipeline
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
 - Limitations
 
 
-## 04 - Backgrounds and tilemaps (VDP2)
+## 05 - Backgrounds and tilemaps (VDP2)
 - 
 
 
-## 05 - Input Handling
+## 06 - Input Handling
 - 
