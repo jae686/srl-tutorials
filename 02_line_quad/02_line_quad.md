@@ -202,7 +202,13 @@ If you set the `fill` option to true, you get a filled polygon.
 ![](img/Quad_result_filled.png)
 
 
+## Summary
 
+In this short tutorial you learned that :
+- SRL supplies the `SRL::Scene2D` class the provides the methods to draw in 2D Space
+  -  `SRL::Scene2D::DrawLine()` to draw lines
+  -  `SRL::Scene2D::DrawPolygon()` to draw 4 sided polygons , that can be filled or not depending on its arguments.
+  
 
 
 
