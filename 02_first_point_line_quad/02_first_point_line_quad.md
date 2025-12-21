@@ -140,13 +140,68 @@ In this example we will draw a quad according to the picture :
 ![](img/Quad_2D.png)
 
 
-To draw a quad, at the center of the screen, we must define the points in a clockwise order.
+To draw a quad, at the center of the screen, we must define the points. Order is not relevant.
 
 ```cpp
 
+ Vector2D points[4] = {Vector2D(0.0)};
+    points[0] = Vector2D(-50, -50);
+    points[1] = Vector2D(50,  -50);
+    points[2] = Vector2D( 50,  50);
+    points[3] = Vector2D(-50,  50);
 
+    bool fill = false;
+    auto color = HighColor::Colors::White;
 
 ```
+
+Now the code becomes :
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+// Main program entry
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+
+    SRL::Debug::Print(1,1, "02_Tutorial");
+    
+    Vector2D points[4] = {Vector2D(0.0)};
+    points[0] = Vector2D(-50, -50);
+    points[1] = Vector2D(50,  -50);
+    points[2] = Vector2D( 50,  50);
+    points[3] = Vector2D(-50,  50);
+
+    bool fill = false;
+    auto color = HighColor::Colors::White;
+
+	while(1)
+	{   
+        // Refresh screen
+        SRL::Scene2D::DrawPolygon(points, fill, color, 50);
+        
+        SRL::Core::Synchronize();
+	}
+
+	return 0;
+}
+```
+
+Result  :
+
+![](img/Quad_result_line.png)
+
+If you set the `fill` option to true, you get a filled polygon.
+![](img/Quad_result_filled.png)
+
+
+
 
 
 
