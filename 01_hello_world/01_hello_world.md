@@ -118,7 +118,10 @@ int main()
   // Initialize library
   SRL::Core::Initialize(HighColor::Colors::Black);
   SRL::Debug::Print(1,1, "Hello World");
-  SRL::Core::Synchronize(); 
+  while(1)
+  {
+    SRL::Core::Synchronize(); 
+  }
   return 0;
 }
 ```
