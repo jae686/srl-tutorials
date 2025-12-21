@@ -1,8 +1,4 @@
 # Your First ~~triangle~~ ~~point~~ / line / quad / sprite (VDP1)
-
-> [!NOTE]
-> Since SRL is a SGL Wrapper , most of its concepts are interchangeable 
-
 ## 2D Coordinate system primer
 
 > [!NOTE]
@@ -17,10 +13,11 @@ For 2D Graphics, SRL uses the following coordinate system :
 
 ![](img/Coordinate_System_2d.png)
 
-## Vector Primer
+## About vectors in SRL
 
 SRL provides several [math types](https://srl.reye.me/namespaceSRL_1_1Math_1_1Types.html) optimized for use for the sega saturn hardware.
 
+For vector operations, SRL supplies the `SRL::Math::Types::Vector2D` .
 
 
 ## SRL::Scene2D
@@ -205,6 +202,7 @@ If you set the `fill` option to true, you get a filled polygon.
 ## Summary
 
 In this short tutorial you learned that :
+- SRL supplier the `SRL::Math::Types::Vector2D` type to represent vectors.
 - SRL supplies the `SRL::Scene2D` class the provides the methods to draw in 2D Space
   -  `SRL::Scene2D::DrawLine()` to draw lines
   -  `SRL::Scene2D::DrawPolygon()` to draw 4 sided polygons , that can be filled or not depending on its arguments.
