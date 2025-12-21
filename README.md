@@ -3,7 +3,7 @@
 ## Author note
 
 > [!IMPORTANT]
-> As of August 2025, this tutorial series is a work in progress. New chapters will be added as my personal time allows. 
+> As of August 2025, this tutorial series is a work in progress. New chapters will be added and corrected as my personal time allows. 
 > The Chapters as they are now may be changed as the tutorials are being written.
 
 
@@ -24,7 +24,6 @@
 ## [02 - Your First ~~triangle~~ point / line / quad (VDP1)](02_line_quad/02_line_quad.md)
 - 2D Screen Coordinates primer
   - Screen Coordinates
-- Vector Primer
 - `SRL::Scene2D`
   - A simple line
   - A simple quad
