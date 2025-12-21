@@ -3,17 +3,17 @@
 > [!NOTE]
 > Since SRL is a SGL Wrapper , most of its concepts are interchangeable 
 
-
 ## 2D Coordinate system primer
 
 > [!NOTE]
 > The resolution on the sega saturn is not fixed.
 > It is dependent of the Region the application is built
-> For example, if built on PAL the resolution is 320x256. If on NTSC (low Res) 320x256. There is a NTSC high res that uses (704x480).
+> For example, if built on PAL the resolution is 320x256. 
+> If on NTSC (low Res) 320x256. There is also a NTSC high resolution mode : 704x480.
 
 You can access the resolution information at run time via the `SRL::TV` class.
 
-For 2D Graphics, the sega saturn uses the following coordinate system :
+For 2D Graphics, SRL uses the following coordinate system :
 
 ![](img/Coordinate_System_2d.png)
 
@@ -22,11 +22,10 @@ For 2D Graphics, the sega saturn uses the following coordinate system :
 
 TODO : add a small vector primer
 
-
 ## SRL::Scene2D
 
-In order to draw things in 2D space, SRL supplies the `SRL::Scene2d` class.
-This class allows you to draw, via the VDP 1, into the screen.
+In order to draw things in 2D space, SRL supplies the `SRL::Scene2D` class.
+This class allows you to draw, via the VDP 1, to the screen.
 
 This class allows you to easily draw lines, quads and sprites.
 
@@ -57,52 +56,29 @@ For this we can use the `` SRL::Scene2D::DrawLine() `` [documentation](https://s
 
 To define the start and end points we use 2D vectors, via the `` SRL::Math::Types::Vector2D`` . Since we use `using namespace SRL::Math::Types;` at the start, we can just declare the vector by `Vector2D`.
 
-In this case, we want to draw a line from `(0,0)` to `(319, 239)` , we want it to be white, and on top of the screen.
+In this case, we want to draw a line from upper right corner to the bottom left corner , we want it to be white, and on top of the screen.
+
+Taking into account the picture above describing the coordinate system, we must calculate the coordinates taking into account the current resolution.
 
 ```cpp
 
-Vector2D start = Vector2D(0.0);
-Vector2D start = Vector2D(319, 239);
+// Get screen resolution
+auto h = SRL::TV::Height;
+auto w = SRL::TV::Width;
 
+//get the halves
+auto half_h = Fxp::Convert(h) / 2;
+auto half_w = Fxp::Convert(w) / 2;
+
+// since (0,0) is at the center of the screen, 
+Vector2D start = Vector2D(-(half_w), -half_h);
+Vector2D end = Vector2D(half_w, (half_h));
+
+//Color of our line
 auto color = HighColor::Colors::White;
 
 ```
 
-In the end we end with this code :
-
-```cpp
-#include <srl.hpp>
-
-// Using to shorten names for Vector and HighColor
-using namespace SRL::Types;
-using namespace SRL::Math::Types;
-
-// Main program entry
-int main()
-{
-    // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
-    SRL::Debug::Print(1,1, "02_Tutorial");
-    Vector2D start = Vector2D(0.0);
-    Vector2D end = Vector2D(319, 239);
-    auto color = HighColor::Colors::White;
-    // Main program loop
-	while(1)
-	{   
-        // Refresh screen
-         SRL::Scene2D::DrawLine(start, end, color, 500);
-         SRL::Core::Synchronize();
-	}
-
-	return 0;
-}
-``` 
-
-However, the output is not whats expected :![](img/first_screen.png)
-
-This is because SRL sets the center of screen at (0,0).
-
-Therefore, we must obtain the current resolution and recalculate the start and end points.
 
 The code now is :
 
@@ -128,7 +104,9 @@ int main()
     auto half_h = Fxp::Convert(h) / 2;
     auto half_w = Fxp::Convert(w) / 2;
     Vector2D start = Vector2D(-(half_w), -half_h);
-    Vector2D end = Vector2D(half_w, (half_h));
+    Vector2D end = Vector2D(half_w, half_h);
+    SRL::Debug::Print(1,3, "Width %f Height %f", -(half_w), -half_h );
+    SRL::Debug::Print(1,4, "Width %f Height %f", half_w, half_h);
     //define the color of the line
     auto color = HighColor::Colors::White;
     // Main program loop
@@ -145,6 +123,31 @@ int main()
 ```
 Now we get the expected result : 
 ![](img/second_screen.png)
+
+
+### A simple quad
+
+To draw polygons such as quads , SRL provides the [`SRL::Scene2D::DrawPolygon()`](https://srl.reye.me/classSRL_1_1Scene2D_a4fd11e4e81494caf00830893c07722bc.html#a4fd11e4e81494caf00830893c07722bc) Function.
+
+To draw a polygon we must provide :
+- A list of 4 2D Vectors, with the polygon points.
+- A boolean to tell the function if the polygon should be filled or not
+- the color (similar to `SRL::Scene2D::DrawLine()`)
+- the z order (similar to `SRL::Scene2D::DrawLine()`)
+
+
+In this example we will draw a quad according to the picture :
+![](img/Quad_2D.png)
+
+
+To draw a quad, at the center of the screen, we must define the points in a clockwise order.
+
+```cpp
+
+
+
+```
+
 
 
 
