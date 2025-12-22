@@ -90,8 +90,8 @@ int main()
    	SRL::Core::Initialize(HighColor::Colors::Black); // Initialize library
     SRL::Debug::Print(1,1, "03_Tutorial");
            
-    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA("TEST.TGA"); // Loads TGA file into main RAM
-    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);    // Loads TGA into VDP1
+    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA("TEST.TGA"); // Loads TGA file from cd into main RAM
+    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);    // Loads Bitmap from main RAM into VDP1 RAM
     
     if(textureIndex < 0) // Check if texture was properly loaded into VDP1 RAM
     {
@@ -101,7 +101,7 @@ int main()
         SRL::Debug::Print(1,2, "Loading OK , index : %d", textureIndex);
     }  
     
-    delete tga;  // Free memory                                        
+    delete tga;  // Free memory used by Bitmap in main RAM
 
 	while(1) // Main program loop
 	{   
