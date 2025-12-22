@@ -14,7 +14,7 @@ When you compile a project in SLR, via the `compile.bat` , the files on the `cd\
 However the files must comply with the 8.3 format, case insensitive, like the old MS-DOS days. 
 There is also a file count limit , that its set on the `makefile` at the root of the project, via the `SRL_MAX_CD_FILES` option.
 
-## Sprite loading constraints
+## Sprite constraints
 
 > [!WARNING]
 > Be aware of the limitations of the sega saturn hardware.
