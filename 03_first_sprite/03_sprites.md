@@ -64,11 +64,11 @@ static bool SRL::Scene2D::DrawSprite	(	const uint16_t	texture,
 
 ```
 
-Dont be scared by the function argument list! Since the last 3 arguments are optional, we can start using this function by providing 
+> [!TIP]
+> Don't be intimidated by the function argument list! Since the last 3 arguments are optional, we can start using this function by providing only 2 arguments :
 
 - `texture` is the textureIndex returned by `SRL::VDP1::TryLoadTexture` , 
 - `location` is a Vector3D with X and Y locations and  for Z sorting.
-
 
 And then we pass the textureIndex and location vector into `SRL::Scene2D::DrawSprite` :
 
