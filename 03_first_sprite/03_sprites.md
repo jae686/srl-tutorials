@@ -56,11 +56,83 @@ Currently there are 6 overloads of this function.
 
 The most simple way is by using :
 ```cpp 
-    static bool SRL::Scene2D::DrawSprite(const uint16_t	texture,  const SRL::Math::Types::Vector2D	points[4], const SRL::Math::Types::Fxp depth)
+static bool SRL::Scene2D::DrawSprite(const uint16_t	texture,  const SRL::Math::Types::Vector2D	points[4], const SRL::Math::Types::Fxp depth)
 ```
 
-`texture` is the textureIndex returned by `SRL::VDP1::TryLoadTexture` , `points` is an array with 4 Vector2D with the points of the sprite. This array uses the same logic that was used on the previous chapter.
-`depth` is used for Z sorting.
+- `texture` is the textureIndex returned by `SRL::VDP1::TryLoadTexture` , 
+- `points` is an array with 4 Vector2D with the points of the sprite. This array uses the same logic that was used on the previous chapter.
+- `depth` is used for Z sorting.
+
+So to draw the sprite, we must define the 4 points of our sprite (we will re-use the same coordinates as the previous tutorial), into a array:
+
+```cpp
+Vector2D points[4] = {Vector2D(0.0)};
+    points[0] = Vector2D(-50, -50);
+    points[1] = Vector2D(50,  -50);
+    points[2] = Vector2D( 50,  50);
+    points[3] = Vector2D(-50,  50);
+
+```
+
+And then we pass the textureIndex and vector Array and the Z sort value into `SRL::Scene2D::DrawSprite` :
+
+```cpp
+SRL::Scene2D::DrawSprite(textureIndex, points, 50);
+```
+
+So the resulting code is :
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "03_Tutorial");
+    
+    Vector2D points[4] = {Vector2D(0.0)};
+    points[0] = Vector2D(-50, -50);
+    points[1] = Vector2D(50,  -50);
+    points[2] = Vector2D( 50,  50);
+    points[3] = Vector2D(-50,  50);
+   
+    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA("TEST.TGA"); // Loads TGA file into main RAM
+    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);    // Loads TGA into VDP1
+    
+    if(textureIndex < 0)
+    {
+         SRL::Debug::Print(1,2, "Loading Failed");
+    }else
+    {
+        SRL::Debug::Print(1,2, "Loading OK , index : %d", textureIndex);
+    }  
+    
+    delete tga;                                          
+
+    //define the color of the line
+    auto color = HighColor::Colors::White;
+    // Main program loop
+	while(1)
+	{   
+        // Refresh screen
+         SRL::Scene2D::DrawSprite(textureIndex, points, 50);
+         SRL::Core::Synchronize();
+	}
+
+	return 0;
+}
+```
+
+And the resulting image :
+
+![](img/DrawSprite_1.png)
+
+
 
 
 
