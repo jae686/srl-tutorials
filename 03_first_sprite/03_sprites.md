@@ -87,14 +87,13 @@ using namespace SRL::Math::Types;
 
 int main()
 {
-    // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+   	SRL::Core::Initialize(HighColor::Colors::Black); // Initialize library
     SRL::Debug::Print(1,1, "03_Tutorial");
            
     SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA("TEST.TGA"); // Loads TGA file into main RAM
     int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);    // Loads TGA into VDP1
     
-    if(textureIndex < 0)
+    if(textureIndex < 0) // Check if texture was properly loaded into VDP1 RAM
     {
          SRL::Debug::Print(1,2, "Loading Failed");
     }else
@@ -102,15 +101,12 @@ int main()
         SRL::Debug::Print(1,2, "Loading OK , index : %d", textureIndex);
     }  
     
-    delete tga;                                          
+    delete tga;  // Free memory                                        
 
-    
-    // Main program loop
-	while(1)
+	while(1) // Main program loop
 	{   
-        // Refresh screen
-         SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500));
-         SRL::Core::Synchronize();
+        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500));
+        SRL::Core::Synchronize(); // Refresh screen
 	}
 
 	return 0;
@@ -121,8 +117,3 @@ int main()
 And the resulting image :
 
 ![](img/DrawSprite_1.png)
-
-
-
-
-
