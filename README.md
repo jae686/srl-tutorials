@@ -26,7 +26,13 @@
   - A simple line
   - A simple quad
 
-## 03 - Your First sprite (VDP1)
+## [03 - Your First sprite (VDP1)](03_first_sprite/03_sprites.md)
+- File System Primer
+- Sprite constraints
+- Sprite Loading
+- Sprite Drawing
+  - The Simplest Way
+
 
 ## 04 - 3D Model pipeline
 - Description of the use of the tools for 3d mesh importing
