@@ -220,17 +220,23 @@ And then we can pass it to the `SRL::Scene2D::DrawSprite` :
 ```cpp
 SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), Angle(), scale, zp);
 ```
-
 And for clarity, I've added 2 lines , crossing at `(0,0)` for reference.
 
 Result :
 
 ![](img/DrawSprite_zp_Center.png)
 
-But if we **only** change the ZoomPoint to ,for example, `UpperLeft`  :
+But if we **only** change the ZoomPoint to , for example, `UpperLeft`  :
 
 ```cpp
 SRL::Scene2D::ZoomPoint zp = SRL::Scene2D::ZoomPoint::UpperLeft
 ```
+
 ![](img/DrawSprite_zp_UpperLeft.png)
+
+As we can see, the Origin of the sprite is set to the UpperLeft.
+
+This also affects rotation :
+
+![](img/DrawSprite_zp_BottomRight45.png)
 
