@@ -120,9 +120,9 @@ And the resulting image :
 
 If you take a further look at the function signature you can also specify rotation, scale and a zoom point.
 
-However you might have notice that there is an specific type for angles.
+However you might have noticed that there is an specific type for angles.
 
-## Angle Primer
+## `SRL::Math::Types::Angle` Introduction
 
 The `SRL::Math::Types::Angle` is the type used in SRL for angles. 
 
@@ -153,6 +153,22 @@ The result is :
 ![](img/DrawSprite_2.png)
 
 
+However, there will be situations where is more convenient to work with degrees or radiants.
 
+## Working with Radians and degrees
 
+`SRL::Math::Types::Angle` provides methods that allows for conversion from degrees and radiants to `Angle` in runtime :
 
+- `static constexpr Angle FromRadians (const Fxp &radianTurns)` - Converts from Radiants stored in a `Fxp` type to `Angle`
+- `static constexpr Angle FromDegrees (const Fxp &degreeTurns)` - Converts from Degrees stored in a `Fxp` type to `Angle`
+
+> [!TIP]
+> There are also functions that convert from radiants and degrees stored in the `double` type at compile time, but we wont cover those here.
+
+So if we want to use degrees instead of turns we can instead write :
+
+```cpp
+Angle SpriteAngle = Angle::FromDegrees(45.0);
+```
+
+That will have the same result.
