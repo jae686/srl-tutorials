@@ -32,6 +32,16 @@
 - Sprite Loading
 - Sprite Drawing
   - The Simplest Way
+- `SRL::Math::Types::Angle` Introduction
+- Sprite Rotation
+- Working with Degrees and Radians
+- Scaling the sprites
+- The ZoomPoint
+
+## 04 - Your Second sprite (VDP1)
+- Distorted sprites
+- Pallets
+- 
 
 
 ## 04 - 3D Model pipeline
