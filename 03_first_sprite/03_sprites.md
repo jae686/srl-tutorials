@@ -176,7 +176,7 @@ That will have the same result.
 
 To scale a sprite, we first define a `Vector2D` that will contain the X scaling on the first component and the Y scaling on the second component.
 
-If the scale value is > 1.0 the sprite sill be made bigger on that axis. If < 1.0 then the sprite will be made smaller on the axis.
+If the scale value is > 1.0 the sprite sill be made bigger on that axis. If < 1.0 then the sprite will be made smaller on that axis.
 
 For example :
 
@@ -195,7 +195,7 @@ The resulting rotated and scaled sprite can be seen below.
 
 ## The ZoomPoint
 
-The [ZoomPoint](https://srl.reye.me/classSRL_1_1Scene2D_a2f09ba617c34e0ae409e8717482799c8.html#a2f09ba617c34e0ae409e8717482799c8) sets the Origin on the sprite.
+The [ZoomPoint](https://srl.reye.me/classSRL_1_1Scene2D_a2f09ba617c34e0ae409e8717482799c8.html#a2f09ba617c34e0ae409e8717482799c8) sets the Origin of the sprite.
 This is an enum that can take the following choices :
 - `UpperLeft` Upper left corner.
 - `CenterLeft` Center left side.
