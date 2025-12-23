@@ -243,29 +243,38 @@ This also affects rotation, as you can see below :
 For completeness , below are the effects of other values of `SRL::Scene2D::ZoomPoint` :
 
 `Center`
+
 ![](img/DrawSprite_zp_Center.png)
 
 `CenterLeft`
+
 ![](img/DrawSprite_zp_CenterLeft.png)
 
 `CenterRight`
+
 ![](img/DrawSprite_zp_CenterRight.png)
 
 `TopCenter` 
+
 ![](img/DrawSprite_zp_TopCenter.png)
 
 `UpperLeft`
+
 ![](img/DrawSprite_zp_UpperLeft.png)
 
 `UpperRight`
+
 ![](img/DrawSprite_zp_UpperRight.png)
 
 `BottomCenter`
+
 ![](img/DrawSprite_zp_BottomCenter.png)
 
 `BottomLeft`
+
 ![](img/DrawSprite_zp_BottomLeft.png)
 
 `BottomRight`
+
 ![](img/DrawSprite_zp_BottomRight.png)
 
