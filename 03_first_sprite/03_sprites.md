@@ -226,3 +226,11 @@ And for clarity, I've added 2 lines , crossing at `(0,0)` for reference.
 Result :
 
 ![](img/DrawSprite_zp_Center.png)
+
+But if we **only** change the ZoomPoint to ,for example, `UpperLeft`  :
+
+```cpp
+SRL::Scene2D::ZoomPoint zp = SRL::Scene2D::ZoomPoint::UpperLeft
+```
+![](img/DrawSprite_zp_UpperLeft.png)
+
