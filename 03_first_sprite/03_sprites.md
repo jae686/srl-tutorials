@@ -155,7 +155,7 @@ The result is :
 
 However, there will be situations where is more convenient to work with degrees or radiants.
 
-## Working with Radians and degrees
+### Working with Radians and degrees
 
 `SRL::Math::Types::Angle` provides methods that allows for conversion from degrees and radiants to `Angle` in runtime :
 
@@ -170,5 +170,59 @@ So if we want to use degrees instead of turns we can instead write :
 ```cpp
 Angle SpriteAngle = Angle::FromDegrees(45.0);
 ```
-
 That will have the same result.
+
+## Scaling the Sprites
+
+To scale a sprite, we first define a `Vector2D` that will contain the X scaling on the first component and the Y scaling on the second component.
+
+If the scale value is > 1.0 the sprite sill be made bigger on that axis. If < 1.0 then the sprite will be made smaller on the axis.
+
+For example :
+
+```cpp
+Vector2D scale = Vector2D(1.5, 1.5);
+```
+Then we pass it to `SRL::Scene2D::DrawSprite` :
+
+```cpp
+SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle, scale);
+```
+
+The resulting rotated and scaled sprite can be seen below.
+
+![](img/DrawSprite_3.png)
+
+## The ZoomPoint
+
+The [ZoomPoint](https://srl.reye.me/classSRL_1_1Scene2D_a2f09ba617c34e0ae409e8717482799c8.html#a2f09ba617c34e0ae409e8717482799c8) sets the Origin on the sprite.
+This is an enum that can take the following choices :
+- `UpperLeft` Upper left corner.
+- `CenterLeft` Center left side.
+- `BottomLeft` Bottom left corner.
+- `TopCenter` Center top side.
+- `Center` Sprite center.
+- `BottomCenter` Center bottom side.
+- `UpperRight` Upper right corner.
+- `CenterRight` Center right side.
+- `BottomRight` Bottom right corner.
+
+To make it more simple, lets draw our sprite at `0,0`, and try different values for the zoom point.
+
+To set a zoom point  :
+
+```cpp
+SRL::Scene2D::ZoomPoint zp = SRL::Scene2D::ZoomPoint::Center;
+```
+
+And then we can pass it to the `SRL::Scene2D::DrawSprite` :
+
+```cpp
+SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), Angle(), scale, zp);
+```
+
+And for clarity, I've added 2 lines , crossing at `(0,0)` for reference.
+
+Result :
+
+![](img/DrawSprite_zp_Center.png)
