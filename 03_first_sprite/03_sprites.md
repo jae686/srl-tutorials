@@ -117,3 +117,42 @@ int main()
 And the resulting image :
 
 ![](img/DrawSprite_1.png)
+
+If you take a further look at the function signature you can also specify rotation, scale and a zoom point.
+
+However you might have notice that there is an specific type for angles.
+
+## Angle Primer
+
+The `SRL::Math::Types::Angle` is the type used in SRL for angles. 
+
+3 Different constructors are supplied :
+- `constexpr Angle ()` that simply constructs a `SRL::Math::Types::Angle` with 0 Degrees.
+- `constexpr Angle (const Fxp &turns)` that takes the number of **turns** in `Fxp`.
+- `constexpr Angle (const T &turns)` that takes the number of turns in a numeric format such as `float` or `int` values.
+
+
+> [!WARNING]
+> Be aware that the constructor takes **turns** , not degrees or radians!
+
+## Rotating the Sprite
+
+If you want to turn the sprite by 45º first we declare a `Angle` variable :
+
+```cpp
+Angle SpriteAngle = Angle(0.125); // since 45º is 1/8 of a turn = 0.125
+```
+And then supply the `SpriteAngle` to  `SRL::Scene2D::DrawSprite`
+
+```cpp
+SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle);
+```
+
+The result is :
+
+![](img/DrawSprite_2.png)
+
+
+
+
+
