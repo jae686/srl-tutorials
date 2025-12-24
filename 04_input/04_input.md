@@ -45,7 +45,6 @@ int main()
       if(port.IsConnected())
       {
         SRL::Debug::Print(1,2, "Connected");
-
       }else
       {
         SRL::Debug::Print(1,2, "Not connected");
@@ -56,6 +55,23 @@ int main()
 	return 0;
 }
 ```
+
+Now that we can determine if the gamepad is plugged in, we can check if there are any buttons pressed.
+This is done with [`SRL::Input::Digital::IsHeld`](https://srl.reye.me/structSRL_1_1Input_1_1Digital_ab66076d4804ea3728d6fa4cf964ef1b9.html#ab66076d4804ea3728d6fa4cf964ef1b9) method.
+
+For example, if I want to check if the Up button is pressed on the gamepad this is done by :
+
+```cpp
+if(port.IsHeld(Digital::Button::Up) == true)
+{
+    SRL::Debug::Print(1,3, "UP is pressed");
+}else
+{
+    SRL::Debug::Print(1,3, "UP is NOT pressed");
+}
+```
+
+The Button definition list can be found [here](https://srl.reye.me/structSRL_1_1Input_1_1Digital_ae4d3d8e7eee9b2b63616ce6af46070e1.html#ae4d3d8e7eee9b2b63616ce6af46070e1)
 
 
 
