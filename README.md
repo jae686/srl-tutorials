@@ -38,19 +38,23 @@
 - Scaling the sprites
 - The ZoomPoint
 
-## 04 - Your Second sprite (VDP1)
+## 04 - [Input Handling](04_input/04_input.md)
+- Digital Gamepad
+- Analogue Gamepad
+- Light Pistol
+
+## 05 - Your Second sprite (VDP1)
 - Distorted sprites
 - Pallets
 - 
 
-
-## 04 - 3D Model pipeline
+## 06 - 3D Model pipeline
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
 - Limitations
 
-## 05 - Backgrounds and tilemaps (VDP2)
+## 07 - Backgrounds and tilemaps (VDP2)
 - 
 
-## 06 - Input Handling
+## 08 - Input Handling
 - 
