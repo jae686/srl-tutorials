@@ -54,6 +54,7 @@
  
 
 ## 07 - Input Handling - Revisited
+- Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
