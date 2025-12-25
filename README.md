@@ -38,23 +38,31 @@
 - Scaling the sprites
 - The ZoomPoint
 
-## 04 - [Input Handling](04_input/04_input.md)
-- Digital Gamepad
+## [04 - Input Handling (Digital Gamepad)](04_input/04_input.md)
+- ```SRL::Input::Digital``` class
+- Is is Connected ?
+- Is a Button being pressed ?
+- Multiple buttons at the same time
+
+## 05 - Interlude : Putting everything (so far) together
+- Moving stuff around
+- 
+
+## 06 - Your Second sprite (VDP1)
+- Distorted sprites
+- Pallets
+ 
+
+## 07 - Input Handling - Revisited
 - Analogue Gamepad
 - Light Pistol
 
-## 05 - Your Second sprite (VDP1)
-- Distorted sprites
-- Pallets
-- 
-
-## 06 - 3D Model pipeline
+## 08 - 3D Model pipeline
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
 - Limitations
 
-## 07 - Backgrounds and tilemaps (VDP2)
+## 09 - Backgrounds and tilemaps (VDP2)
 - 
 
-## 08 - Input Handling
-- 
+ 

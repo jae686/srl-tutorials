@@ -2,13 +2,13 @@
 
 For handling input the SRL library provides the `SRL::Input` namespace.
 
-In order to keep the function calls short we will use ```cpp using namespace SRL::Input; ``` at the beginning of our file, similarly to what we've done with ```SRL::Types ``` and ```SRL::Math::Types``` .
+In order to keep the function calls short we will use ```using namespace SRL::Input; ``` at the beginning of our file, similarly to what we've done with ```SRL::Types ``` and ```SRL::Math::Types``` .
 
 ## Digital Gamepad
 
 ### Quick start
 
-First we must declare a ```cpp SRL::Input::Digital```. 
+First we must declare a ```SRL::Input::Digital```. 
 We must provide the port number to the constructor.
 Since we already have declared at the beginning that we are also using the `SRL::Input` namespace, we can initiate it by :
 
@@ -21,7 +21,9 @@ Once it is initialized, we must check its state inside the render loop.
 
 Before reading the input from the gamepad, we must check if it's connected to the console.
 
-This is done via `IsConnected()` method.
+### Is it connected ?
+
+We must check if the gamepad is connected via `IsConnected()` method.
 
 The code, to Initialize the gamepad port, and check if its connected, is shown below :
 
@@ -55,6 +57,7 @@ int main()
 	return 0;
 }
 ```
+### Is it being pressed ?
 
 Now that we can determine if the gamepad is plugged in, we can check if there are any buttons pressed.
 This is done with [`SRL::Input::Digital::IsHeld`](https://srl.reye.me/structSRL_1_1Input_1_1Digital_ab66076d4804ea3728d6fa4cf964ef1b9.html#ab66076d4804ea3728d6fa4cf964ef1b9) method.
@@ -73,5 +76,17 @@ if(port.IsHeld(Digital::Button::Up) == true)
 
 The Button definition list can be found [here](https://srl.reye.me/structSRL_1_1Input_1_1Digital_ae4d3d8e7eee9b2b63616ce6af46070e1.html#ae4d3d8e7eee9b2b63616ce6af46070e1)
 
+### Multiple buttons at the same time
+
+If you wish to see if 2 or more buttons are being  pressed at the same time (for example for diagonals), you can do :
+
+```cpp
+ if((port.IsHeld(Digital::Button::Up) && port.IsHeld(Digital::Button::Right)) == true)
+    {
+        SRL::Debug::Print(1,3, "UP + Right are being pressed");
+    }
+```
+
+## 
 
 
