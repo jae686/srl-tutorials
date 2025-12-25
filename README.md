@@ -10,7 +10,7 @@
 ## Sega Saturn Primer
 - [Hardware Description](hardware.md)
 
-## Introduction to SRL
+## Introduction to [SRL](https://github.com/ReyeMe/SaturnRingLib)
 - [Description Of Library, Features , Alternatives](00_srl/srl_description.md)
 - [SDK setup](https://github.com/ReyeMe/SaturnRingLib)
 - [Best Practices](00_srl/srl_bestpractices.md)
@@ -44,8 +44,8 @@
 - Is a Button being pressed ?
 - Multiple buttons at the same time
 
-## 05 - Interlude : Putting everything (so far) together
-- Moving stuff around
+## [05 - Interlude : Putting everything (so far) together](05_Interlude/05_interlude.md)
+- Modularize code
 - 
 
 ## 06 - Your Second sprite (VDP1)
