@@ -86,6 +86,9 @@ If you wish to see if 2 or more buttons are being  pressed at the same time (for
         SRL::Debug::Print(1,3, "UP + Right are being pressed");
     }
 ```
+> [!WARNING]
+> You may be tempted to use `port.IsHeld(Digital::Button::Up | Digital::Button::Right)` however it wont work since `Digital::Button` is an `enum class`. 
+
 
 ## Summary
 
