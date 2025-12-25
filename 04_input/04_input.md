@@ -87,6 +87,26 @@ If you wish to see if 2 or more buttons are being  pressed at the same time (for
     }
 ```
 
-## 
+## Summary
+
+- In order to read the Digital Gamepad Input, you use the [`SRL::Input::Digital`](https://srl.reye.me/structSRL_1_1Input_1_1Digital.html) class.
+- When creating the Object to read the gamepad, you must provide the gamepad port number. The first port number is `0`.
+- It is always a best practice to check if gamepad is connected. This is done via `IsConnected()` method.
+- To read what a given button is pressed , you use the `IsHeld(const Button &button)` method where [`Button`](https://srl.reye.me/structSRL_1_1Input_1_1Digital_ae4d3d8e7eee9b2b63616ce6af46070e1.html#ae4d3d8e7eee9b2b63616ce6af46070e1) can take the following values :
+  - `SRL::Input::Digital::Button::Right`
+  - `SRL::Input::Digital::Button::Left`  
+  - `SRL::Input::Digital::Button::Down`
+  - `SRL::Input::Digital::Button::Up`
+  - `SRL::Input::Digital::Button::START`
+  - `SRL::Input::Digital::Button::A`
+  - `SRL::Input::Digital::Button::B`
+  - `SRL::Input::Digital::Button::C`
+  - `SRL::Input::Digital::Button::X`
+  - `SRL::Input::Digital::Button::Y`
+  - `SRL::Input::Digital::Button::Z`
+  - `SRL::Input::Digital::Button::R`
+  - `SRL::Input::Digital::Button::L`
+- You can test if several keys are pressed at the same time by using the `&&` operator with several `isHeld()` functions.
+
 
 
