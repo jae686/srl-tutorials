@@ -258,8 +258,8 @@ bool updatePosition(Digital &port, Vector2D &spritePos)
 > [!NOTE] 
 > Passing by value vs Passing by reference :
 > 
-> You probably noticed that the function to update the position vector does not return a vector, and it takes *pointers* to the Digital port class and the position vector.
-> This is intentional : if we pass by value, we are passing a copy of the variable to the function, by passing by reference we read / modify directly the variable through the pointer. We thus avoid using more memory and save some time since we don´t have do copy data around.
+> You probably noticed that the function to update the position vector does not return a vector, and it takes *references* to the Digital port class and the position vector.
+> This is intentional : if we pass by value, we are passing a copy of the variable to the function, by passing by reference we read / modify directly the variable through the reference. We thus avoid using more memory and save some time since we don´t have do copy data around.
 
 Now the code becomes : 
 
@@ -675,7 +675,6 @@ bool updatePosition(Digital &port, Vector2D &spritePos,  Vector2D &spriteScale, 
     return true;
 }
 
-
 int main() // Main program entry
 {
   // Initialize library
@@ -702,6 +701,12 @@ int main() // Main program entry
   return 0;
 }
 ```
+# Summary
+
+- It is recommended to avoid having large blocks of code, since those are more difficult to maintain and debug.
+  - This can be done by means of implementing the functionality into functions you can re-use trough out your code (for example texture loading)
+  - Specific functionality can be implemented in a function you can invoke from the render loop (for example the Input handling function).
+- Pass values by reference when possible. The sega saturn is not known for having much computational resources.
 
 
 
