@@ -220,34 +220,35 @@ int main() // Main program entry
 }
 ```
 
-However the render loop is getting longer. Long blocks of code are harder to read and debug. 
-It will get even bigger when we add handling of more buttons.
+However, the render loop is getting longer and long blocks of code are harder to read and debug. This will get worse when we add the handling of more buttons.
 
-In order to keep the render loop manageable, we can put the input handling inside a function , in order to keep the render loop code as clean and short as possible.
+In order to keep the render loop manageable, we can put the input handling inside a function. This way we can keep the render loop code as clean and short as possible.
+
+
 
 ```cpp
-bool updatePosition(Digital *port, Vector2D *spritePos)
+bool updatePosition(Digital &port, Vector2D &spritePos)
 {
-    if(port->IsConnected() == false)
+    if(port.IsConnected() == false)
     {
         return false;
     }
 
-    if(port->IsHeld(Digital::Button::Up))
+    if(port.IsHeld(Digital::Button::Up))
     {
-        spritePos->Y = spritePos->Y - 1 ;
+        spritePos.Y = spritePos.Y - 1 ;
     }
-    if(port->IsHeld(Digital::Button::Down))
+    if(port.IsHeld(Digital::Button::Down))
     {
-        spritePos->Y = spritePos->Y + 1 ;
+        spritePos.Y = spritePos.Y + 1 ;
     }
-    if(port->IsHeld(Digital::Button::Left))
+    if(port.IsHeld(Digital::Button::Left))
     {
-        spritePos->X = spritePos->X - 1 ;
+        spritePos.X = spritePos.X - 1 ;
     }
-    if(port->IsHeld(Digital::Button::Right))
+    if(port.IsHeld(Digital::Button::Right))
     {
-        spritePos->X = spritePos->X + 1 ;
+        spritePos.X = spritePos.X + 1 ;
     }
 
     return true;
@@ -278,28 +279,28 @@ int32_t loadTGA(char* filename) //texture loading function
         return textureIndex;
     }
 
-bool updatePosition(Digital *port, Vector2D *spritePos)
+bool updatePosition(Digital &port, Vector2D &spritePos)
 {
-    if(port->IsConnected() == false)
+    if(port.IsConnected() == false)
     {
         return false;
     }
 
-    if(port->IsHeld(Digital::Button::Up))
+    if(port.IsHeld(Digital::Button::Up))
     {
-        spritePos->Y = spritePos->Y - 1 ;
+        spritePos.Y = spritePos.Y - 1 ;
     }
-    if(port->IsHeld(Digital::Button::Down))
+    if(port.IsHeld(Digital::Button::Down))
     {
-        spritePos->Y = spritePos->Y + 1 ;
+        spritePos.Y = spritePos.Y + 1 ;
     }
-    if(port->IsHeld(Digital::Button::Left))
+    if(port.IsHeld(Digital::Button::Left))
     {
-        spritePos->X = spritePos->X - 1 ;
+        spritePos.X = spritePos.X - 1 ;
     }
-    if(port->IsHeld(Digital::Button::Right))
+    if(port.IsHeld(Digital::Button::Right))
     {
-        spritePos->X = spritePos->X + 1 ;
+        spritePos.X = spritePos.X + 1 ;
     }
 
     return true;
@@ -317,10 +318,10 @@ int main() // Main program entry
   Vector2D spritePos = Vector2D(0.0);
   Digital port(0);
 
-  while(1)
+  while(1) // render loop
   {
     SRL::Debug::PrintClearLine(2);
-    updatePosition(&port, &spritePos);
+    updatePosition(port, spritePos);
     SRL::Debug::Print(1,2, "X : %f , Y : %f", spritePos.X, spritePos.Y);
     SRL::Scene2D::DrawSprite(SpriteId, Vector3D(spritePos, 500));
     SRL::Core::Synchronize(); 
@@ -334,5 +335,192 @@ int main() // Main program entry
 Now the render loop looks cleaner, and the input handling functionality was split into a separate function. Increasing the complexity of the input handling functionality won´t impact the readability of the render loop.
 
 
+## Adding states
 
+Now we want to change the rotation and scaling of out sprite.
+We could map a given button for every parameter we wish to change, but that does not seem very practical.
+We will instead have a button to select what will be changed (scale, position, rotation) and use the Dpad to change it.
+
+First let's create a [enumeration](https://en.cppreference.com/w/cpp/language/enum.html) with our manipulation state:
+
+```cpp
+enum manipulationMode {translate = 0, scaleUniform ,  scaleX, scaleY , rotate};
+```
+
+We will use the `A` button to switch states.
+
+So we would start by changing our previous `updatePosition` function to take then enum of the `manupulationMode` :
+
+```cpp
+bool updatePosition(Digital &port, Vector2D &spritePos, manipulationMode &mode)
+{
+    if(port.IsConnected() == false)
+    {
+        return false;
+    }
+
+    if(port.IsHeld(Digital::Button::A))
+    {
+        switch(mode)
+        {
+            case translate : mode = scaleUniform;
+            break;
+            case scaleUniform : mode = scaleX;
+            break;
+            case scaleX : mode = scaleY ;
+            break;
+            case scaleY : mode = rotate ;
+            break;
+            case rotate : mode = translate ;
+            break;
+            default : mode = translate;
+            break;
+        }
+    }
+
+    switch(mode)
+    {
+        case translate : SRL::Debug::Print(1,3,"Mode : Translate");
+        break;
+        case scaleUniform : SRL::Debug::Print(1,3,"Mode : scaleUniform");
+        break;
+        case scaleX : SRL::Debug::Print(1,3,"Mode : scaleX");
+        break;
+        case scaleY : SRL::Debug::Print(1,3,"Mode : scaleY");
+        break;
+        case rotate : SRL::Debug::Print(1,3,"Mode : rotate");
+        break;
+        default :  SRL::Debug::Print(1,3,"Mode : unknown");
+    }
+
+    if(port.IsHeld(Digital::Button::Up))
+    {
+        spritePos.Y = spritePos.Y - 1 ;
+    }
+    if(port.IsHeld(Digital::Button::Down))
+    {
+        spritePos.Y = spritePos.Y + 1 ;
+    }
+    if(port.IsHeld(Digital::Button::Left))
+    {
+        spritePos.X = spritePos.X - 1 ;
+    }
+    if(port.IsHeld(Digital::Button::Right))
+    {
+        spritePos.X = spritePos.X + 1 ;
+    }
+
+    return true;
+}
+```
+
+Now the full code becomes :
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector , HighColor and Input
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+using namespace SRL::Input;
+
+
+int32_t loadTGA(char* filename) //texture loading function
+    {
+        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+        int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+        delete tga;  
+        return textureIndex;
+    }
+
+enum manipulationMode {translate = 0, scaleUniform ,  scaleX, scaleY , rotate};
+
+bool updatePosition(Digital &port, Vector2D &spritePos, manipulationMode &mode)
+{
+    if(port.IsConnected() == false)
+    {
+        return false;
+    }
+
+    if(port.IsHeld(Digital::Button::A))
+    {
+        switch(mode)
+        {
+            case translate : mode = scaleUniform;
+            break;
+            case scaleUniform : mode = scaleX;
+            break;
+            case scaleX : mode = scaleY ;
+            break;
+            case scaleY : mode = rotate ;
+            break;
+            case rotate : mode = translate ;
+            break;
+            default : mode = translate;
+            break;
+        }
+    }
+
+    switch(mode)
+    {
+        case translate : SRL::Debug::Print(1,3,"Mode : Translate");
+        break;
+        case scaleUniform : SRL::Debug::Print(1,3,"Mode : scaleUniform");
+        break;
+        case scaleX : SRL::Debug::Print(1,3,"Mode : scaleX");
+        break;
+        case scaleY : SRL::Debug::Print(1,3,"Mode : scaleY");
+        break;
+        case rotate : SRL::Debug::Print(1,3,"Mode : rotate");
+        break;
+        default :  SRL::Debug::Print(1,3,"Mode : unknown");
+    }
+
+    if(port.IsHeld(Digital::Button::Up))
+    {
+        spritePos.Y = spritePos.Y - 1 ;
+    }
+    if(port.IsHeld(Digital::Button::Down))
+    {
+        spritePos.Y = spritePos.Y + 1 ;
+    }
+    if(port.IsHeld(Digital::Button::Left))
+    {
+        spritePos.X = spritePos.X - 1 ;
+    }
+    if(port.IsHeld(Digital::Button::Right))
+    {
+        spritePos.X = spritePos.X + 1 ;
+    }
+
+    return true;
+}
+
+int main() // Main program entry
+{
+  // Initialize library
+  SRL::Core::Initialize(HighColor::Colors::Black);
+  SRL::Debug::Print(1,1, "05 - Interlude");
+
+  int32_t SpriteId = 0;
+  SpriteId = loadTGA("TEST.TGA");
+  manipulationMode state = translate;
+  Vector2D spritePos = Vector2D(0.0);
+  Digital port(0);
+
+  while(1)
+  {
+    SRL::Debug::PrintClearLine(2);
+    SRL::Debug::PrintClearLine(3);
+    updatePosition(port, spritePos, state);
+    SRL::Debug::Print(1,2, "X : %f , Y : %f", spritePos.X, spritePos.Y);
+    SRL::Scene2D::DrawSprite(SpriteId, Vector3D(spritePos, 500));
+    SRL::Core::Synchronize(); 
+  }
+  return 0;
+}
+```
+
+When testing the code, a bug emerges : If you keep the button `A` pressed, the the program will loop between different `manipulationMode` states.
+This is unintended, since we want to change the state ONCE per press.
 
