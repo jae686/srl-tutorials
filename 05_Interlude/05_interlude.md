@@ -475,7 +475,7 @@ bool updatePosition(Digital &port, Vector2D &spritePos, manipulationMode &mode)
         break;
         default :  SRL::Debug::Print(1,3,"Mode : unknown");
     }
-
+    
     if(port.IsHeld(Digital::Button::Up))
     {
         spritePos.Y = spritePos.Y - 1 ;
@@ -521,6 +521,187 @@ int main() // Main program entry
 }
 ```
 
-When testing the code, a bug emerges : If you keep the button `A` pressed, the the program will loop between different `manipulationMode` states.
+When testing the code, an unintended behavior emerges : If you keep the button `A` pressed, the program will loop between different `manipulationMode` states.
 This is unintended, since we want to change the state ONCE per press.
+
+We can do this by changing the code `port.IsHeld(Digital::Button::A)` to `port.WasPressed(Digital::Button::A)`.
+
+And now the state switching works as expected. 
+Now we can add the scale vector and rotation to the code :
+
+```cpp
+Vector2D spriteScale = Vector2D(1.0);
+Fxp Angle = 0.0;
+```
+
+And we change the signature of our `spritePosition` to take the reference of our scale vector and Angle value.
+We will also add handling for scaling, rotation and angle. 
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector , HighColor and Input
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+using namespace SRL::Input;
+
+int32_t loadTGA(char* filename) //texture loading function
+    {
+        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+        int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+        delete tga;  
+        return textureIndex;
+    }
+
+enum manipulationMode {translate = 0, scaleUniform ,  scaleX, scaleY , rotate};
+
+bool updatePosition(Digital &port, Vector2D &spritePos,  Vector2D &spriteScale, Fxp &angle, manipulationMode &mode)
+{
+    if(port.IsConnected() == false)
+    {
+        return false;
+    }
+
+    if(port.WasPressed(Digital::Button::A))
+    {
+        switch(mode)
+        {
+            case translate : mode = scaleUniform;
+            break;
+            case scaleUniform : mode = scaleX;
+            break;
+            case scaleX : mode = scaleY ;
+            break;
+            case scaleY : mode = rotate ;
+            break;
+            case rotate : mode = translate ;
+            break;
+            default : mode = translate;
+            break;
+        }
+    }
+
+    if(port.WasPressed(Digital::Button::C)) // Reset the location, scale, rotation.
+    {
+        spritePos = Vector2D(0.0);
+        spriteScale = Vector2D(1.0);
+        angle = 0.0;
+    }
+
+    switch(mode)
+    {
+        case translate : SRL::Debug::Print(1,3,"Mode : Translate");
+        break;
+        case scaleUniform : SRL::Debug::Print(1,3,"Mode : scaleUniform");
+        break;
+        case scaleX : SRL::Debug::Print(1,3,"Mode : scaleX");
+        break;
+        case scaleY : SRL::Debug::Print(1,3,"Mode : scaleY");
+        break;
+        case rotate : SRL::Debug::Print(1,3,"Mode : rotate");
+        break;
+        default :  SRL::Debug::Print(1,3,"Mode : unknown");
+    }
+
+    if(mode == translate)
+    {
+        if(port.IsHeld(Digital::Button::Up))
+        {
+            spritePos.Y = spritePos.Y - 1 ;
+        }
+        if(port.IsHeld(Digital::Button::Down))
+        {
+            spritePos.Y = spritePos.Y + 1 ;
+        }
+        if(port.IsHeld(Digital::Button::Left))
+        {
+            spritePos.X = spritePos.X - 1 ;
+        }
+        if(port.IsHeld(Digital::Button::Right))
+        {
+            spritePos.X = spritePos.X + 1 ;
+        }
+    }
+
+    if(mode == scaleUniform)
+    {
+        if(port.IsHeld(Digital::Button::Up) || port.IsHeld(Digital::Button::Right) )
+        {
+            spriteScale.X = spriteScale.X + 0.25 ;
+            spriteScale.Y = spriteScale.Y + 0.25 ;
+        }
+        if(port.IsHeld(Digital::Button::Down) || port.IsHeld(Digital::Button::Left) )
+        {
+            spriteScale.X = spriteScale.X - 0.25 ;
+            spriteScale.Y = spriteScale.Y - 0.25 ;
+        }
+    }
+
+    if(mode == scaleX)
+    {
+        if(port.IsHeld(Digital::Button::Up) || port.IsHeld(Digital::Button::Right))
+        {
+            spriteScale.X = spriteScale.X + 0.25 ;
+        }
+        if(port.IsHeld(Digital::Button::Down) || port.IsHeld(Digital::Button::Left))
+        {
+            spriteScale.X = spriteScale.X - 0.25 ;
+        }
+    }
+
+    if(mode == scaleY)
+    {
+        if(port.IsHeld(Digital::Button::Up) || port.IsHeld(Digital::Button::Right))
+        {
+            spriteScale.Y = spriteScale.Y + 0.25 ;
+        }
+        if(port.IsHeld(Digital::Button::Down) || port.IsHeld(Digital::Button::Left))
+        {
+            spriteScale.Y = spriteScale.Y - 0.25 ;
+        }
+    }
+
+    if(mode == rotate)
+    {
+      if(port.IsHeld(Digital::Button::Up) || port.IsHeld(Digital::Button::Right))
+      {
+         angle += 0.25 ;
+      }
+      if(port.IsHeld(Digital::Button::Down) || port.IsHeld(Digital::Button::Left))
+      {
+         angle -= 0.25 ;
+      }
+    }
+    return true;
+}
+
+
+int main() // Main program entry
+{
+  // Initialize library
+  SRL::Core::Initialize(HighColor::Colors::Black);
+  SRL::Debug::Print(1,1, "05 - Interlude");
+
+  int32_t SpriteId = 0;
+  SpriteId = loadTGA("TEST.TGA");
+  manipulationMode state = translate;
+  Vector2D spritePos = Vector2D(0.0);
+  Vector2D spriteScale = Vector2D(1.0);
+  Fxp angle = 0.0;
+  Digital port(0);
+
+  while(1)
+  {
+    SRL::Debug::PrintClearLine(2);
+    SRL::Debug::PrintClearLine(3);
+    updatePosition(port, spritePos, spriteScale, angle , state);
+    SRL::Debug::Print(1,2, "X : %f , Y : %f", spritePos.X, spritePos.Y);
+    SRL::Scene2D::DrawSprite(SpriteId, Vector3D(spritePos, 500), Angle::FromDegrees(angle), spriteScale);
+    SRL::Core::Synchronize(); 
+  }
+  return 0;
+}
+```
+
+
 
