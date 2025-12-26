@@ -701,6 +701,12 @@ int main() // Main program entry
   return 0;
 }
 ```
+
+The result :
+
+![](img/05_interlude.png)
+
+
 # Summary
 
 - It is recommended to avoid having large blocks of code, since those are more difficult to maintain and debug.
