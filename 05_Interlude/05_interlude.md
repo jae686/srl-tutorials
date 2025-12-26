@@ -103,7 +103,7 @@ To move the sprite around the screen we must be able to change is position at ru
 To do this, we can either declare 2 `Fxp` variables, or a single `Vector2D` variable, to contain the sprite coordinates.
 
 > [!TIP]
-> Remember that the `SRL::Scene2D::DrawSprite` takes a `Vector2D or Vector3D` depending on the used constructor.
+> Remember that the `SRL::Scene2D::DrawSprite` takes a `Vector2D` or `Vector3D` depending on the used constructor.
 
 In this case we will use a single `Vector2D` variable :
 
@@ -161,7 +161,6 @@ The final code looks like this :
 using namespace SRL::Types;
 using namespace SRL::Math::Types;
 using namespace SRL::Input;
-
 
 int32_t loadTGA(char* filename) //texture loading function
     {
@@ -224,7 +223,6 @@ int main() // Main program entry
 However the render loop is getting longer. Long blocks of code are harder to read and debug. It will get even bigger when we add more buttons.
 We can put the input handling inside a function as well, in order to keep the render loop code as clean as possible.
 
-
 ```cpp
 bool updatePosition(Digital *port, Vector2D *spritePos)
 {
@@ -254,11 +252,12 @@ bool updatePosition(Digital *port, Vector2D *spritePos)
 }
 ```
 
-> [!INFO] Passing by value vs Passing by reference
+> [!NOTE] 
+> Passing by value vs Passing by reference :
 > You probably noticed that the function to update the position vector does not return a vector, and it takes *pointers* to the Digital port class and the position vector.
 > This is intentional : if we pass by value, we are passing a copy of the variable to the function, by passing by reference we read / modify directly the variable through the pointer. We thus avoid using more memory and save some time since we don´t have do copy data around.
 
-Now the render loop looks cleaner, and the input handling functionality was modularized into a separate function. Increasing the complexity of the input handling functionality won´t impact the readability of the render loop.
+Not the code becomes : 
 
 ```cpp
 #include <srl.hpp>
@@ -267,7 +266,6 @@ Now the render loop looks cleaner, and the input handling functionality was modu
 using namespace SRL::Types;
 using namespace SRL::Math::Types;
 using namespace SRL::Input;
-
 
 int32_t loadTGA(char* filename) //texture loading function
     {
@@ -330,7 +328,7 @@ int main() // Main program entry
 
 ```
 
-
+Now the render loop looks cleaner, and the input handling functionality was split into a separate function. Increasing the complexity of the input handling functionality won´t impact the readability of the render loop.
 
 
 
