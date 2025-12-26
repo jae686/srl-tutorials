@@ -1,4 +1,4 @@
-# A Tutorial series for SRL
+# A Tutorial series for Saturn Ring Library (SRL)
 
 ## Author note
 
