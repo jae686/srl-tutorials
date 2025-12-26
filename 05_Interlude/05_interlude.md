@@ -220,8 +220,10 @@ int main() // Main program entry
 }
 ```
 
-However the render loop is getting longer. Long blocks of code are harder to read and debug. It will get even bigger when we add more buttons.
-We can put the input handling inside a function as well, in order to keep the render loop code as clean as possible.
+However the render loop is getting longer. Long blocks of code are harder to read and debug. 
+It will get even bigger when we add handling of more buttons.
+
+In order to keep the render loop manageable, we can put the input handling inside a function , in order to keep the render loop code as clean and short as possible.
 
 ```cpp
 bool updatePosition(Digital *port, Vector2D *spritePos)
@@ -254,10 +256,11 @@ bool updatePosition(Digital *port, Vector2D *spritePos)
 
 > [!NOTE] 
 > Passing by value vs Passing by reference :
+> 
 > You probably noticed that the function to update the position vector does not return a vector, and it takes *pointers* to the Digital port class and the position vector.
 > This is intentional : if we pass by value, we are passing a copy of the variable to the function, by passing by reference we read / modify directly the variable through the pointer. We thus avoid using more memory and save some time since we don´t have do copy data around.
 
-Not the code becomes : 
+Now the code becomes : 
 
 ```cpp
 #include <srl.hpp>
