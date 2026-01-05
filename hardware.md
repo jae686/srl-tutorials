@@ -11,4 +11,3 @@ The hardware is composed of :
 > + VDP1 for foreground
 > + VDP2 for background
 + Sound Chip : 	[Yamaha YMF292](https://en.wikipedia.org/wiki/Yamaha_YMF292)
-
