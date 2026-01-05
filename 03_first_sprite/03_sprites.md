@@ -26,6 +26,7 @@ Image width must be divisible by 8.
 ## Sprite loading
 
 On this tutorial, the sprite loading into VDP1 ram is done in 2 steps :
+
 - Create a `SRL::Bitmap::TGA` object to load from the CD file system into main RAM.
 - Load it into VDP1 via the `SRL::VDP1::TryLoadTexture`
 - Free the memory in main RAM occupied by the `SRL::Bitmap::TGA` object.
@@ -55,12 +56,13 @@ Currently there are 6 overloads of this function.
 ### The simplest way
 
 The most simple way is by using :
-```cpp 
-static bool SRL::Scene2D::DrawSprite	(	const uint16_t	texture,
-        const SRL::Math::Types::Vector3D &	location,
+
+```cpp
+static bool SRL::Scene2D::DrawSprite ( const uint16_t texture,
+        const SRL::Math::Types::Vector3D & location,
         const SRL::Math::Types::Angle &	angle = SRL::Math::Types::Angle::Zero(),
-        const SRL::Math::Types::Vector2D &	scale = SRL::Math::Types::Vector2D(1.0, 1.0),
-        const Scene2D::ZoomPoint	zoomPoint = Scene2D::ZoomPoint::Center )
+        const SRL::Math::Types::Vector2D & scale = SRL::Math::Types::Vector2D(1.0, 1.0),
+        const Scene2D::ZoomPoint zoomPoint = Scene2D::ZoomPoint::Center )
 
 ```
 
@@ -127,10 +129,10 @@ However you might have noticed that there is an specific type for angles.
 The `SRL::Math::Types::Angle` is the type used in SRL for angles. 
 
 3 Different constructors are supplied :
+
 - `constexpr Angle ()` that simply constructs a `SRL::Math::Types::Angle` with 0 Degrees.
 - `constexpr Angle (const Fxp &turns)` that takes the number of **turns** in `Fxp`.
 - `constexpr Angle (const T &turns)` that takes the number of turns in a numeric format such as `float` or `int` values.
-
 
 > [!WARNING]
 > Be aware that the constructor takes **turns** , not degrees or radians!
@@ -142,6 +144,7 @@ If you want to turn the sprite by 45º first we declare a `Angle` variable :
 ```cpp
 Angle SpriteAngle = Angle(0.125); // since 45º is 1/8 of a turn = 0.125
 ```
+
 And then supply the `SpriteAngle` to  `SRL::Scene2D::DrawSprite`
 
 ```cpp
@@ -170,6 +173,7 @@ So if we want to use degrees instead of turns we can instead write :
 ```cpp
 Angle SpriteAngle = Angle::FromDegrees(45.0);
 ```
+
 That will have the same result.
 
 ## Scaling the Sprites
@@ -183,6 +187,7 @@ For example :
 ```cpp
 Vector2D scale = Vector2D(1.5, 1.5);
 ```
+
 Then we pass it to `SRL::Scene2D::DrawSprite` :
 
 ```cpp
@@ -197,6 +202,7 @@ The resulting rotated and scaled sprite can be seen below.
 
 The [ZoomPoint](https://srl.reye.me/classSRL_1_1Scene2D_a2f09ba617c34e0ae409e8717482799c8.html#a2f09ba617c34e0ae409e8717482799c8) sets the Origin of the sprite.
 This is an enum that can take the following choices :
+
 - `UpperLeft` Upper left corner.
 - `CenterLeft` Center left side.
 - `BottomLeft` Bottom left corner.
@@ -220,6 +226,7 @@ And then we can pass it to the `SRL::Scene2D::DrawSprite` :
 ```cpp
 SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), Angle(), scale, zp);
 ```
+
 And for clarity, I've added 2 lines , crossing at `(0,0)` for reference.
 
 Result :
@@ -277,4 +284,3 @@ For completeness , below are the effects of other values of `SRL::Scene2D::ZoomP
 `BottomRight`
 
 ![](img/DrawSprite_zp_BottomRight.png)
-
