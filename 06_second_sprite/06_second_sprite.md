@@ -36,7 +36,7 @@ The use of `SRL::CRAM::Palette` will be covered at a late tutorial.
 
 ## A Distorted sprite
 
-To start lets specify a simple quad:
+To start lets specify a simple quad. This Quad is where out sprite will be mapped into. Bear in mind that there are no UV coordiates : the whole sprite is fully mapped into the quad.
 
 ```cpp
 
@@ -103,3 +103,23 @@ int main()
 	return 0;
 }
 ```
+
+The Result :
+
+![](img/second_sprite_01.png)
+
+From this, we can now start to experiment with the coordiates.
+Lets, for example, make the quad larger in the top :
+
+```cpp
+    points[0] = Vector2D(-75, -50);
+    points[1] = Vector2D(75,  -50);
+    points[2] = Vector2D( 50,  50);
+    points[3] = Vector2D(-50,  50);   
+```
+
+The resulting quad :
+
+![](img/second_sprite_02.png)
+
+
