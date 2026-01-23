@@ -95,7 +95,7 @@ int main()
     // Main program loop
 	while(1)
 	{   
-        SRL::Scene2D::DrawSprite ( textureIndex,  points, 50.0 );
+        SRL::Scene2D::DrawSprite(textureIndex,  points, 50.0 );
         // Refresh screen
         SRL::Core::Synchronize();
 	}
@@ -122,4 +122,44 @@ The resulting quad :
 
 ![](img/second_sprite_02.png)
 
+## Manual Transforms
 
+We can scale , rotate and transform the points of our quad.
+For this, SRL provides matrices to help.
+
+### Rotation
+
+Since we are on the XY plane, we must rotatate along the Z axis.
+
+Therefore, using SRL we can first declare our rotation matrix.
+In SRL is really simple :
+
+```cpp
+    //Declare and initialize our 3x3 matrix
+    Matrix33 transform = Matrix33::Identity();
+    //Lets create a rotation matrix
+    transform = transform.CreateRotationZ(SRL::Math::Angle::FromDegrees(45.0));
+```
+
+Our sprite point coordinates are in 2 component vectors. We must create a 3 component vectors in order to multiply the vertex position by the rotation matrix. Then we multiply each point and copy the X and Y values into the `Vector2D` array that will be provided to `SRL::Scene2D::DrawSprite`.
+
+```cpp
+Vector3D vec3_points[4] = {Vector3D(0.0)};
+    vec3_points[0] = Vector3D(points[0], 1.0);
+    vec3_points[1] = Vector3D(points[1], 1.0);
+    vec3_points[2] = Vector3D(points[2], 1.0);
+    vec3_points[3] = Vector3D(points[3], 1.0);
+
+    for(int i = 0 ; i < 4 ; i++)
+    {
+       //multiply matrix
+       vec3_points[i] = transform *  vec3_points[i];
+       // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+       points[i].X = vec3_points[i].X;
+       points[i].Y = vec3_points[i].Y;
+    }
+```
+
+The reusult:
+
+![](img/second_sprite_03.png)
