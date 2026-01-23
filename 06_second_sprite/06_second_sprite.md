@@ -132,6 +132,9 @@ For this, SRL provides matrices to help.
 Since we are on the XY plane, we must rotatate along the Z axis.
 
 Therefore, using SRL we can first declare our rotation matrix.
+We must provide to the `CreateRotationZ` function the rotation angle.
+SRL also provides functions to create rotation in X and Y as well.
+
 In SRL is really simple :
 
 ```cpp
