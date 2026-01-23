@@ -36,7 +36,7 @@ The use of `SRL::CRAM::Palette` will be covered at a late tutorial.
 
 ## A Distorted sprite
 
-To start lets specify a simple quad. This Quad is where out sprite will be mapped into. Bear in mind that there are no UV coordiates : the whole sprite is fully mapped into the quad.
+To start lets specify a simple quad. This Quad is where our sprite will be mapped into. Bear in mind that there are no UV coordiates : the whole sprite is fully mapped into the quad.
 
 ```cpp
 
@@ -48,7 +48,7 @@ To start lets specify a simple quad. This Quad is where out sprite will be mappe
 
 ```
 
-and use out loader function as specified on [chapter 5](05_interlude/05_interlude.md):
+and use our loader function as specified on [chapter 5](05_interlude/05_interlude.md):
 
 ```cpp
 int32_t loadTGA(char* filename)
@@ -109,7 +109,7 @@ The Result :
 ![](img/second_sprite_01.png)
 
 From this, we can now start to experiment with the coordiates.
-Lets, for example, make the quad larger in the top :
+Lets, for example, make the quad larger at the top :
 
 ```cpp
     points[0] = Vector2D(-75, -50);
@@ -163,6 +163,17 @@ Vector3D vec3_points[4] = {Vector3D(0.0)};
     }
 ```
 
-The reusult:
+The result:
 
 ![](img/second_sprite_03.png)
+
+### A quick note on animations
+
+One might be tempted to , in order to make for example, a sprite to rotate , by multiplying the rotated points from a previous frame by the rotation matrix.
+
+This will compound the rounding errors due to precision loss.
+
+![](mov/error_compounds.mp4)
+
+
+ 
