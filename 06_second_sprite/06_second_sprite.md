@@ -170,7 +170,7 @@ The result:
 > [!WARNING]
 > A quick note on animations
 > 
-> One might be tempted to , in order to make for example, make an animation of a sprite rotating , by multiplying the rotated points from a previous frame by the rotation matrix.
-> This will *compound* the rounding errors due to precision loss.
+> One might be tempted to , for example, make an animation of a sprite rotating by multiplying the rotated points from a previous frame by the rotation matrix.
+> This will *compound* the rounding errors due to precision loss. THis can be seen on the GIF below :
 
 ![](mov/error_compounds.gif)
