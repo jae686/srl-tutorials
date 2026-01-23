@@ -713,6 +713,3 @@ The result :
   - This can be done by means of implementing the functionality into functions you can re-use trough out your code (for example texture loading)
   - Specific functionality can be implemented in a function you can invoke from the render loop (for example the Input handling function).
 - Pass values by reference when possible. The sega saturn is not known for having much computational resources.
-
-
-
