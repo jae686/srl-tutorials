@@ -173,9 +173,7 @@ One might be tempted to , in order to make for example, make an animation of a s
 
 This will compound the rounding errors due to precision loss.
 
-[![Watch the video](https://raw.githubusercontent.com/username/repository/branch/path/to/thumbnail.jpg)](https://github.com/jae686/srl-tutorials/blob/d08d13d8c1df6d591f35d602de8536f28261798a/06_second_sprite/mov/error_compounds.mp4)
-
-![](mov/error_compounds.mp4)
+![](mov/error_compounds.gif)
 
 
  
