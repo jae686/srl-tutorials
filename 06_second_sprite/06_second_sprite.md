@@ -178,7 +178,7 @@ The result:
 The correct approach is to define the new position from the initial state instead of the previous frame.
 
 We calculate the new points from the original points and a new rotation matrix with the *new* angle.
-
+This way we avoid the compound of errors due to precision loss.
 The code for the main loop is shown below :
 
 ```cpp
@@ -212,4 +212,14 @@ while(1)
 And now we have the rotation working properly:
 
 ![](mov/error_compounds_fixed.gif)
+
+If we rotate by X or Y , we can get a very interesting behavior :
+
+Rotation by X :
+
+![](mov/rotation_x.gif)
+
+Rotation by Y :
+
+![](mov/rotation_y.gif)
 
