@@ -223,3 +223,18 @@ Rotation by Y :
 
 ![](mov/rotation_y.gif)
 
+And of course, we can compound transforms by multiplying the matrices. 
+
+For example if we want to rotate by 45 degrees in Z, and then by Y we can define or matrices as follows :
+
+```cpp
+transform = Matrix33::Identity();
+transform = transform.CreateRotationZ(SRL::Math::Angle::FromDegrees(45.0)); // new matrix with the new angle
+transform = transform.CreateRotationY(SRL::Math::Angle::FromDegrees(angle)) * transform; // We multiply our rotation matrix by our previous transform
+```
+
+> [!WARNING]
+> Matrix multiplication is NOT commutative! A x B != B x A. The multiplication order matters!
+
+![](mov/rotation_x_y.gif)
+
