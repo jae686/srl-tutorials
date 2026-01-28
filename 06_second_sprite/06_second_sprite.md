@@ -239,5 +239,5 @@ transform = transform.CreateRotationY(SRL::Math::Angle::FromDegrees(angle)) * tr
 
 ![](mov/rotation_z_y.gif)
 
-![](mov/rotation_y_z.gif)
+![](mov/rotarion_y_z.gif)
 
