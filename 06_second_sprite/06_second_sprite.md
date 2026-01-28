@@ -159,7 +159,7 @@ An equivalent way would be to write :
 > [!TIP]
 > `M.RotateZ` is equivalent to write `M = M * M.CreateRotationZ` in our example , since `M` is an Identity Matrix, we can , in this case, omit the multiplication.
 >
-> ![Documentation](https://srl.reye.me/structSRL_1_1Math_1_1Types_1_1Matrix33_a039ee605912f583cafc8e58e606506b3.html#a039ee605912f583cafc8e58e606506b3)
+> [Documentation](https://srl.reye.me/structSRL_1_1Math_1_1Types_1_1Matrix33_a039ee605912f583cafc8e58e606506b3.html#a039ee605912f583cafc8e58e606506b3)
 
 
 Our sprite point coordinates are in 2 component vectors. We must create a 3 component vectors in order to multiply the vertex position by the rotation matrix. Then we multiply each point and copy the X and Y values into the `Vector2D` array that will be provided to `SRL::Scene2D::DrawSprite`.
@@ -266,4 +266,20 @@ transform.RotateY(SRL::Math::Angle::FromDegrees(angle));
 ![](mov/rotation_z_y.gif)
 
 ![](mov/rotarion_y_z.gif)
+
+
+The scaling is made by calling the `Scale` method.
+
+The method needs a `Vector3D` , where its X, Y ,Z represent the scaling factor on the respective axis.
+
+For example, to scale the sprite by 50% :
+
+```cpp
+ transform = Matrix33::Identity();  
+ transform.Scale(Vector3D(0.5));
+```
+
+The Resulting sprite :
+
+![](img/second_sprite_04.png)
 
