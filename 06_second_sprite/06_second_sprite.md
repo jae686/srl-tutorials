@@ -129,13 +129,25 @@ For this, SRL provides matrices to help.
 
 ### Rotation
 
-Since we are on the XY plane, we must rotatate along the Z axis.
+Since we are on the XY plane, we must rotate along the Z axis.
 
-Therefore, using SRL we can first declare our rotation matrix.
-We must provide to the `CreateRotationZ` function the rotation angle.
+Therefore, using SRL we can first declare our matrix.
+We can use the `RotateZ` method to apply a rotation matrix on the Z axis by the supplied angle.
+We if we want the rotation matrix, we can use the  `CreateRotationZ` method , also providing the angle we want to rotate by.
 SRL also provides functions to create rotation in X and Y as well.
 
 In SRL is really simple :
+
+You can write
+
+```cpp
+    //Declare and initialize our 3x3 matrix
+    Matrix33 transform = Matrix33::Identity();
+    //Lets apply a rotation matrix to our Identity Matrix
+    transform.RotateZ(SRL::Math::Angle::FromDegrees(45.0));
+```
+
+An equivalent way would be to write :
 
 ```cpp
     //Declare and initialize our 3x3 matrix
@@ -143,6 +155,12 @@ In SRL is really simple :
     //Lets create a rotation matrix
     transform = transform.CreateRotationZ(SRL::Math::Angle::FromDegrees(45.0));
 ```
+
+> [!TIP]
+> `M.RotateZ` is equivalent to write `M = M * M.CreateRotationZ` in our example , since `M` is an Identity Matrix, we can , in this case, omit the multiplication.
+>
+> ![Documentation](https://srl.reye.me/structSRL_1_1Math_1_1Types_1_1Matrix33_a039ee605912f583cafc8e58e606506b3.html#a039ee605912f583cafc8e58e606506b3)
+
 
 Our sprite point coordinates are in 2 component vectors. We must create a 3 component vectors in order to multiply the vertex position by the rotation matrix. Then we multiply each point and copy the X and Y values into the `Vector2D` array that will be provided to `SRL::Scene2D::DrawSprite`.
 
@@ -155,7 +173,7 @@ Vector3D vec3_points[4] = {Vector3D(0.0)};
 
     for(int i = 0 ; i < 4 ; i++)
     {
-       //multiply matrix
+       //multiply vector by our rotation matrix
        vec3_points[i] = transform *  vec3_points[i];
        // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
        points[i].X = vec3_points[i].X;
@@ -230,11 +248,19 @@ For example if we want to rotate by 45 degrees in Z, and then by Y we can define
 ```cpp
 transform = Matrix33::Identity();
 transform = transform.CreateRotationZ(SRL::Math::Angle::FromDegrees(45.0)); // new matrix with the new angle
-transform = transform.CreateRotationY(SRL::Math::Angle::FromDegrees(angle)) * transform; // We multiply our rotation matrix by our previous transform
+transform = transform * transform.CreateRotationY(SRL::Math::Angle::FromDegrees(angle)) ; // We multiply our rotation matrix by our previous transform
+```
+
+Or you could write
+
+```cpp
+transform.RotateZ(SRL::Math::Angle::FromDegrees(45.0));
+transform.RotateY(SRL::Math::Angle::FromDegrees(angle));
 ```
 
 > [!WARNING]
 > Matrix multiplication is NOT commutative! A x B != B x A. The multiplication order matters!
+>
 > See Below examples
 
 ![](mov/rotation_z_y.gif)
