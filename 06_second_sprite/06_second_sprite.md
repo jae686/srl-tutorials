@@ -235,6 +235,9 @@ transform = transform.CreateRotationY(SRL::Math::Angle::FromDegrees(angle)) * tr
 
 > [!WARNING]
 > Matrix multiplication is NOT commutative! A x B != B x A. The multiplication order matters!
+> See Below examples
 
-![](mov/rotation_x_y.gif)
+![](mov/rotation_z_y.gif)
+
+![](mov/rotation_y_z.gif)
 
