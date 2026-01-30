@@ -321,12 +321,58 @@ Its simple, however if you want to combine several transforms, using this approa
 Defining a translation matrix allows to apply the translation to a given vertex in the same way you would apply scale and rotation.
 
 A Translation matrix, that translates a Vertex by (x, y) is defined as :
+
 $`
-\[
+TranslateMatrix_{x,y} =
  \begin{matrix}
   1 & 0 & x \\
   0 & 1 & y \\
   0 & 0 & 1
  \end{matrix}
-\]
 `$
+
+We can define it in SRL as :
+
+```cpp
+
+Matrix33 transform = Matrix33::Identity();
+Vector2D translateV = Vector2D(15.0, 15.0);
+transform.Row0.Z = translateV.X;
+transform.Row1.Z = translateV.Y;
+
+```
+
+and then we can apply the translation in the same way we did for rotation and scaling.
+
+The resulting code for the main loop becomes :
+
+```cpp
+
+while(1)
+	{   
+        Matrix33 transform = Matrix33::Identity();
+        Vector2D translateV = Vector2D(15.0, 15.0);
+
+        transform.Row0.Z = translateV.X;
+        transform.Row1.Z = translateV.Y;
+
+        points[0] = Vector2D(-50, -50);
+        points[1] = Vector2D( 50, -50);
+        points[2] = Vector2D( 50,  50);
+        points[3] = Vector2D(-50,  50);   
+                
+        for(int i = 0 ; i < 4 ; i++)
+        {
+          vec3_points[i] = Vector3D(points[i], 1.0); // copy the original points into Vector3D points
+          vec3_points[i] = transform *  vec3_points[i]; //multiply by matrix
+          //get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+          points[i].X = vec3_points[i].X;
+          points[i].Y = vec3_points[i].Y;
+        }
+        
+        SRL::Scene2D::DrawSprite ( textureIndex,  points, 50.0 );
+        // Refresh screen
+        SRL::Core::Synchronize();
+	}
+
+```
