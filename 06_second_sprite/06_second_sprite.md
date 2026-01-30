@@ -254,6 +254,7 @@ transform = transform * transform.CreateRotationY(SRL::Math::Angle::FromDegrees(
 Or you could write
 
 ```cpp
+transform = Matrix33::Identity();
 transform.RotateZ(SRL::Math::Angle::FromDegrees(45.0));
 transform.RotateY(SRL::Math::Angle::FromDegrees(angle));
 ```
@@ -267,6 +268,7 @@ transform.RotateY(SRL::Math::Angle::FromDegrees(angle));
 
 ![](mov/rotarion_y_z.gif)
 
+### Scaling
 
 The scaling is made by calling the `Scale` method.
 
@@ -276,10 +278,55 @@ For example, to scale the sprite by 50% :
 
 ```cpp
  transform = Matrix33::Identity();  
- transform.Scale(Vector3D(0.5));
+ transform.Scale(Vector3D(0.5)); 
 ```
 
 The Resulting sprite :
 
 ![](img/second_sprite_04.png)
+
+### Translation
+
+For translation we can do in two ways :
+
+- Sum a translation vector
+- Create a Translation matrix
+
+#### Sum a translation vector
+
+Its the more simple way. Just add the vector that represents the displacement to each point.
+
+```cpp
+Vector2D translateV = Vector2D(15.0, 15.0);
+
+points[0] = Vector2D(-50, -50);
+points[1] = Vector2D( 50, -50);
+points[2] = Vector2D( 50,  50);
+points[3] = Vector2D(-50,  50);   
+             
+for(int i = 0 ; i < 4 ; i++)
+    {
+        points[i] = points[i] + translateV;
+    }
+        
+SRL::Scene2D::DrawSprite ( textureIndex,  points, 50.0 );
+// Refresh screen
+SRL::Core::Synchronize();
+```
+
+Its simple, however if you want to combine several transforms, using this approach gets cumbersome.
+
+### Create a Translation matrix
+
+Defining a translation matrix allows to apply the translation to a given vertex in the same way you would apply scale and rotation.
+
+A Translation matrix, that translates a Vertex by (x, y) is defined as :
+
+\[
+ \begin{matrix}
+  1 & 0 & x \\
+  0 & 1 & y \\
+  0 & 0 & 1
+ \end{matrix}
+\]
 
