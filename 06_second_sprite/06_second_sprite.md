@@ -377,6 +377,9 @@ while(1)
 
 ```
 
+Notice that if all 3 transforms are represented by matrices we can use the same code to apply them to the vertices.
+And also we can combine transforms by multiplying the matrices.
+
 However, we can define a function to return the translation matrix that we can re-use when we need a translation matrix :
 
 ```cpp
