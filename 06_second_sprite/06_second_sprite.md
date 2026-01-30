@@ -321,7 +321,7 @@ Its simple, however if you want to combine several transforms, using this approa
 Defining a translation matrix allows to apply the translation to a given vertex in the same way you would apply scale and rotation.
 
 A Translation matrix, that translates a Vertex by (x, y) is defined as :
-
+$`
 \[
  \begin{matrix}
   1 & 0 & x \\
@@ -329,4 +329,4 @@ A Translation matrix, that translates a Vertex by (x, y) is defined as :
   0 & 0 & 1
  \end{matrix}
 \]
-
+`$
