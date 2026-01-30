@@ -324,14 +324,14 @@ A Translation matrix, that translates a Vertex by (x, y) is defined as :
 
 $`
 TranslateMatrix_{x,y} =
- \begin{matrix}
+ \begin{bmatrix}
   1 & 0 & x \\
   0 & 1 & y \\
   0 & 0 & 1
- \end{matrix}
+ \end{bmatrix}
 `$
 
-We can define it in SRL as :
+For example we can define a translation matrix for a translation by `(15,15)` in SRL :
 
 ```cpp
 
@@ -374,5 +374,19 @@ while(1)
         // Refresh screen
         SRL::Core::Synchronize();
 	}
+
+```
+
+However, we can define a function to return the translation matrix that we can re-use when we need a translation matrix :
+
+```cpp
+
+Matrix33 translationM(Fxp x, Fxp y)
+{
+    Matrix33 transform = Matrix33::Identity();
+    transform.Row0.Z = x;
+    transform.Row1.Z = y;
+    return transform;
+}
 
 ```
