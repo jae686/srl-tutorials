@@ -57,18 +57,22 @@
 
 - Distorted sprites
 
-## 07 - 3D Model pipeline
+## 07 - Sprite effects
+
+## 08 - Sprite pallets
+
+## 09 - 3D Model pipeline
 
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
 - Limitations
 
-## 08 - Input Handling - Revisited
+## 10 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 09 - Backgrounds and tilemaps (VDP2)
+## 11 - Backgrounds and tilemaps (VDP2)
 
 - 
