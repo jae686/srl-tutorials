@@ -2,11 +2,11 @@
 
 On [Chapter 3](../03_first_sprite/03_sprites.md) we covered the simplest way to display, rotate and resize sprites.
 
-However there might be situations where more control on the sprites is needed : for example to apply custom transforms to the sprite's vertices.
+However there might be situations where more control on the sprites is needed: for example to apply custom transforms to the sprite's vertices.
 
 ## Sprite Drawing - Redux
 
-On [Chapter 3](../03_first_sprite/03_sprites.md) we've drawn sprites only by specifing the `bitmap ID`, sprite `position`, and optionally `scale`, `rotation` and `zoompoint`.
+On [Chapter 3](../03_first_sprite/03_sprites.md) we've drawn sprites only by specifying the `bitmap ID`, sprite `position`, and optionally `scale`, `rotation` and `zoompoint`.
 
 Although the functions themselves are quite simple to use they do not alow for us to deform the sprite.
 
@@ -36,15 +36,15 @@ The use of `SRL::CRAM::Palette` will be covered at a late tutorial.
 
 ## A Distorted sprite
 
-To start lets specify a simple quad. This Quad is where our sprite will be mapped into. Bear in mind that there are no UV coordiates : the whole sprite is fully mapped into the quad.
+To start lets specify a simple quad. This Quad is where our sprite will be mapped into. Bear in mind that there are no UV coordinates: the whole sprite is fully mapped into the quad.
 
 ```cpp
 
- Vector2D points[4] = {Vector2D(0.0)};
-    points[0] = Vector2D(-50, -50);
-    points[1] = Vector2D(50,  -50);
-    points[2] = Vector2D( 50,  50);
-    points[3] = Vector2D(-50,  50);
+Vector2D points[4] = {Vector2D(0.0)};
+points[0] = Vector2D(-50, -50);
+points[1] = Vector2D(50,  -50);
+points[2] = Vector2D( 50,  50);
+points[3] = Vector2D(-50,  50);
 
 ```
 
@@ -52,15 +52,15 @@ and use our loader function as specified on [chapter 5](05_interlude/05_interlud
 
 ```cpp
 int32_t loadTGA(char* filename)
-    {
-        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
-        int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
-        delete tga;  
-        return textureIndex;
-    }
+{
+    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+    delete tga;  
+    return textureIndex;
+}
 ```
 
-Now the finished source code looks like this :
+Now the finished source code looks like this:
 
 ```cpp
 #include <srl.hpp>
@@ -70,12 +70,12 @@ using namespace SRL::Types;
 using namespace SRL::Math::Types;
 
 int32_t loadTGA(char* filename) //texture loading function
-    {
-        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
-        int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
-        delete tga;  
-        return textureIndex;
-    }
+{
+    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+    delete tga;  
+    return textureIndex;
+}
 
 
 int main()
@@ -104,12 +104,12 @@ int main()
 }
 ```
 
-The Result :
+The Result:
 
 ![](img/second_sprite_01.png)
 
 From this, we can now start to experiment with the coordiates.
-Lets, for example, make the quad larger at the top :
+Lets, for example, make the quad larger at the top:
 
 ```cpp
     points[0] = Vector2D(-75, -50);
@@ -118,13 +118,13 @@ Lets, for example, make the quad larger at the top :
     points[3] = Vector2D(-50,  50);   
 ```
 
-The resulting quad :
+The resulting quad:
 
 ![](img/second_sprite_02.png)
 
 ## Manual Transforms
 
-We can scale , rotate and transform the points of our quad.
+We can scale, rotate and transform the points of our quad.
 For this, SRL provides matrices to help.
 
 ### Rotation
@@ -133,10 +133,10 @@ Since we are on the XY plane, we must rotate along the Z axis.
 
 Therefore, using SRL we can first declare our matrix.
 We can use the `RotateZ` method to apply a rotation matrix on the Z axis by the supplied angle.
-We if we want the rotation matrix, we can use the  `CreateRotationZ` method , also providing the angle we want to rotate by.
+We if we want the rotation matrix, we can use the  `CreateRotationZ` method, also providing the angle we want to rotate by.
 SRL also provides functions to create rotation in X and Y as well.
 
-In SRL is really simple :
+In SRL is really simple:
 
 You can write
 
@@ -147,7 +147,7 @@ You can write
     transform.RotateZ(SRL::Math::Angle::FromDegrees(45.0));
 ```
 
-An equivalent way would be to write :
+An equivalent way would be to write:
 
 ```cpp
     //Declare and initialize our 3x3 matrix
@@ -157,7 +157,7 @@ An equivalent way would be to write :
 ```
 
 > [!TIP]
-> `M.RotateZ` is equivalent to write `M = M * M.CreateRotationZ` in our example , since `M` is an Identity Matrix, we can , in this case, omit the multiplication.
+> `M.RotateZ` is equivalent to write `M = M * M.CreateRotationZ` in our example, since `M` is an Identity Matrix, we can, in this case, omit the multiplication.
 >
 > [Documentation](https://srl.reye.me/structSRL_1_1Math_1_1Types_1_1Matrix33_a039ee605912f583cafc8e58e606506b3.html#a039ee605912f583cafc8e58e606506b3)
 
@@ -188,7 +188,7 @@ The result:
 > [!WARNING]
 > A quick note on animations
 > 
-> One might be tempted to , for example, make an animation of a sprite rotating by multiplying the rotated points from a previous frame by the rotation matrix.
+> One might be tempted to, for example, make an animation of a sprite rotating by multiplying the rotated points from a previous frame by the rotation matrix.
 > This will *compound* the rounding errors due to precision loss. This can be seen on the GIF below.
 
 ![](mov/error_compounds.gif)
@@ -197,12 +197,12 @@ The correct approach is to define the new position from the initial state instea
 
 We calculate the new points from the original points and a new rotation matrix with the *new* angle.
 This way we avoid the compound of errors due to precision loss.
-The code for the main loop is shown below :
+The code for the main loop is shown below:
 
 ```cpp
 // Main program loop
 while(1)
-	{   
+{   
         transform = Matrix33::Identity();
         transform = transform.CreateRotationZ(SRL::Math::Angle::FromDegrees(angle)); // new matrix with the new angle
         
@@ -224,26 +224,26 @@ while(1)
         // Refresh screen
         SRL::Core::Synchronize();
         angle = angle + 1.0;
-	}
+}
 ```
 
 And now we have the rotation working properly:
 
 ![](mov/error_compounds_fixed.gif)
 
-If we rotate by X or Y , we can get a very interesting behavior :
+If we rotate by X or Y, we can get a very interesting behavior:
 
-Rotation by X :
+Rotation by X:
 
 ![](mov/rotation_x.gif)
 
-Rotation by Y :
+Rotation by Y:
 
 ![](mov/rotation_y.gif)
 
 And of course, we can compound transforms by multiplying the matrices. 
 
-For example if we want to rotate by 45 degrees in Z, and then by Y we can define or matrices as follows :
+For example if we want to rotate by 45 degrees in Z, and then by Y we can define or matrices as follows:
 
 ```cpp
 transform = Matrix33::Identity();
@@ -272,22 +272,22 @@ transform.RotateY(SRL::Math::Angle::FromDegrees(angle));
 
 The scaling is made by calling the `Scale` method.
 
-The method needs a `Vector3D` , where its X, Y ,Z represent the scaling factor on the respective axis.
+The method needs a `Vector3D`, where its X, Y, and Z represent the scaling factor on the respective axis.
 
-For example, to scale the sprite by 50% :
+For example, to scale the sprite by 50%:
 
 ```cpp
- transform = Matrix33::Identity();  
- transform.Scale(Vector3D(0.5)); 
+transform = Matrix33::Identity();  
+transform.Scale(Vector3D(0.5)); 
 ```
 
-The Resulting sprite :
+The Resulting sprite:
 
 ![](img/second_sprite_04.png)
 
 ### Translation
 
-For translation we can do in two ways :
+For translation we can do in two ways:
 
 - Sum a translation vector
 - Create a Translation matrix
@@ -305,9 +305,9 @@ points[2] = Vector2D( 50,  50);
 points[3] = Vector2D(-50,  50);   
              
 for(int i = 0 ; i < 4 ; i++)
-    {
-        points[i] = points[i] + translateV;
-    }
+{
+    points[i] = points[i] + translateV;
+}
         
 SRL::Scene2D::DrawSprite ( textureIndex,  points, 50.0 );
 // Refresh screen
@@ -320,7 +320,7 @@ Its simple, however if you want to combine several transforms, using this approa
 
 Defining a translation matrix allows to apply the translation to a given vertex in the same way you would apply scale and rotation.
 
-A Translation matrix, that translates a Vertex by (x, y) is defined as :
+A Translation matrix, that translates a Vertex by (x, y) is defined as:
 
 $`
 TranslateMatrix_{x,y} =
@@ -331,7 +331,7 @@ TranslateMatrix_{x,y} =
  \end{bmatrix}
 `$
 
-For example we can define a translation matrix for a translation by `(15,15)` in SRL :
+For example we can define a translation matrix for a translation by `(15,15)` in SRL:
 
 ```cpp
 
@@ -344,12 +344,12 @@ transform.Row1.Z = translateV.Y;
 
 and then we can apply the translation in the same way we did for rotation and scaling.
 
-The resulting code for the main loop becomes :
+The resulting code for the main loop becomes:
 
 ```cpp
 
 while(1)
-	{   
+{   
         Matrix33 transform = Matrix33::Identity();
         Vector2D translateV = Vector2D(15.0, 15.0);
 
@@ -373,14 +373,14 @@ while(1)
         SRL::Scene2D::DrawSprite ( textureIndex,  points, 50.0 );
         // Refresh screen
         SRL::Core::Synchronize();
-	}
+}
 
 ```
 
 Notice that if all 3 transforms are represented by matrices we can use the same code to apply them to the vertices.
 And also we can combine transforms by multiplying the matrices.
 
-However, we can define a function to return the translation matrix that we can re-use when we need a translation matrix :
+However, we can define a function to return the translation matrix that we can re-use when we need a translation matrix:
 
 ```cpp
 
@@ -396,7 +396,7 @@ Matrix33 translationM(Fxp x, Fxp y)
 
 ## Putting it all together
 
-Now lets combine all the above :
+Now lets combine all the above:
 
 First let's draw a scaled sprite on the center of the screen and have 4 sprites orbiting it.
 
@@ -408,7 +408,7 @@ Fxp curr_angle = 0.0;
 Fxp sprite_offset = 90.0;
 ```
 
-For the center sprite :
+For the center sprite:
 
 ```cpp
 
@@ -430,7 +430,7 @@ SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );
 
 ```
 
-Now we can start by drawing the orbiting sprites :
+Now we can start by drawing the orbiting sprites:
 
 ```cpp
 
@@ -438,38 +438,38 @@ transform_s = transform_s.CreateScale(Vector3D(0.5)); // scale our sprites by 50
 
 //draw each sprite
 for(int sprite_nr = 0 ; sprite_nr < 4 ; sprite_nr++)
+{
+    Fxp final_angle  = curr_angle + (sprite_offset * sprite_nr);
+
+    //Calculate coordinates of our orbital sprite       
+    Fxp x_pos = radius * SRL::Math::Trigonometry::Cos(final_angle);
+    Fxp y_pos = radius * SRL::Math::Trigonometry::Sin(final_angle);
+
+    Matrix33 transform_t = translationM(x_pos, y_pos);
+    Matrix33 transform_r = Matrix33::Identity();
+    Matrix33 transforms = transform_r.CreateRotationZ(Angle::FromDegrees(final_angle)) * transform_t * transform_s;
+        
+    for(int i = 0 ; i < 4 ; i++)
     {
-        Fxp final_angle  = curr_angle + (sprite_offset * sprite_nr);
-
-        //Calculate coordinates of our orbital sprite       
-        Fxp x_pos = radius * SRL::Math::Trigonometry::Cos(final_angle);
-        Fxp y_pos = radius * SRL::Math::Trigonometry::Sin(final_angle);
-
-        Matrix33 transform_t = translationM(x_pos, y_pos);
-        Matrix33 transform_r = Matrix33::Identity();
-        Matrix33 transforms = transform_r.CreateRotationZ(Angle::FromDegrees(final_angle)) * transform_t * transform_s;
-            
-        for(int i = 0 ; i < 4 ; i++)
-        {
-            working_points[i] = center_sprite[i];
-            vec3_points[i] = Vector3D(working_points[i], 1.0); // copy the original points into Vector3D points
-            vec3_points[i] = transforms *  vec3_points[i]; //multiply by matrix
-            // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
-            working_points[i].X = vec3_points[i].X;
-            working_points[i].Y = vec3_points[i].Y;
-        }
-        SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );
+        working_points[i] = center_sprite[i];
+        vec3_points[i] = Vector3D(working_points[i], 1.0); // copy the original points into Vector3D points
+        vec3_points[i] = transforms *  vec3_points[i]; //multiply by matrix
+        // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+        working_points[i].X = vec3_points[i].X;
+        working_points[i].Y = vec3_points[i].Y;
     }
+    SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );
+}
 
 ```
 
 Notice that we can combine all the transforms into a single matrix, by multiplication of the transform matrices.
 
-The result :
+The result:
 
 ![](mov/several_transforms.gif)
 
-The final code for this example becomes :
+The final code for this example becomes:
 
 ```cpp
 
@@ -480,12 +480,12 @@ using namespace SRL::Types;
 using namespace SRL::Math::Types;
 
 int32_t loadTGA(char* filename) //texture loading function
-    {
-        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
-        int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
-        delete tga;  
-        return textureIndex;
-    }
+{
+    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+    delete tga;  
+    return textureIndex;
+}
 
 
 Matrix33 translationM(Fxp x, Fxp y)
