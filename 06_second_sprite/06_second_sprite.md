@@ -393,3 +393,80 @@ Matrix33 translationM(Fxp x, Fxp y)
 }
 
 ```
+
+## Putting it all together
+
+Now lets combine all the above :
+
+First let's draw a scaled sprite on the center of the screen and have 4 sprites orbiting it.
+
+First we must define the Radius, the current angle, and the angle offset between sprites.
+
+```cpp
+Fxp radius = 150.0;
+Fxp curr_angle = 0.0;
+Fxp sprite_offset = 90.0;
+```
+
+For the center sprite :
+
+```cpp
+
+//draw the center sprite
+Matrix33 transform_s = Matrix33::Identity();
+transform_s = transform_s.CreateScale(Vector3D(0.3)); // scale the points
+
+for(int i = 0 ; i < 4 ; i++)
+{
+    working_points[i] = center_sprite[i];
+    vec3_points[i] = Vector3D(working_points[i], 1.0); // copy the original points into Vector3D points
+    vec3_points[i] = transform_s *  vec3_points[i]; //multiply by matrix
+    // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+    working_points[i].X = vec3_points[i].X;
+    working_points[i].Y = vec3_points[i].Y;
+}
+
+SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );        
+
+```
+
+Now we can start by drawing the orbiting sprites :
+
+```cpp
+
+transform_s = transform_s.CreateScale(Vector3D(0.5)); // scale our sprites by 50%
+
+//draw each sprite
+for(int sprite_nr = 0 ; sprite_nr < 4 ; sprite_nr++)
+    {
+        Fxp final_angle  = curr_angle + (sprite_offset * sprite_nr);
+
+        //Calculate coordinates of our orbital sprite       
+        Fxp x_pos = radius * SRL::Math::Trigonometry::Cos(final_angle);
+        Fxp y_pos = radius * SRL::Math::Trigonometry::Sin(final_angle);
+
+        Matrix33 transform_t = translationM(x_pos, y_pos);
+        Matrix33 transform_r = Matrix33::Identity();
+        Matrix33 transforms = transform_r.CreateRotationZ(Angle::FromDegrees(final_angle)) * transform_t * transform_s;
+            
+        for(int i = 0 ; i < 4 ; i++)
+        {
+            working_points[i] = center_sprite[i];
+            vec3_points[i] = Vector3D(working_points[i], 1.0); // copy the original points into Vector3D points
+            vec3_points[i] = transforms *  vec3_points[i]; //multiply by matrix
+            // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+            working_points[i].X = vec3_points[i].X;
+            working_points[i].Y = vec3_points[i].Y;
+        }
+        SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );
+    }
+
+```
+
+Notice that we can combine all the transforms into a single matrix, by multiplication of the transform matrices.
+
+The result :
+
+![](mov/several_transforms.gif)
+
+
