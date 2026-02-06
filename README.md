@@ -52,26 +52,23 @@
 ## [05 - Interlude : Putting everything (so far) together](05_Interlude/05_interlude.md)
 
 - Modularize code
-- 
 
 ## [06 - Your Second sprite (VDP1)](06_second_sprite/06_second_sprite.md)
 
 - Distorted sprites
-- Pallets
- 
 
-## 07 - Input Handling - Revisited
-
-- Peripheral management.
-- Analogue Gamepad
-- Light Pistol
-
-## 08 - 3D Model pipeline
+## 07 - 3D Model pipeline
 
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
 - Limitations
 
+## 08 - Input Handling - Revisited
+
+- Peripheral management.
+- Analogue Gamepad
+- Light Pistol
+
 ## 09 - Backgrounds and tilemaps (VDP2)
 
-- z
+- 
