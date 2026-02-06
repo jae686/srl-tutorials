@@ -469,4 +469,105 @@ The result :
 
 ![](mov/several_transforms.gif)
 
+The final code for this example becomes :
 
+```cpp
+
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+int32_t loadTGA(char* filename) //texture loading function
+    {
+        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+        int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+        delete tga;  
+        return textureIndex;
+    }
+
+
+Matrix33 translationM(Fxp x, Fxp y)
+{
+    Matrix33 transform = Matrix33::Identity();
+    transform.Row0.Z = x;
+    transform.Row1.Z = y;
+    return transform;
+}
+
+
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "06_Tutorial");
+   
+    int32_t textureIndex = loadTGA("TEST.TGA");    // Loads TGA into VDP1
+
+    Vector2D center_sprite[4] = {Vector2D(0.0)}; // holds center sprite position.
+    center_sprite[0] = Vector2D(-50, -50);
+    center_sprite[1] = Vector2D( 50, -50);
+    center_sprite[2] = Vector2D( 50,  50);
+    center_sprite[3] = Vector2D(-50,  50); 
+
+    Vector2D working_points[4] = {Vector2D(0.0)}; // 
+       
+    //we cant multiply a 2 component vector by a 3x3 matrix....
+    Vector3D vec3_points[4] = {Vector3D(0.0)};
+
+    Fxp radius = 150.0;
+    Fxp curr_angle = 0.0;
+    Fxp sprite_offset = 90.0;
+
+    // Main program loop
+	while(1)
+	{       
+       //draw the center sprite
+       Matrix33 transform_s = Matrix33::Identity();
+       transform_s = transform_s.CreateScale(Vector3D(0.3));
+       // Apply the transform for every point
+       for(int i = 0 ; i < 4 ; i++)
+       {
+            working_points[i] = center_sprite[i];
+            vec3_points[i] = Vector3D(working_points[i], 1.0); // copy the original points into Vector3D points
+            vec3_points[i] = transform_s *  vec3_points[i]; //multiply by matrix
+            // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+            working_points[i].X = vec3_points[i].X;
+            working_points[i].Y = vec3_points[i].Y;
+       }
+
+       SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );        
+       transform_s = transform_s.CreateScale(Vector3D(0.5));
+
+       for(int sprite_nr = 0 ; sprite_nr < 4 ; sprite_nr++)
+       {
+            Fxp final_angle  = curr_angle + (sprite_offset * sprite_nr);
+            //Calculate coordinates of our orbital sprite       
+            Fxp x_pos = radius * SRL::Math::Trigonometry::Cos(final_angle);
+            Fxp y_pos = radius * SRL::Math::Trigonometry::Sin(final_angle);
+            Matrix33 transform_t = translationM(x_pos, y_pos);
+            Matrix33 transform_r = Matrix33::Identity();
+            Matrix33 transforms = transform_r.CreateRotationZ(Angle::FromDegrees(final_angle)) * transform_t * transform_s;
+            
+            for(int i = 0 ; i < 4 ; i++)
+            {
+                working_points[i] = center_sprite[i];
+                vec3_points[i] = Vector3D(working_points[i], 1.0); // copy the original points into Vector3D points
+                vec3_points[i] = transforms *  vec3_points[i]; //multiply by matrix
+                // get back to vector2D type that  SRL::Scene2D::DrawSprite accepts
+                working_points[i].X = vec3_points[i].X;
+                working_points[i].Y = vec3_points[i].Y;
+            }
+             SRL::Scene2D::DrawSprite ( textureIndex,  working_points, 50.0 );
+       }
+
+        // Refresh screen
+        SRL::Core::Synchronize();
+        curr_angle += 1.0 ;
+	}
+
+	return 0;
+}
+
+```
