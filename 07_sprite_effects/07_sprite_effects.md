@@ -50,7 +50,7 @@ And this is the result.
 
 ## Setting Effects
 
-In order to set effects it is done via the `static void SRL::Scene2D::SetEffect	(const SpriteEffect	effect, const int32_t data = -1 )` function [documentation](https://srl.reye.me/classSRL_1_1Scene2D_a2f702eaaf22b82345520cce09908f386.html#a2f702eaaf22b82345520cce09908f386).
+In order to set effects it is done via the `static void SRL::Scene2D::SetEffect(const SpriteEffect	effect, const int32_t data = -1)` function [documentation](https://srl.reye.me/classSRL_1_1Scene2D_a2f702eaaf22b82345520cce09908f386.html#a2f702eaaf22b82345520cce09908f386).
 
 ### Half Transparency
 
@@ -69,10 +69,13 @@ while(1)
         SRL::Core::Synchronize();                                                    //Refresh screen
 	}
 ```
+The Result:
 
 ![](img/spriteEffects_02.png)
 
 ### Screen doors
+
+For the `ScreenDoors` effect, you use the `SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true);` function.
 
 ```cpp
 while(1)
@@ -84,6 +87,7 @@ while(1)
         SRL::Core::Synchronize();                                               //Refresh screen
 	}
 ```
+The Result:
 
 ![](img/spriteEffects_03.png)
 
