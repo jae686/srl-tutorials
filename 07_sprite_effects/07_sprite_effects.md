@@ -110,11 +110,61 @@ while(1)
 
 ![](img/spriteEffects_04.png)
 
+### Flip
+
+For the `Flip` effect , in can be applied vertically, horizontally, or both.
+
+For example : 
+### `SRL::Scene2D::FlipEffect::HorizontalFlip` 
+
+```cpp
+while(1)
+	{       
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip); //Enable the effect    
+        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                   //Disable the effect            
+        SRL::Core::Synchronize();                                                    // Refresh screen
+	}
+
+```
+
+![](img/spriteEffects_05.png)
+
+### `SRL::Scene2D::FlipEffect::VerticalFlip`
+
+```cpp
+while(1)
+	{       
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip); //Enable the effect    
+        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite   
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);       //Disable the effect            
+        SRL::Core::Synchronize();                                                    // Refresh screen
+	}
+```
+
+![](img/spriteEffects_06.png)
+
+### Combining both `SRL::Scene2D::FlipEffect::HorizontalFlip` and `SRL::Scene2D::FlipEffect::VerticalFlip`
+
+   
+```cpp
+while(1)
+	{       
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip | SRL::Scene2D::FlipEffect::HorizontalFlip);   
+        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite   
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);       //Disable the effect            
+        SRL::Core::Synchronize();                                                    // Refresh screen
+	}
+```
+
+![](img/spriteEffects_07.png)
+
+
 ### Gouraud
 
 ### Clipping
 
-### Flip
+
 
 ### OpacityBank
 
