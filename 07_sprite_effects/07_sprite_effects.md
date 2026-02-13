@@ -162,17 +162,17 @@ while(1)
 
 ### Clipping
 
-The clipping effect allows you define a "clipping window", and you define how 2 sprites interact when they overlap inside or outside this window.
+The clipping effect allows you to define a "clipping window", where you can set if the affected sprite is drawn inside or outside of it.
 
 First we must define the clipping window.
 This is done via the `static bool SRL::Scene2D::SetClippingRectangle(const SRL::Math::Types::Vector3D &location, const SRL::Math::Types::Vector2D &size )` function. [documentation](https://srl.reye.me/classSRL_1_1Scene2D_a73100f8cb69e1a46092bd997bc9aed3b.html#a73100f8cb69e1a46092bd997bc9aed3b).
 
 We must provide the location of our clipping window and its size.
 
-> ![WARNING]
+> [!WARNING]
 > The top left corner of the screen is (0,0)!
 
-> ![WARNING]
+> [!WARNING]
 > If no Clipping Rectangle is specified, the sprites are not drawn.
 
 After our clipping rectangle is defined, we can enable our clipping.
@@ -200,11 +200,15 @@ while(1)
                 SRL::Core::Synchronize();                                                    // Refresh screen
 	}
 ```
+The result :
+
 ![](img/spriteEffects_08.png)
 
 ### `SRL::Scene2D::ClippingEffect::ClipOutside`
 
 The `SRL::Scene2D::ClippingEffect::ClipOutside` option will clip everything that is outside of the clipping window.
+
+The code below:
 
 ```cpp
 Vector3D clip_square = Vector3D(160.0 , 120.0, 50); // holds center sprite position.
@@ -221,6 +225,8 @@ while(1)
                 SRL::Core::Synchronize();                                                    // Refresh screen
 	}
 ```
+
+Result in the following result :
 
 ![](img/spriteEffects_09.png)
 
