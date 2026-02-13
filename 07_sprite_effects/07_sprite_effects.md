@@ -75,6 +75,7 @@ The Result:
 
 ### Screen doors
 
+For that Saturn look, look no further than the `ScreenDoors` effect.
 For the `ScreenDoors` effect, you use the `SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true);` function.
 
 ```cpp
@@ -112,9 +113,9 @@ while(1)
 
 ### Flip
 
-For the `Flip` effect , in can be applied vertically, horizontally, or both.
+The `Flip` effect is exactly what it says. This will flip the sprite on X, Y out both axis.
 
-For example : 
+For example :
 #### `SRL::Scene2D::FlipEffect::HorizontalFlip` 
 
 ```cpp
@@ -125,7 +126,6 @@ while(1)
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                   //Disable the effect            
         SRL::Core::Synchronize();                                                    // Refresh screen
 	}
-
 ```
 
 ![](img/spriteEffects_05.png)
@@ -162,7 +162,67 @@ while(1)
 
 ### Clipping
 
+The clipping effect allows you define a "clipping window", and you define how 2 sprites interact when they overlap inside or outside this window.
 
+First we must define the clipping window.
+This is done via the `static bool SRL::Scene2D::SetClippingRectangle(const SRL::Math::Types::Vector3D &location, const SRL::Math::Types::Vector2D &size )` function. [documentation](https://srl.reye.me/classSRL_1_1Scene2D_a73100f8cb69e1a46092bd997bc9aed3b.html#a73100f8cb69e1a46092bd997bc9aed3b).
+
+We must provide the location of our clipping window and its size.
+
+> ![WARNING]
+> The top left corner of the screen is (0,0)!
+
+> ![WARNING]
+> If no Clipping Rectangle is specified, the sprites are not drawn.
+
+After our clipping rectangle is defined, we can enable our clipping.
+And there are 3 clipping modes to choose from :
+
+### `SRL::Scene2D::ClippingEffect::ClipInside`
+
+It will clip top sprite inside of the clipping window.
+In out example, it will show the sprite underneath the sprite that was drawn on top.
+
+The code becomes :
+
+```cpp
+Vector3D clip_square = Vector3D(160.0 , 120.0, 50); // holds center sprite position.
+Vector2D square_size = Vector2D(50,50);
+
+// Main program loop
+while(1)
+        {       
+                SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
+                SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
+                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipInside);
+                SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
+                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
+                SRL::Core::Synchronize();                                                    // Refresh screen
+	}
+```
+![](img/spriteEffects_08.png)
+
+### `SRL::Scene2D::ClippingEffect::ClipOutside`
+
+The `SRL::Scene2D::ClippingEffect::ClipOutside` option will clip everything that is outside of the clipping window.
+
+```cpp
+Vector3D clip_square = Vector3D(160.0 , 120.0, 50); // holds center sprite position.
+Vector2D square_size = Vector2D(50,50);
+
+// Main program loop
+while(1)
+	{       
+                SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
+                SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
+                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipOutside);
+                SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
+                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
+                SRL::Core::Synchronize();                                                    // Refresh screen
+	}
+```
+
+![](img/spriteEffects_09.png)
 
 
 ### Gouraud
