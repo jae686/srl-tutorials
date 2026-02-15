@@ -226,10 +226,9 @@ while(1)
 	}
 ```
 
-Result in the following result :
+Result:
 
 ![](img/spriteEffects_09.png)
-
 
 ### Gouraud
 
