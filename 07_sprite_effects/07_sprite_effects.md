@@ -62,8 +62,8 @@ The code then becomes :
 ```cpp
 while(1)
 	{       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
         SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);                //draw the center sprite
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
         SRL::Scene2D::DrawSprite(chkTexture,  second_sprite, 50.0);                  //draw the offset sprite   
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect          
         SRL::Core::Synchronize();                                                    //Refresh screen
@@ -113,7 +113,7 @@ while(1)
 
 ### Flip
 
-The `Flip` effect is exactly what it says. This will flip the sprite on X, Y out both axis.
+The `Flip` effect is exactly what it says. This will flip the sprite on X, Y or both axis.
 
 For example :
 #### `SRL::Scene2D::FlipEffect::HorizontalFlip` 
@@ -181,7 +181,7 @@ And there are 3 clipping modes to choose from :
 ### `SRL::Scene2D::ClippingEffect::ClipInside`
 
 It will clip top sprite inside of the clipping window.
-In out example, it will show the sprite underneath the sprite that was drawn on top.
+In our example, it will show the sprite underneath the sprite that was drawn on top.
 
 The code becomes :
 
