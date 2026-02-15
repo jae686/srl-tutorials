@@ -232,6 +232,40 @@ Result:
 
 ### Gouraud
 
+Gouraud Shading is a shading technique where colors are interpolated along vertices.
+Before using the gouraud effect, we must first create a gouraud table.
+This table contains color values to be used.
+And then, when enabling the effect, we refer the table entry index for the fist color to be applied.
+To every vertex of the quad will applied the next color on the Gouraud 
+
+
+This is done by means of :
+```cpp
+// Define Gouraud Table
+HighColor* table = SRL::VDP1::GetGouraudTable();
+table[0] = HighColor::Colors::Blue;
+table[1] = HighColor::Colors::Green;
+table[2] = HighColor::Colors::Yellow;
+table[3] = HighColor::Colors::Magenta;
+```
+
+And we enable the effect by :
+
+```cpp
+while(1)
+{       
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud, 0);
+        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite  
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud);               
+        SRL::Core::Synchronize();                                                    // Refresh screen
+}
+```
+
+This is the result :
+
+![](img/spriteEffects_10.png)
+
+Notice that the table has `Blue` , `Green` , `Yellow` and `Magenta` values. And notice that the values are applied clockwise on the quad.
 
 
 ### OpacityBank
