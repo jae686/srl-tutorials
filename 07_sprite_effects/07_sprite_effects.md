@@ -291,7 +291,7 @@ The Result :
 
 ![](img/spriteEffects_11.png)
 
-
+Upon close inspection, it becomes clear that the HSS version is slightly different from a non HSS one, however for most applications the performance gain is worth it.
 
 ### OpacityBank
 
