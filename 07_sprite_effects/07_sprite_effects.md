@@ -238,7 +238,6 @@ This table contains color values to be used.
 And then, when enabling the effect, we refer the table entry index for the first color to be applied.
 To every vertex of the quad will applied the next color on the Gouraud Table.
 
-
 This is done by means of :
 ```cpp
 // Define Gouraud Table
@@ -254,10 +253,10 @@ And we enable the effect by :
 ```cpp
 while(1)
 {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud, 0);
-        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite  
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud, 0);        //Use the 1st index of the Gouraud table
+        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );        //draw the center sprite  
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud);               
-        SRL::Core::Synchronize();                                                    // Refresh screen
+        SRL::Core::Synchronize();                                               // Refresh screen
 }
 ```
 
@@ -267,9 +266,34 @@ This is the result :
 
 Notice that the table has `Blue` , `Green` , `Yellow` and `Magenta` values. And notice that the values are applied clockwise on the quad.
 
-### OpacityBank
-
 ### EnableHSS
+
+HSS (`High Speed Shrink`) speeds up sprite *downsizing* by only sampling the even, or odd, pixels.
+This increases performance, at cost of some accuracy.
+
+Lets draw 3 sprites : one at original size, one resized to half the size without HSS, and another one with HSS enabled.
+
+```cpp
+
+while(1)
+{       
+        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(-120.0, 0.0, 500)); // Original sprite
+        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), Vector2D(0.7)); // Scaled sprite 
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableHSS, true);
+        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(120.0, 0.0, 500), Vector2D(0.7)); // Scaled sprite wth hss
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableHSS);
+        SRL::Core::Synchronize();                                                    // Refresh screen
+}
+
+```
+
+The Result :
+
+![](img/spriteEffects_11.png)
+
+
+
+### OpacityBank
 
 ### EnableECD
 
