@@ -235,8 +235,8 @@ Result:
 Gouraud Shading is a shading technique where colors are interpolated along vertices.
 Before using the gouraud effect, we must first create a gouraud table.
 This table contains color values to be used.
-And then, when enabling the effect, we refer the table entry index for the fist color to be applied.
-To every vertex of the quad will applied the next color on the Gouraud 
+And then, when enabling the effect, we refer the table entry index for the first color to be applied.
+To every vertex of the quad will applied the next color on the Gouraud Table.
 
 
 This is done by means of :
@@ -266,7 +266,6 @@ This is the result :
 ![](img/spriteEffects_10.png)
 
 Notice that the table has `Blue` , `Green` , `Yellow` and `Magenta` values. And notice that the values are applied clockwise on the quad.
-
 
 ### OpacityBank
 
