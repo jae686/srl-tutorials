@@ -295,6 +295,38 @@ Upon close inspection, it becomes clear that the HSS version is slightly differe
 
 ### OpacityBank
 
+To be covered after the VDP2 tutorials are written.
+
 ### EnableECD
+
+`ECD` also referred as  `end-code disable` , allows for finer control on what pixels are drawn.
+When enabled, only the pixels between the end-codes are drawn.
+
+The end code is dependent on the color mode of the sprite.
+
+However one must be mindful of the interaction between `EnableECD` and `EnableHSS`.
+
+
+| HSS  | ECD | End code processing |
+| ------------- | ------------- | ------- |
+| 0  | 0  |  End code is valid, horizontal drawing ends with the second end code, End code will be transparent |
+| 0  | 1  |  End code invalid, end code not processed, the color comes out according to the code |
+| 1 and enlarge  | 0  |  End code is valid, horizontal drawing ends with the second end code, End code will be transparent |
+| 1 and reduce  | 0  |  End code invalid, end code not processed, The color comes out according to the code |
+| 1  | 1  |  End code invalid, end code not processed, The color comes out according to the code |
+
+The end code it self is dependent on the color mode of the sprite :
+
+| Color Mode | Description | End Code |
+| ---------- | ----------- | -------- |
+| 0 | 16 colors (color bank mode) | FH (4 bits) |
+| 1 | 16 colors (lookup table mode) | FH (4 bits) |
+| 2 | 64 colors (color bank mode) | FFH (8 bits) |
+| 3 | 128 colors (color bank mode) | FFH (4 bits) |
+| 4 | 256 colors (color bank mode) | FFH (8 bit) |
+| 5 | 32768 colors (RGB mode) | 7FFFH (16 bit) |
+
+
+
 
 ### DisablePreClip
