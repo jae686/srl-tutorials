@@ -11,7 +11,7 @@ Lets add 2 distinct, overlapping sprites :
 int main()
 {
     // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+ SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "07_Tutorial");
    
     int32_t textureIndex = loadTGA("TEST.TGA");    // Loads TGA into VDP1
@@ -32,14 +32,14 @@ int main()
     }
 
     // Main program loop
-	while(1)
-	{       
+ while(1)
+ {       
         SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite
         SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite                 
         SRL::Core::Synchronize();                                                   // Refresh screen
-	}
+ }
 
-	return 0;
+ return 0;
 }
 
 ```
@@ -50,7 +50,7 @@ And this is the result.
 
 ## Setting Effects
 
-In order to set effects it is done via the `static void SRL::Scene2D::SetEffect(const SpriteEffect	effect, const int32_t data = -1)` function [documentation](https://srl.reye.me/classSRL_1_1Scene2D_a2f702eaaf22b82345520cce09908f386.html#a2f702eaaf22b82345520cce09908f386).
+In order to set effects it is done via the `static void SRL::Scene2D::SetEffect(const SpriteEffect effect, const int32_t data = -1)` function [documentation](https://srl.reye.me/classSRL_1_1Scene2D_a2f702eaaf22b82345520cce09908f386.html#a2f702eaaf22b82345520cce09908f386).
 
 ### Half Transparency
 
@@ -61,14 +61,15 @@ The code then becomes :
 
 ```cpp
 while(1)
-	{       
+ {       
         SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);                //draw the center sprite
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
         SRL::Scene2D::DrawSprite(chkTexture,  second_sprite, 50.0);                  //draw the offset sprite   
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect          
         SRL::Core::Synchronize();                                                    //Refresh screen
-	}
+ }
 ```
+
 The Result:
 
 ![](img/spriteEffects_02.png)
@@ -80,14 +81,15 @@ For the `ScreenDoors` effect, you use the `SRL::Scene2D::SetEffect(SRL::Scene2D:
 
 ```cpp
 while(1)
-	{       
+ {       
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true); //Enable the effect
         SRL::Scene2D::DrawSprite (textureIndex,  center_sprite, 50.0);        //draw the center sprite
         SRL::Scene2D::DrawSprite (chkTexture,  second_sprite, 50.0);          //draw the offset sprite   
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors);       //Disable the effect          
         SRL::Core::Synchronize();                                               //Refresh screen
-	}
+ }
 ```
+
 The Result:
 
 ![](img/spriteEffects_03.png)
@@ -98,7 +100,7 @@ You can also combine `ScreenDoors` and `HalfTransparency`.
 
 ```cpp
 while(1)
-	{       
+ {       
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true);      //Enable the effect
         SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);             //draw the center sprite
@@ -106,7 +108,7 @@ while(1)
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors);            //Disable the effect
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect            
         SRL::Core::Synchronize();                                                    //Refresh screen
-	}
+ }
 ```
 
 ![](img/spriteEffects_04.png)
@@ -116,16 +118,17 @@ while(1)
 The `Flip` effect is exactly what it says. This will flip the sprite on X, Y or both axis.
 
 For example :
-#### `SRL::Scene2D::FlipEffect::HorizontalFlip` 
+
+#### `SRL::Scene2D::FlipEffect::HorizontalFlip`
 
 ```cpp
 while(1)
-	{       
+ {       
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip); //Enable the effect    
         SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                   //Disable the effect            
         SRL::Core::Synchronize();                                                    // Refresh screen
-	}
+ }
 ```
 
 ![](img/spriteEffects_05.png)
@@ -134,31 +137,29 @@ while(1)
 
 ```cpp
 while(1)
-	{       
+ {       
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip); //Enable the effect    
         SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );                                   //draw the center sprite   
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                                         //Disable the effect            
         SRL::Core::Synchronize();                                                                          // Refresh screen
-	}
+ }
 ```
 
 ![](img/spriteEffects_06.png)
 
 #### Combining both `SRL::Scene2D::FlipEffect::HorizontalFlip` and `SRL::Scene2D::FlipEffect::VerticalFlip`
 
-   
 ```cpp
 while(1)
-	{       
+ {       
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip | SRL::Scene2D::FlipEffect::HorizontalFlip);   
         SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite   
         SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);       //Disable the effect            
         SRL::Core::Synchronize();                                                    // Refresh screen
-	}
+ }
 ```
 
 ![](img/spriteEffects_07.png)
-
 
 ### Clipping
 
@@ -198,8 +199,9 @@ while(1)
                 SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
                 SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
                 SRL::Core::Synchronize();                                                    // Refresh screen
-	}
+ }
 ```
+
 The result :
 
 ![](img/spriteEffects_08.png)
@@ -216,14 +218,14 @@ Vector2D square_size = Vector2D(50,50);
 
 // Main program loop
 while(1)
-	{       
+ {       
                 SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
                 SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
                 SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipOutside);
                 SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
                 SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
                 SRL::Core::Synchronize();                                                    // Refresh screen
-	}
+ }
 ```
 
 Result:
@@ -239,6 +241,7 @@ And then, when enabling the effect, we refer the table entry index for the first
 To every vertex of the quad will applied the next color on the Gouraud Table.
 
 This is done by means of :
+
 ```cpp
 // Define Gouraud Table
 HighColor* table = SRL::VDP1::GetGouraudTable();
@@ -301,19 +304,17 @@ To be covered after the VDP2 tutorials are written.
 
 `ECD` also referred as  `end-code disable` , allows for finer control on what pixels are drawn.
 When enabled, only the pixels between the end-codes are drawn.
-
 The end code is dependent on the color mode of the sprite.
 
 However one must be mindful of the interaction between `EnableECD` and `EnableHSS`.
 
-
-| HSS  | ECD | End code processing |
+| HSS | ECD | End code processing |
 | ------------- | ------------- | ------- |
-| 0  | 0  |  End code is valid, horizontal drawing ends with the second end code, End code will be transparent |
-| 0  | 1  |  End code invalid, end code not processed, the color comes out according to the code |
-| 1 and enlarge  | 0  |  End code is valid, horizontal drawing ends with the second end code, End code will be transparent |
-| 1 and reduce  | 0  |  End code invalid, end code not processed, The color comes out according to the code |
-| 1  | 1  |  End code invalid, end code not processed, The color comes out according to the code |
+| 0 | 0 | End code is valid, horizontal drawing ends with the second end code, End code will be transparent |
+| 0 | 1 | End code invalid, end code not processed, the color comes out according to the code |
+| 1 and enlarge | 0 | End code is valid, horizontal drawing ends with the second end code, End code will be transparent |
+| 1 and reduce | 0 | End code invalid, end code not processed, The color comes out according to the code |
+| 1 | 1 | End code invalid, end code not processed, The color comes out according to the code |
 
 The end code it self is dependent on the color mode of the sprite :
 
@@ -326,7 +327,13 @@ The end code it self is dependent on the color mode of the sprite :
 | 4 | 256 colors (color bank mode) | FFH (8 bit) |
 | 5 | 32768 colors (RGB mode) | 7FFFH (16 bit) |
 
+For example for a 16 color mode lets us use the TGA below as an example:
+
+![](img/EDC_01.png)
+
+The First color is transparent, the last color of the palette corresponds to the End Code (for now onward we will refer to the End Code as `EC`).
 
 
+[Further Reference](https://docs.exodusemulator.com/Archives/SSDDV25/segahtml/index.html?page=hard/vdp1/hon/p06_34.htm)
 
 ### DisablePreClip
