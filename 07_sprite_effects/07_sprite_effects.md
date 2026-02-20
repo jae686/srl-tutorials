@@ -302,8 +302,9 @@ To be covered after the VDP2 tutorials are written.
 
 ### EnableECD
 
-`ECD` also referred as `end-code disable` , allows for finer control on what pixels are drawn.
-When enabled, only the pixels between the end-codes on a *given line* are drawn. 
+
+`ECD` also referred as `end-code disable` , allows for finer control on what pixels are drawn on a given line of the texture.
+When enabled, only the pixels between the end-codes on a *given line* are drawn.
 If there are 2 `ECD` at the both ends of the line, the whole line is skipped.
 The end code is dependent on the color mode of the sprite.
 
@@ -379,7 +380,7 @@ int32_t loadTGA(char* filename) //texture loading function
         }
         else
         {
-            //assume is palleted texture
+            //assume is pallet texture
             textureIndex = SRL::VDP1::TryLoadTexture(tga, LoadPalette);
         }
         
@@ -412,10 +413,12 @@ And this is the result:
 
 ![](img/spriteEffects_12.png)
 
+#### `ECD` and `HorizontalFlip`
+
+Since the `ECD` is per line, if you are not careful you might have unintended artifacts when flipping the texture horizontally:
+
+![](img/spriteEffects_13.png)
 
 [Further Reference](https://docs.exodusemulator.com/Archives/SSDDV25/segahtml/index.html?page=hard/vdp1/hon/p06_34.htm)
-
-
-
 
 ### DisablePreClip
