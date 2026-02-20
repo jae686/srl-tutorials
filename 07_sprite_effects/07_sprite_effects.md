@@ -417,8 +417,24 @@ And this is the result:
 
 Since the `ECD` is per line, if you are not careful you might have unintended artifacts when flipping the texture horizontally:
 
+```cpp
+while(1)
+{       
+        //Enable the effect
+        SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);  
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip);           //draw the center sprite
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD, true);     //Enable the effect
+        SRL::Scene2D::DrawSprite(ecdTexture,  second_sprite, 50.0);               //draw the offset sprite   
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD);           //Disable the effect
+        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                //Disable the effect
+        SRL::Core::Synchronize();                                                 //Refresh screen                                           
+}
+```
+
 ![](img/spriteEffects_13.png)
 
-[Further Reference](https://docs.exodusemulator.com/Archives/SSDDV25/segahtml/index.html?page=hard/vdp1/hon/p06_34.htm)
+[Further Reference regarding the ECD](https://docs.exodusemulator.com/Archives/SSDDV25/segahtml/index.html?page=hard/vdp1/hon/p06_34.htm)
 
 ### DisablePreClip
+
+To be completed at a later date.
