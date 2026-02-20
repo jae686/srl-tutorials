@@ -123,12 +123,12 @@ For example:
 
 ```cpp
 while(1)
- {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip); //Enable the effect    
-        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                   //Disable the effect            
-        SRL::Core::Synchronize();                                                    // Refresh screen
- }
+{       
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip); //Enable the effect    
+    SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                   //Disable the effect            
+    SRL::Core::Synchronize();                                                    // Refresh screen
+}
 ```
 
 ![](img/spriteEffects_05.png)
@@ -137,12 +137,12 @@ while(1)
 
 ```cpp
 while(1)
- {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip); //Enable the effect    
-        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );                                   //draw the center sprite   
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                                         //Disable the effect            
-        SRL::Core::Synchronize();                                                                          // Refresh screen
- }
+{       
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip); //Enable the effect    
+    SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );                                   //draw the center sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                                         //Disable the effect            
+    SRL::Core::Synchronize();                                                                          // Refresh screen
+}
 ```
 
 ![](img/spriteEffects_06.png)
@@ -151,12 +151,12 @@ while(1)
 
 ```cpp
 while(1)
- {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip | SRL::Scene2D::FlipEffect::HorizontalFlip);   
-        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite   
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);       //Disable the effect            
-        SRL::Core::Synchronize();                                                    // Refresh screen
- }
+{       
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::VerticalFlip | SRL::Scene2D::FlipEffect::HorizontalFlip);   
+    SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);       //Disable the effect            
+    SRL::Core::Synchronize();                                                    // Refresh screen
+}
 ```
 
 ![](img/spriteEffects_07.png)
@@ -192,13 +192,13 @@ Vector2D square_size = Vector2D(50,50);
 
 // Main program loop
 while(1)
-        {       
-                SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
-                SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
-                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipInside);
-                SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
-                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
-                SRL::Core::Synchronize();                                                    // Refresh screen
+{       
+    SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
+    SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipInside);
+    SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
+    SRL::Core::Synchronize();                                                    // Refresh screen
  }
 ```
 
@@ -218,13 +218,13 @@ Vector2D square_size = Vector2D(50,50);
 
 // Main program loop
 while(1)
- {       
-                SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
-                SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
-                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipOutside);
-                SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
-                SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
-                SRL::Core::Synchronize();                                                    // Refresh screen
+{       
+    SRL::Scene2D::SetClippingRectangle(clip_square, square_size);
+    SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite 
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping, SRL::Scene2D::ClippingEffect::ClipOutside);
+    SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
+    SRL::Core::Synchronize();                                                    // Refresh screen
  }
 ```
 
@@ -256,10 +256,10 @@ And we enable the effect by:
 ```cpp
 while(1)
 {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud, 0);        //Use the 1st index of the Gouraud table
-        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );        //draw the center sprite  
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud);               
-        SRL::Core::Synchronize();                                               // Refresh screen
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud, 0);        //Use the 1st index of the Gouraud table
+    SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );        //draw the center sprite  
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Gouraud);               
+    SRL::Core::Synchronize();                                               // Refresh screen
 }
 ```
 
@@ -280,12 +280,12 @@ Lets draw 3 sprites: one at original size, one resized to half the size without 
 
 while(1)
 {       
-        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(-120.0, 0.0, 500)); // Original sprite
-        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), Vector2D(0.7)); // Scaled sprite 
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableHSS, true);
-        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(120.0, 0.0, 500), Vector2D(0.7)); // Scaled sprite wth hss
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableHSS);
-        SRL::Core::Synchronize();                                                    // Refresh screen
+    SRL::Scene2D::DrawSprite(textureIndex, Vector3D(-120.0, 0.0, 500)); // Original sprite
+    SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), Vector2D(0.7)); // Scaled sprite 
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableHSS, true);
+    SRL::Scene2D::DrawSprite(textureIndex, Vector3D(120.0, 0.0, 500), Vector2D(0.7)); // Scaled sprite wth hss
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableHSS);
+    SRL::Core::Synchronize();                                                    // Refresh screen
 }
 
 ```
@@ -420,14 +420,14 @@ Since the `ECD` is per line, if you are not careful you might have unintended ar
 ```cpp
 while(1)
 {       
-        //Enable the effect
-        SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);  
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip);           //draw the center sprite
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD, true);     //Enable the effect
-        SRL::Scene2D::DrawSprite(ecdTexture,  second_sprite, 50.0);               //draw the offset sprite   
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD);           //Disable the effect
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                //Disable the effect
-        SRL::Core::Synchronize();                                                 //Refresh screen                                           
+    //Enable the effect
+    SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);  
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip, SRL::Scene2D::FlipEffect::HorizontalFlip);           //draw the center sprite
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD, true);     //Enable the effect
+    SRL::Scene2D::DrawSprite(ecdTexture,  second_sprite, 50.0);               //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD);           //Disable the effect
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Flip);                //Disable the effect
+    SRL::Core::Synchronize();                                                 //Refresh screen                                           
 }
 ```
 
