@@ -57,7 +57,16 @@
 
 - Distorted sprites
 
-## 07 - Sprite effects
+## [07 - Sprite effects](07_sprite_effects/07_sprite_effects.md)
+
+- Half Transparency
+- Screen doors
+- Combining Effects
+- Flip
+- Clipping
+- Gouraud
+- High Speed Shrink
+- Enable End-code-Disable  
 
 ## 08 - Sprite pallets
 
@@ -75,4 +84,3 @@
 
 ## 11 - Backgrounds and tilemaps (VDP2)
 
-- 
