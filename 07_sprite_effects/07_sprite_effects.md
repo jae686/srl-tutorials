@@ -327,12 +327,67 @@ The end code it self is dependent on the color mode of the sprite :
 | 4 | 256 colors (color bank mode) | FFH (8 bit) |
 | 5 | 32768 colors (RGB mode) | 7FFFH (16 bit) |
 
-For example for a 16 color mode lets us use the TGA below as an example:
+For example for a 16 color mode image, lets us use the TGA below as an example:
 
 ![](img/EDC_01.png)
 
 The First color is transparent, the last color of the palette corresponds to the End Code (for now onward we will refer to the End Code as `EC`).
 
+One might also notice that the `loadTGA()` function mentioned on previous chapters won't load palette textures.
+
+For completeness , this is a version of the `loadTGA()` that loads both color palette and RGB555 images :
+
+```cpp
+// Load color palettes here
+int16_t LoadPalette(SRL::Bitmap::BitmapInfo* bitmap)
+{
+    // Get free CRAM bank
+    int32_t id = SRL::CRAM::GetFreeBank(bitmap->ColorMode);
+
+    if (id >= 0)
+    {
+        SRL::CRAM::Palette palette(bitmap->ColorMode, id);
+
+        if (palette.Load((HighColor*)bitmap->Palette->Colors, bitmap->Palette->Count) >= 0)
+        {
+            // Mark bank as in use
+            SRL::CRAM::SetBankUsedState(id, bitmap->ColorMode, true);
+            return id;
+        }
+
+        return id;
+    }
+
+    // No free bank found
+    return -1;
+}
+
+int32_t loadTGA(char* filename) //texture loading function
+{
+        SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA(filename); // Loads TGA file into main RAM
+        SRL::Bitmap::BitmapInfo info = tga->GetInfo();          // Get info about the tga we are loading
+        int32_t textureIndex = -1;
+        
+        if(info.ColorMode == SRL::CRAM::TextureColorMode::RGB555) // RGBA texture
+        {
+            textureIndex = SRL::VDP1::TryLoadTexture(tga);  // Loads TGA into VDP1
+        }
+        else
+        {
+            //assume is palleted texture
+            textureIndex = SRL::VDP1::TryLoadTexture(tga, LoadPalette);
+        }
+        
+        delete tga; 
+        
+        if (textureIndex == -1)
+        {
+            SRL::Debug::AssertScreen("Failed loading texture %s", filename, "loadTGA", filename);
+        } 
+        
+        return textureIndex;
+}
+```
 
 [Further Reference](https://docs.exodusemulator.com/Archives/SSDDV25/segahtml/index.html?page=hard/vdp1/hon/p06_34.htm)
 
