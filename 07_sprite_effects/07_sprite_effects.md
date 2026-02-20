@@ -302,11 +302,12 @@ To be covered after the VDP2 tutorials are written.
 
 ### EnableECD
 
-`ECD` also referred as  `end-code disable` , allows for finer control on what pixels are drawn.
-When enabled, only the pixels between the end-codes are drawn.
+`ECD` also referred as `end-code disable` , allows for finer control on what pixels are drawn.
+When enabled, only the pixels between the end-codes on a *given line* are drawn. 
+If there are 2 `ECD` at the both ends of the line, the whole line is skipped.
 The end code is dependent on the color mode of the sprite.
 
-However one must be mindful of the interaction between `EnableECD` and `EnableHSS`.
+However one must be mindful of the interaction between `EnableECD` and `EnableHSS`, specially when reducing the size of the sprite.
 
 | HSS | ECD | End code processing |
 | ------------- | ------------- | ------- |
