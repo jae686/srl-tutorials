@@ -5,7 +5,7 @@ The effects are set via the `SRL::Scene2D::SetEffect` function.
 
 ## Baseline
 
-Lets add 2 distinct, overlapping sprites :
+Lets add 2 distinct, overlapping sprites:
 
 ```cpp
 int main()
@@ -57,7 +57,7 @@ In order to set effects it is done via the `static void SRL::Scene2D::SetEffect(
 And now lets set a Half Transparency effect.
 To do so, we must use the function `SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true);` before our `SRL::Scene2D::DrawSprite` call.
 
-The code then becomes :
+The code then becomes:
 
 ```cpp
 while(1)
@@ -117,7 +117,7 @@ while(1)
 
 The `Flip` effect is exactly what it says. This will flip the sprite on X, Y or both axis.
 
-For example :
+For example:
 
 #### `SRL::Scene2D::FlipEffect::HorizontalFlip`
 
@@ -177,14 +177,14 @@ We must provide the location of our clipping window and its size.
 > If no Clipping Rectangle is specified, the sprites are not drawn.
 
 After our clipping rectangle is defined, we can enable our clipping.
-And there are 3 clipping modes to choose from :
+And there are 3 clipping modes to choose from:
 
 ### `SRL::Scene2D::ClippingEffect::ClipInside`
 
 It will clip top sprite inside of the clipping window.
 In our example, it will show the sprite underneath the sprite that was drawn on top.
 
-The code becomes :
+The code becomes:
 
 ```cpp
 Vector3D clip_square = Vector3D(160.0 , 120.0, 50); // holds center sprite position.
@@ -202,7 +202,7 @@ while(1)
  }
 ```
 
-The result :
+The result:
 
 ![](img/spriteEffects_08.png)
 
@@ -240,7 +240,7 @@ This table contains color values to be used.
 And then, when enabling the effect, we refer the table entry index for the first color to be applied.
 To every vertex of the quad will applied the next color on the Gouraud Table.
 
-This is done by means of :
+This is done by means of:
 
 ```cpp
 // Define Gouraud Table
@@ -251,7 +251,7 @@ table[2] = HighColor::Colors::Yellow;
 table[3] = HighColor::Colors::Magenta;
 ```
 
-And we enable the effect by :
+And we enable the effect by:
 
 ```cpp
 while(1)
@@ -263,7 +263,7 @@ while(1)
 }
 ```
 
-This is the result :
+This is the result:
 
 ![](img/spriteEffects_10.png)
 
@@ -274,7 +274,7 @@ Notice that the table has `Blue` , `Green` , `Yellow` and `Magenta` values. And 
 HSS (`High Speed Shrink`) speeds up sprite *downsizing* by only sampling the even, or odd, pixels.
 This increases performance, at cost of some accuracy.
 
-Lets draw 3 sprites : one at original size, one resized to half the size without HSS, and another one with HSS enabled.
+Lets draw 3 sprites: one at original size, one resized to half the size without HSS, and another one with HSS enabled.
 
 ```cpp
 
@@ -290,7 +290,7 @@ while(1)
 
 ```
 
-The Result :
+The Result:
 
 ![](img/spriteEffects_11.png)
 
@@ -317,7 +317,7 @@ However one must be mindful of the interaction between `EnableECD` and `EnableHS
 | 1 and reduce | 0 | End code invalid, end code not processed, The color comes out according to the code |
 | 1 | 1 | End code invalid, end code not processed, The color comes out according to the code |
 
-The end code it self is dependent on the color mode of the sprite :
+The end code it self is dependent on the color mode of the sprite:
 
 | Color Mode | Description | End Code |
 | ---------- | ----------- | -------- |
@@ -334,9 +334,13 @@ For example for a 16 color mode image, lets us use the TGA below as an example:
 
 The First color is transparent, the last color of the palette corresponds to the End Code (for now onward we will refer to the End Code as `EC`).
 
+> [!TIP]
+> You might be asking why bother with `ECD` when you can simply use transparent pixels.
+> The main reason is optimization: the use of `ECD` allows for the skipping up to a full line if needed.
+
 One might also notice that the `loadTGA()` function mentioned on previous chapters won't load palette textures.
 
-For completeness , this is a version of the `loadTGA()` that loads both color palette and RGB555 images :
+For completeness , this is a version of the `loadTGA()` that loads both color palette and RGB555 images:
 
 ```cpp
 // Load color palettes here
@@ -390,7 +394,7 @@ int32_t loadTGA(char* filename) //texture loading function
 }
 ```
 
-To enable `ECD` effect, one can simply do :
+To enable `ECD` effect, one can simply do:
 
 ```cpp
 while(1)
