@@ -389,6 +389,28 @@ int32_t loadTGA(char* filename) //texture loading function
 }
 ```
 
+To enable `ECD` effect, one can simply do :
+
+```cpp
+while(1)
+{       
+    //Enable the effect
+    SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);           //draw the center sprite
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD, true);   //Enable the effect
+    SRL::Scene2D::DrawSprite(ecdTexture,  second_sprite, 50.0);             //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::EnableECD);         //Disable the effect
+    SRL::Core::Synchronize();                                               //Refresh screen                                           
+}
+```
+
+And this is the result:
+
+![](img/spriteEffects_12.png)
+
+
 [Further Reference](https://docs.exodusemulator.com/Archives/SSDDV25/segahtml/index.html?page=hard/vdp1/hon/p06_34.htm)
+
+
+
 
 ### DisablePreClip
