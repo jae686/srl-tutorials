@@ -11,7 +11,7 @@ Lets add 2 distinct, overlapping sprites:
 int main()
 {
     // Initialize library
- SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "07_Tutorial");
    
     int32_t textureIndex = loadTGA("TEST.TGA");    // Loads TGA into VDP1
@@ -32,14 +32,14 @@ int main()
     }
 
     // Main program loop
- while(1)
- {       
-        SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite
-        SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite                 
-        SRL::Core::Synchronize();                                                   // Refresh screen
- }
+    while(1)
+    {       
+            SRL::Scene2D::DrawSprite ( textureIndex,  center_sprite, 50.0 );             //draw the center sprite
+            SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite                 
+            SRL::Core::Synchronize();                                                   // Refresh screen
+    }
 
- return 0;
+    return 0;
 }
 
 ```
@@ -61,13 +61,13 @@ The code then becomes:
 
 ```cpp
 while(1)
- {       
-        SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);                //draw the center sprite
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
-        SRL::Scene2D::DrawSprite(chkTexture,  second_sprite, 50.0);                  //draw the offset sprite   
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect          
-        SRL::Core::Synchronize();                                                    //Refresh screen
- }
+{       
+    SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);                //draw the center sprite
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
+    SRL::Scene2D::DrawSprite(chkTexture,  second_sprite, 50.0);                  //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect          
+    SRL::Core::Synchronize();                                                    //Refresh screen
+}
 ```
 
 The Result:
@@ -81,13 +81,13 @@ For the `ScreenDoors` effect, you use the `SRL::Scene2D::SetEffect(SRL::Scene2D:
 
 ```cpp
 while(1)
- {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true); //Enable the effect
-        SRL::Scene2D::DrawSprite (textureIndex,  center_sprite, 50.0);        //draw the center sprite
-        SRL::Scene2D::DrawSprite (chkTexture,  second_sprite, 50.0);          //draw the offset sprite   
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors);       //Disable the effect          
-        SRL::Core::Synchronize();                                               //Refresh screen
- }
+{       
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true); //Enable the effect
+    SRL::Scene2D::DrawSprite (textureIndex,  center_sprite, 50.0);        //draw the center sprite
+    SRL::Scene2D::DrawSprite (chkTexture,  second_sprite, 50.0);          //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors);       //Disable the effect          
+    SRL::Core::Synchronize();                                               //Refresh screen
+}
 ```
 
 The Result:
@@ -100,15 +100,15 @@ You can also combine `ScreenDoors` and `HalfTransparency`.
 
 ```cpp
 while(1)
- {       
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true);      //Enable the effect
-        SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);             //draw the center sprite
-        SRL::Scene2D::DrawSprite(chkTexture,  second_sprite, 50.0);               //draw the offset sprite   
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors);            //Disable the effect
-        SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect            
-        SRL::Core::Synchronize();                                                    //Refresh screen
- }
+{       
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency, true); //Enable the effect
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors, true);      //Enable the effect
+    SRL::Scene2D::DrawSprite(textureIndex,  center_sprite, 50.0);             //draw the center sprite
+    SRL::Scene2D::DrawSprite(chkTexture,  second_sprite, 50.0);               //draw the offset sprite   
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::ScreenDoors);            //Disable the effect
+    SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::HalfTransparency);       //Disable the effect            
+    SRL::Core::Synchronize();                                                    //Refresh screen
+}
 ```
 
 ![](img/spriteEffects_04.png)
@@ -199,7 +199,7 @@ while(1)
     SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
     SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
     SRL::Core::Synchronize();                                                    // Refresh screen
- }
+}
 ```
 
 The result:
@@ -225,7 +225,7 @@ while(1)
     SRL::Scene2D::DrawSprite ( chkTexture,  second_sprite, 50.0 );               //draw the offset sprite   
     SRL::Scene2D::SetEffect(SRL::Scene2D::SpriteEffect::Clipping);                
     SRL::Core::Synchronize();                                                    // Refresh screen
- }
+}
 ```
 
 Result:
