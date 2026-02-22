@@ -68,7 +68,7 @@
 - High Speed Shrink
 - Enable End-code-Disable  
 
-## 08 - Sprite pallets
+## 08 - Backgrounds and tile maps (VDP2)
 
 ## 09 - 3D Model pipeline
 
@@ -82,5 +82,5 @@
 - Analogue Gamepad
 - Light Pistol
 
-## 11 - Backgrounds and tilemaps (VDP2)
+## 11 - Backgrounds and tile maps (VDP2) - Revisited
 
