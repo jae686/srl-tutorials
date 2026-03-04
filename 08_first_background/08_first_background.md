@@ -33,6 +33,8 @@ There are 2 screen formats:
 This is the most simple way to have a image into the VDP2.
 The bitmap data is placed into a VDP2 screen
 
+SRL provides, through the `SRL::VDP2` namespace the methods to interact and set or VDP2 scroll screens.
+
 On SRL, we can do so by , for example for the NBG2 screen (code taken from `VDP2 - Layers` sample):
 
 ```cpp
@@ -43,7 +45,3 @@ SRL::VDP2::NBG2::LoadTilemap(*TestTilebmp);//Transfer tilemap from work RAM to V
 delete TestTilebmp;//free tilemap from work ram 
 delete logo;//free original bitmap from work ram
 ```
-
-## Our First Background
-
-SRL provides, through the `SRL::VDP2` namespace the methods to interact and set or VDP2 scroll screens.
