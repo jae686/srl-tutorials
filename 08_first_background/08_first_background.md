@@ -80,11 +80,12 @@ int main()
     SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
     delete logo;                                                //free original bitmap from work ram                                                                                   
 
+    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
+    SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+
     // Main program loop
  while(1)
  {       
-        SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
-        SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
         SRL::Core::Synchronize();                                   //Refresh screen                                           
  }
 
@@ -116,15 +117,14 @@ int main()
     delete logo;                                                //free original bitmap from work ram                                                                                   
 
     Vector2D offset = Vector2D(0.0, -50.0);
+    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
+    SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
 
     // Main program loop
 	while(1)
 	{       
-        SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
-        SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
         SRL::VDP2::NBG1::SetPosition(offset);
         SRL::Core::Synchronize();                                   //Refresh screen                                           
-
         offset.Y = offset.Y - 1.0;
 	}
 
