@@ -43,7 +43,7 @@ SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into 
 delete logo;                                                //free original bitmap from work ram
 ```
 
-There are some caveats when using ![`LoadBitmap`](https://srl.reye.me/classSRL_1_1VDP2_1_1BmpScreen_a731038a2273de70dafaf30a3c5a9f7c2.html#a731038a2273de70dafaf30a3c5a9f7c2) function:
+There are some caveats when using [`LoadBitmap`](https://srl.reye.me/classSRL_1_1VDP2_1_1BmpScreen_a731038a2273de70dafaf30a3c5a9f7c2.html#a731038a2273de70dafaf30a3c5a9f7c2) function:
 
 - The bitmap can only have the following sizes :  512x256, 512x512, 1024x256, or 1024x512
 - The maximum supported loading size is 2 VRAM banks (262,144 bytes)
