@@ -31,17 +31,57 @@ There are 2 screen formats:
 ### Bitmap format
 
 This is the most simple way to have a image into the VDP2.
-The bitmap data is placed into a VDP2 screen
+The bitmap data is placed into a VDP2 screen.
 
 SRL provides, through the `SRL::VDP2` namespace the methods to interact and set or VDP2 scroll screens.
 
-On SRL, we can do so by , for example for the NBG2 screen (code taken from `VDP2 - Layers` sample):
+On SRL, we can do so by , for example for the NBG1 screen:
 
 ```cpp
-//Demonstrate NBG2 loading with Tilemap converted from Bitmap:
-SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("LOGO1.TGA");//Load Bitmap image to work RAM
-SRL::Tilemap::Interfaces::Bmp2Tile* TestTilebmp = new SRL::Tilemap::Interfaces::Bmp2Tile(*logo);//convert bitmap to tilemap
-SRL::VDP2::NBG2::LoadTilemap(*TestTilebmp);//Transfer tilemap from work RAM to VDP2 VRAM and register with NBG2
-delete TestTilebmp;//free tilemap from work ram 
-delete logo;//free original bitmap from work ram
+SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");                                         //Load Bitmap image to work RAM
+SRL::Tilemap::Interfaces::Bmp2Tile* TestTilebmp = new SRL::Tilemap::Interfaces::Bmp2Tile(*logo);    //convert bitmap to tilemap
+SRL::VDP2::NBG1::LoadTilemap(*TestTilebmp);             //Transfer tilemap from work RAM to VDP2 VRAM and register with NBG2
+delete TestTilebmp;                                                                                 //free tilemap from work ram 
+delete logo;                                                                                        //free original bitmap from work ram
 ```
+
+And to Draw the VDP2 Scroll Screen we must call, on our render loop:
+
+```cpp
+SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
+SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+SRL::Core::Synchronize();                                   //Refresh screen      
+```
+
+The Example Code becomes :
+
+```cpp
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "08_Tutorial");
+     
+    //Demonstrate NBG1 loading with Tilemap converted from Bitmap:
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");                                         //Load Bitmap image to work RAM
+    SRL::Tilemap::Interfaces::Bmp2Tile* TestTilebmp = new SRL::Tilemap::Interfaces::Bmp2Tile(*logo);    //convert bitmap to tilemap
+    SRL::VDP2::NBG1::LoadTilemap(*TestTilebmp);             //Transfer tilemap from work RAM to VDP2 VRAM and register with NBG2
+    delete TestTilebmp;                                                                                 //free tilemap from work ram 
+    delete logo;                                                                                        //free original bitmap from work ram
+
+    // Main program loop
+	while(1)
+	{       
+        SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
+        SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+        SRL::Core::Synchronize();                                   //Refresh screen                                           
+	}
+
+	return 0;
+}
+```
+
+And this is the result :
+
+![](img/first_background_01.png)
+
