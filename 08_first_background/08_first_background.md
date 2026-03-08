@@ -48,7 +48,7 @@ There are some caveats when using [`LoadBitmap`](https://srl.reye.me/classSRL_1_
 - The bitmap can only have the following sizes :  512x256, 512x512, 1024x256, or 1024x512
 - The maximum supported loading size is 2 VRAM banks (262,144 bytes)
 
-The relation between bit depth and VRAM usage.
+The relation between bit depth and VRAM usage is shown below.
 
 | Bitdepth | Max Image Size | VRAM Usage |
 | -------- | -------------- | ---------- |
@@ -56,7 +56,7 @@ The relation between bit depth and VRAM usage.
 | 8bpp | 512x512 or 1024x256 | 1 or 2 banks |
 | 16bpp | 512x256 | Always 2 banks |
 
-And to Draw the VDP2 Scroll Screen we must call, on our render loop:
+And to draw the VDP2 Scroll Screen we must call, on our render loop:
 
 ```cpp
 SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
@@ -95,3 +95,43 @@ int main()
 And this is the result :
 
 ![](img/first_background_01.png)
+
+However we will what to manipulate out scroll screen (move, rotate, scale..)
+
+### Translation:
+
+For translation we use the [`SetPosition()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_af78d57a49bd7ccc3f04e3b6769bacc20.html#af78d57a49bd7ccc3f04e3b6769bacc20) function.
+
+For example, move our screen along the Y axis, this is what our `main()` function looks like:
+
+```cpp
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "08_Tutorial");
+     
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
+    SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
+    delete logo;                                                //free original bitmap from work ram                                                                                   
+
+    Vector2D offset = Vector2D(0.0, -50.0);
+
+    // Main program loop
+	while(1)
+	{       
+        SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
+        SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+        SRL::VDP2::NBG1::SetPosition(offset);
+        SRL::Core::Synchronize();                                   //Refresh screen                                           
+
+        offset.Y = offset.Y - 1.0;
+	}
+
+	return 0;
+}
+
+```
+And this is the result:
+
+![](img/first_background_02.gif)
