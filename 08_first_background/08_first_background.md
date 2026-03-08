@@ -38,11 +38,9 @@ SRL provides, through the `SRL::VDP2` namespace the methods to interact and set 
 On SRL, we can do so by , for example for the NBG1 screen:
 
 ```cpp
-SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");                                         //Load Bitmap image to work RAM
-SRL::Tilemap::Interfaces::Bmp2Tile* TestTilebmp = new SRL::Tilemap::Interfaces::Bmp2Tile(*logo);    //convert bitmap to tilemap
-SRL::VDP2::NBG1::LoadTilemap(*TestTilebmp);             //Transfer tilemap from work RAM to VDP2 VRAM and register with NBG2
-delete TestTilebmp;                                                                                 //free tilemap from work ram 
-delete logo;                                                                                        //free original bitmap from work ram
+SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
+SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
+delete logo;                                                //free original bitmap from work ram
 ```
 
 And to Draw the VDP2 Scroll Screen we must call, on our render loop:
@@ -65,12 +63,9 @@ int main()
 	SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "08_Tutorial");
      
-    //Demonstrate NBG1 loading with Tilemap converted from Bitmap:
-    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");                                         //Load Bitmap image to work RAM
-    SRL::Tilemap::Interfaces::Bmp2Tile* TestTilebmp = new SRL::Tilemap::Interfaces::Bmp2Tile(*logo);    //convert bitmap to tilemap
-    SRL::VDP2::NBG1::LoadTilemap(*TestTilebmp);             //Transfer tilemap from work RAM to VDP2 VRAM and register with NBG2
-    delete TestTilebmp;                                                                                 //free tilemap from work ram 
-    delete logo;                                                                                        //free original bitmap from work ram
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
+    SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
+    delete logo;                                                //free original bitmap from work ram                                                                                   
 
     // Main program loop
 	while(1)
