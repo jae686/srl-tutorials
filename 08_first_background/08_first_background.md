@@ -53,6 +53,9 @@ SRL::VDP2::NBG1::ScrollEnable();                            //enable display of 
 SRL::Core::Synchronize();                                   //Refresh screen      
 ```
 
+As we use more scroll screens, we must set on which priority they are drawn. The higher the layer, the higher the priority.
+And we must enable the display of our scroll screen.
+
 The Example Code becomes :
 
 ```cpp
@@ -84,4 +87,3 @@ int main()
 And this is the result :
 
 ![](img/first_background_01.png)
-
