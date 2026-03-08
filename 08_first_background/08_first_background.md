@@ -43,6 +43,19 @@ SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into 
 delete logo;                                                //free original bitmap from work ram
 ```
 
+There are some caveats when using !(`LoadBitmap`)[https://srl.reye.me/classSRL_1_1VDP2_1_1BmpScreen_a731038a2273de70dafaf30a3c5a9f7c2.html#a731038a2273de70dafaf30a3c5a9f7c2] function:
+
+- The bitmap can only have the following sizes :  512x256, 512x512, 1024x256, or 1024x512
+- The maximum supported loading size is 2 VRAM banks (262,144 bytes)
+
+The relation between bit depth and VRAM usage.
+
+| Bitdepth | Max Image Size | VRAM Usage |
+| -------- | -------------- | ---------- |
+| 4bpp | 1024x512 | 1/2, 1, or 2 banks |
+| 8bpp | 512x512 or 1024x256 | 1 or 2 banks |
+| 16bpp | 512x256 | Always 2 banks |
+
 And to Draw the VDP2 Scroll Screen we must call, on our render loop:
 
 ```cpp
@@ -60,7 +73,7 @@ The Example Code becomes :
 int main()
 {
     // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "08_Tutorial");
      
     SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
@@ -68,14 +81,14 @@ int main()
     delete logo;                                                //free original bitmap from work ram                                                                                   
 
     // Main program loop
-	while(1)
-	{       
+ while(1)
+ {       
         SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
         SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
         SRL::Core::Synchronize();                                   //Refresh screen                                           
-	}
+ }
 
-	return 0;
+ return 0;
 }
 ```
 
