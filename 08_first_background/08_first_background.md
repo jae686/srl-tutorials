@@ -99,7 +99,9 @@ And this is the result :
 
 However we will what to manipulate out scroll screen (move, rotate, scale..)
 
-### Translation:
+### Translation
+
+Only `RGB0` and `RGB1` can not have translation.
 
 For translation we use the [`SetPosition()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_af78d57a49bd7ccc3f04e3b6769bacc20.html#af78d57a49bd7ccc3f04e3b6769bacc20) function.
 
@@ -116,7 +118,7 @@ int main()
     SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
     delete logo;                                                //free original bitmap from work ram                                                                                   
 
-    Vector2D offset = Vector2D(0.0, -50.0);
+    Vector2D offset = Vector2D(0.0, -50.0);                     //offset vector
     SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
     SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
 
@@ -135,3 +137,52 @@ int main()
 And this is the result:
 
 ![](img/first_background_02.gif)
+
+## Scale
+
+Only `NBG0` and `NBG1` can scale.
+
+To scale the layer, we use the  [`SetScale()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_adcbf7bf416f13ef79e4462f83cdbe5e3.html#adcbf7bf416f13ef79e4462f83cdbe5e3) function.
+
+To test our scaling , below there is an example of our `main` function:
+
+```cpp
+
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "08_Tutorial");
+     
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
+    SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
+    delete logo;                                                //free original bitmap from work ram                                                                                   
+
+    Vector2D scale = Vector2D(0.1);
+    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
+    SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+
+    Fxp Cnt = 0.0;
+
+    // Main program loop
+	while(1)
+	{       
+        SRL::VDP2::NBG1::SetScale(scale);
+        SRL::Core::Synchronize();                                   //Refresh screen                                           
+        scale =  SRL::Math::Trigonometry::Sin(SRL::Math::Angle::FromDegrees(Cnt)*0.5);
+        Cnt = Cnt + 0.5;       
+	}
+
+	return 0;
+}
+```
+
+And this is the result :
+
+![](img/first_background_03.gif)
+
+## Rotation
+
+Only `RGB0` and `RGB1` can rotate.
+
+For the rotation, we use the  [`SetScale()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_adcbf7bf416f13ef79e4462f83cdbe5e3.html#adcbf7bf416f13ef79e4462f83cdbe5e3) function.
