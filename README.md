@@ -68,7 +68,11 @@
 - High Speed Shrink
 - Enable End-code-Disable  
 
-## 08 - Backgrounds and tile maps (VDP2)
+## [08 - Backgrounds and tile maps (VDP2)](08_first_background/08_first_background.md)
+
+- Screen Formats
+  - Bitmap Format
+  - Cell Format
 
 ## 09 - 3D Model pipeline
 
