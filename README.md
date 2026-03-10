@@ -80,11 +80,14 @@
 - the NYA Format
 - Limitations
 
-## 10 - Input Handling - Revisited
+## 10 - Backgrounds and tile maps (VDP2) - Revisited
+
+
+## 11 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 11 - Backgrounds and tile maps (VDP2) - Revisited
+
 

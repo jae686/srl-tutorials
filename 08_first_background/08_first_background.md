@@ -21,6 +21,9 @@ In the table below there is an overview :
 | Rotation Scroll Screen | RBG0 | Can Rotate / Scale |
 | Rotation Scroll Screen | RBG1 | Can Rotate / Scale |
 
+> [!NOTE]
+> RBG0 and RGB1 will be covered at a later tutorial.
+
 ## Screen formats
 
 There are 2 screen formats:
@@ -181,21 +184,5 @@ And this is the result :
 
 ![](img/first_background_03.gif)
 
-## Rotation
 
-Only `RGB0` and `RGB1` can rotate.
-
-First me must set the rotation axis. This is done via the `SetRotationMode()`.
-
-There are 3 modes available :
-
-| Enumerator | Description | Notes |
-| -------- | -------------- | ---------- |
-| OneAxis | 2d rotation with only roll and zoom | No additional VRAM requirements |
-| TwoAxis | 3d rotation with pitch and yaw, but no roll (modified per line) | Requires 0x2000-0x18000 bytes in arbitrary VRAM Bank (No cycles) |
-| ThreeAxis | Full 3d rotation with pitch, yaw and roll (modified per pixel) | Requires 0x2000-0x18000 bytes in Reserved VRAM bank (8 cycles) |
-
-For the rotation, we use the  [`SetScale()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_adcbf7bf416f13ef79e4462f83cdbe5e3.html#adcbf7bf416f13ef79e4462f83cdbe5e3) function.
-
-Lets begin with a `OneAxis` rotation.
 
