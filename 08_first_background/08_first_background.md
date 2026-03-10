@@ -178,6 +178,23 @@ int main()
 }
 ```
 
-And this is the result :
+And this is the result (note that some artifacts in scaling are due to the .gif framerate):
 
 ![](img/first_background_03.gif)
+
+## Cell Format
+
+When using the cell format , the image information on the scroll screen is arranged as follows :
+Data is arranged into "cells", that consist on a 8x8 pixel image.
+Then those "cells" are arranged into a "character pattern" that consists on 1x1 or 2x2 cells.
+Then the "character patterns" are arranged into a "page" that consists of 32x32 or 64x64 character patterns.
+Then the "pages" are arranged into a plane, that can consists of a 1x1, 2x2, 1x2 or 2x1 pages.
+And finally (!) the planes are arranged into a "map" that , on a normal scroll surface consists of 2x2 planes, or, in a rotating plane, 4x4 planes.
+
+The following picture makes it easier to understand :
+
+![](img/first_background_cell_format.png)
+
+
+
+
