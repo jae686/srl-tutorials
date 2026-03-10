@@ -22,7 +22,7 @@ In the table below there is an overview :
 | Rotation Scroll Screen | RBG1 | Can Rotate / Scale |
 
 > [!NOTE]
-> RBG0 and RGB1 will be covered at a later tutorial.
+> RBG0 and RGB1 will be covered at a later tutorial, since they require use of the `SRL::Scene3D` namespace.
 
 ## Screen formats
 
@@ -100,11 +100,9 @@ And this is the result :
 
 ![](img/first_background_01.png)
 
-However we will what to manipulate out scroll screen (move, rotate, scale..)
+However we will want to manipulate out scroll screen (move, rotate, scale..)
 
 ### Translation
-
-Only `RGB0` and `RGB1` can not have translation.
 
 For translation we use the [`SetPosition()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_af78d57a49bd7ccc3f04e3b6769bacc20.html#af78d57a49bd7ccc3f04e3b6769bacc20) function.
 
@@ -183,6 +181,3 @@ int main()
 And this is the result :
 
 ![](img/first_background_03.gif)
-
-
-
