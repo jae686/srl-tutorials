@@ -200,10 +200,18 @@ This in practice means that one can, from a limited set of cells, make more intr
 
 There are several was to create cell format scroll screens :
 
-- Using `SRL::Tilemap::Interfaces::Bmp2Tile` interface
+- Using `SRL::Tilemap::Interfaces::Bmp2Tile`
 - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) plug-in
 - Using sega's map editor for windows 95. (no we wont be covering that)
 
-### Using Bmp2Tile interface
+## Notes on Sega's map editor
+
+Due to existance of alternatives, we wont cover the official sega MapEdtor. However, documentation is provided below.
+Documentation regarding sega map editor :
+
+- [Mapeditor 1.81E Readme](https://antime.kapsi.fi/sega/files/MapEdit.pdf)
+- [SS-SDK Win95 Graphic Tools - ver 1.0j](https://antime.kapsi.fi/sega/files/WGT_MAN.pdf)
+
+### Using `SRL::Tilemap::Interfaces::Bmp2Tile`
 
 ### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) 
