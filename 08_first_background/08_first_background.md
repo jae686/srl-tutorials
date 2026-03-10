@@ -36,9 +36,9 @@ There are 2 screen formats:
 This is the most simple way to have a image into the VDP2.
 The bitmap data is placed into a VDP2 screen.
 
-SRL provides, through the `SRL::VDP2` namespace the methods to interact and set or VDP2 scroll screens.
+SRL provides, through the `SRL::VDP2` namespace the methods to interact and set VDP2 scroll screens.
 
-On SRL, we can do so by , for example for the NBG1 screen:
+On SRL, we can do so by, for example, for the NBG1 screen:
 
 ```cpp
 SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
