@@ -185,16 +185,25 @@ And this is the result (note that some artifacts in scaling are due to the .gif 
 ## Cell Format
 
 When using the cell format , the image information on the scroll screen is arranged as follows :
-Data is arranged into "cells", that consist on a 8x8 pixel image.
-Then those "cells" are arranged into a "character pattern" that consists on 1x1 or 2x2 cells.
-Then the "character patterns" are arranged into a "page" that consists of 32x32 or 64x64 character patterns.
-Then the "pages" are arranged into a plane, that can consists of a 1x1, 2x2, 1x2 or 2x1 pages.
-And finally (!) the planes are arranged into a "map" that , on a normal scroll surface consists of 2x2 planes, or, in a rotating plane, 4x4 planes.
+
+- Data is arranged into "cells", that consist on a 8x8 pixel image.
+- Then those "cells" are arranged into a "character pattern" that consists on 1x1 or 2x2 cells.
+- Then the "character patterns" are arranged into a "page" that consists of 32x32 or 64x64 character patterns.
+- Then the "pages" are arranged into a plane, that can consists of a 1x1, 2x2, 1x2 or 2x1 pages.
+- And finally (!) the planes are arranged into a "map" that , on a normal scroll surface consists of 2x2 planes, or, in a rotating plane, 4x4 planes.
 
 The following picture makes it easier to understand :
 
 ![](img/first_background_cell_format.png)
 
+This in practice means that one can, from a limited set of cells, make more intricate scrolls screens in less space that an equivalent bitmap scroll screen.
 
+There are several was to create cell format scroll screens :
 
+- Using `SRL::Tilemap::Interfaces::Bmp2Tile` interface
+- Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) plug-in
+- Using sega's map editor for windows 95. (no we wont be covering that)
 
+### Using Bmp2Tile interface
+
+### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) 
