@@ -214,6 +214,8 @@ Documentation regarding sega map editor :
 
 ### Using `SRL::Tilemap::Interfaces::Bmp2Tile`
 
+TODO.
+
 ### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) script
 
 > [!NOTE]
