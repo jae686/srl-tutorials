@@ -212,9 +212,17 @@ Documentation regarding sega map editor :
 - [Mapeditor 1.81E Readme](https://antime.kapsi.fi/sega/files/MapEdit.pdf)
 - [SS-SDK Win95 Graphic Tools - ver 1.0j](https://antime.kapsi.fi/sega/files/WGT_MAN.pdf)
 
-### Using `SRL::Tilemap::Interfaces::Bmp2Tile`
+### Using [`SRL::Tilemap::Interfaces::Bmp2Tile`](https://srl.reye.me/structSRL_1_1Tilemap_1_1Interfaces_1_1Bmp2Tile.html)
 
-TODO.
+The `SRL::Tilemap::Interfaces::Bmp2Tile` creates a tilemap from a bitmap.
+
+Some notes, from the [documentation](https://srl.reye.me/structSRL_1_1Tilemap_1_1Interfaces_1_1Bmp2Tile.html):
+
+- Maximum Size of bitmap to convert is 0x20000 bytes (512x512 @ 4bpp, 512x256 @ 8bpp, or 256x256 @ 16bpp).
+- Empty tiles in the source image are detected and removed from the tileset, but duplicate and mirrored tiles are not.
+- In cases where bitmap is below maximum size or contains empty tiles, a default empty tile is written at start of tileset.
+
+
 
 ### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) script
 
@@ -285,12 +293,14 @@ int main()
     // Main program loop
 	while(1)
 	{       
-       SRL::Core::Synchronize();                                   //Refresh screen                                                  
+       SRL::Core::Synchronize();                                                 
 	}
 
 	return 0;
 }
 
 ```
+
+And this is the result :
 
 ![](img/first_background_05.png)
