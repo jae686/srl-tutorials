@@ -244,3 +244,51 @@ character_patterns_size 1280
   width: 1
   height: 1
 ```
+
+The command syntax is as follows :
+
+```bash
+python background.py source_data.py converted_file.bin
+```
+The output file `converted_file.bin` , can be loaded directly into SRL.
+
+#### Loading the tilemap
+
+Once you placed the `.bin` file under the `cd/data` folder , we can load it by using the `SRL::Tilemap::Interfaces::CubeTile` interface :
+
+```cpp
+auto tile = new SRL::Tilemap::Interfaces::CubeTile("TILEMAP1.BIN");     // load the tilemap into main ram
+SRL::VDP2::NBG0::LoadTilemap(*tile);                                    // load tilemap into NGB0
+delete tile;                                                            // free the tilemap copy in main ramm
+SRL::VDP2::NBG0::SetPriority(SRL::VDP2::Priority::Layer3);              // set priority
+SRL::VDP2::NBG0::ScrollEnable();                                        // enable NGB0
+```
+
+The resulting code is :
+
+```cpp
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Blue);
+    SRL::Debug::Print(1,1, "08_Tutorial"); 
+
+    auto tile = new SRL::Tilemap::Interfaces::CubeTile("TILEMAP1.BIN");
+    SRL::VDP2::NBG0::LoadTilemap(*tile);
+    delete tile;
+
+    SRL::VDP2::NBG0::SetPriority(SRL::VDP2::Priority::Layer3);
+    SRL::VDP2::NBG0::ScrollEnable();
+  
+    // Main program loop
+	while(1)
+	{       
+       SRL::Core::Synchronize();                                   //Refresh screen                                                  
+	}
+
+	return 0;
+}
+
+```
+
+![](img/first_background_05.png)
