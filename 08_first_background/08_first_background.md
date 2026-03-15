@@ -214,4 +214,33 @@ Documentation regarding sega map editor :
 
 ### Using `SRL::Tilemap::Interfaces::Bmp2Tile`
 
-### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) 
+### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) script
+
+> [!NOTE]
+> As of 15.03.2026 only this [fork](https://github.com/seven-shades/saturn-aseprite/tree/patch-1) works.
+
+As an example, we will have a tilemap created in [Aseprite](https://www.aseprite.org/).
+
+![](img/first_background_04.png)
+
+The example tilemap used has 128*128 resolution , with tiles with a 16x16 pixel size.
+
+Once you have the scripts, in order to convert them to a format compatible with `SRL` you must use the following command :
+
+```bash
+PS D:\Development\Saturn\saturn-aseprite> python.exe .\background.py .\sprite_map.aseprite teste.bin
+palette_size 512
+8 8
+pattern_name_table_size 4096
+character_patterns_size 1280
+7shades:
+  file_type_id: 5
+  size_of_cel_data: 1280
+  size_of_map_data: 4096
+  tile_character_size: 1
+  tile_color_mode: 16
+  plane_size: 0
+  map_data: 0
+  width: 1
+  height: 1
+```
