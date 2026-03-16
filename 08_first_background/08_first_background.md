@@ -204,9 +204,9 @@ There are several was to create cell format scroll screens :
 - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) plug-in
 - Using sega's map editor for windows 95. (no we wont be covering that)
 
-## Notes on Sega's map editor
+### Notes on Sega's map editor
 
-Due to existance of alternatives, we wont cover the official sega MapEdtor. However, documentation is provided below.
+Due to existence of alternatives, we wont cover the official sega MapEdtor. However, documentation is provided below.
 Documentation regarding sega map editor :
 
 - [Mapeditor 1.81E Readme](https://antime.kapsi.fi/sega/files/MapEdit.pdf)
@@ -258,7 +258,7 @@ character_patterns_size 1280
 The command syntax is as follows :
 
 ```bash
-python background.py source_data.py converted_file.bin
+python background.py source_data.aseprite converted_file.bin
 ```
 The output file `converted_file.bin` , can be loaded directly into SRL.
 
