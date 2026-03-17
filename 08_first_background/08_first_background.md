@@ -96,7 +96,7 @@ int main()
 }
 ```
 
-And this is the result :
+And this is the result:
 
 ![](img/first_background_01.png)
 
@@ -202,7 +202,7 @@ There are several was to create cell format scroll screens :
 
 - Using `SRL::Tilemap::Interfaces::Bmp2Tile`
 - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) plug-in
-- Using sega's map editor for windows 95. (no we wont be covering that)
+- Using sega's map editor for windows 95. (no , we wont be covering that)
 
 ### Notes on Sega's map editor
 
@@ -222,6 +222,51 @@ Some notes, from the [documentation](https://srl.reye.me/structSRL_1_1Tilemap_1_
 - Empty tiles in the source image are detected and removed from the tileset, but duplicate and mirrored tiles are not.
 - In cases where bitmap is below maximum size or contains empty tiles, a default empty tile is written at start of tileset.
 
+Is is done by, for example :
+
+```cpp
+SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("TITLE.TGA"); 
+SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+delete MyBmp;//no longer need original bitmap in memory
+```
+
+And now we can Load the resulting tilemap into VDP2. In this case we can use `NGB0`.
+
+```cpp
+SRL::VDP2::NBG0::LoadTilemap(*Tile);
+```
+
+The resulting code is:
+
+```cpp
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "08_Tutorial"); 
+    SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("TITLE.TGA"); 
+    SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+    delete MyBmp;//no longer need original bitmap in memory
+    
+    //We will display right hand on NBG1 Layer in this example:
+    SRL::VDP2::NBG0::LoadTilemap(*Tile);
+    SRL::VDP2::NBG0::SetPriority(SRL::VDP2::Priority::Layer3);
+    SRL::VDP2::NBG0::ScrollEnable();
+  
+    // Main program loop
+	while(1)
+	{       
+       SRL::Core::Synchronize();                                                
+	}
+
+	return 0;
+}
+```
+
+![](img/first_background_06.png)
+
+The Tile interface allows for, programmatically, create several pages associated with a given tilemap, and copy data between pages.
+This will be covered in a future tutorial covering the VDP2.
 
 
 ### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) script
