@@ -72,7 +72,12 @@
 
 - Screen Formats
   - Bitmap Format
+    - Translate
+    - Scale
   - Cell Format
+    - Notes on SEGA's Editor
+    - Using `SRL::Tilemap::Interfaces::Bmp2Tile` Interface
+    - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
 
 ## 09 - 3D Model pipeline
 
@@ -82,6 +87,8 @@
 
 ## 10 - Backgrounds and tile maps (VDP2) - Revisited
 
+- Cell Screens manipulation
+- `RGB0` and `RGB1` Screens
 
 ## 11 - Input Handling - Revisited
 
@@ -89,5 +96,4 @@
 - Analogue Gamepad
 - Light Pistol
 
-
-
+## 12 - 2nd Interlude : putting everything together
