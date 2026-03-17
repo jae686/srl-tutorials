@@ -184,6 +184,9 @@ And this is the result (note that some artifacts in scaling are due to the .gif 
 
 ## Cell Format
 
+> [!NOTE]
+> The Translation, rotation, scale operations that were shown with the Bitmap format also apply Cell format screens.
+
 When using the cell format , the image information on the scroll screen is arranged as follows :
 
 - Data is arranged into "cells", that consist on a 8x8 pixel image.
@@ -268,7 +271,6 @@ int main()
 The Tile interface allows for, programmatically, create several pages associated with a given tilemap, and copy data between pages.
 This will be covered in a future tutorial covering the VDP2.
 
-
 ### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) script
 
 > [!NOTE]
@@ -305,6 +307,7 @@ The command syntax is as follows :
 ```bash
 python background.py source_data.aseprite converted_file.bin
 ```
+
 The output file `converted_file.bin` , can be loaded directly into SRL.
 
 #### Loading the tilemap
