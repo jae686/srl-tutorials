@@ -68,7 +68,16 @@
 - High Speed Shrink
 - Enable End-code-Disable  
 
-## 08 - Sprite pallets
+## [08 - Backgrounds and tile maps (VDP2)](08_first_background/08_first_background.md)
+
+- Screen Formats
+  - Bitmap Format
+    - Translate
+    - Scale
+  - Cell Format
+    - Notes on SEGA's Editor
+    - Using `SRL::Tilemap::Interfaces::Bmp2Tile` Interface
+    - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
 
 ## 09 - 3D Model pipeline
 
@@ -76,11 +85,15 @@
 - the NYA Format
 - Limitations
 
-## 10 - Input Handling - Revisited
+## 10 - Backgrounds and tile maps (VDP2) - Revisited
+
+- Cell Screens manipulation
+- `RGB0` and `RGB1` Screens
+
+## 11 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 11 - Backgrounds and tilemaps (VDP2)
-
+## 12 - 2nd Interlude : putting everything together
