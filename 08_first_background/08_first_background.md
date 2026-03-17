@@ -42,8 +42,8 @@ On SRL, we can do so by, for example, for the NBG1 screen:
 
 ```cpp
 SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
-SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
-delete logo;                                                //free original bitmap from work ram
+SRL::VDP2::NBG1::LoadBitmap(logo);                          //Load Bitmap into NGB1                                        
+delete logo;                                                //Free original bitmap from work ram
 ```
 
 There are some caveats when using [`LoadBitmap`](https://srl.reye.me/classSRL_1_1VDP2_1_1BmpScreen_a731038a2273de70dafaf30a3c5a9f7c2.html#a731038a2273de70dafaf30a3c5a9f7c2) function:
@@ -75,21 +75,19 @@ The Example Code becomes:
 ```cpp
 int main()
 {
-    // Initialize library
     SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "08_Tutorial");
      
-    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
-    SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
-    delete logo;                                                //free original bitmap from work ram                                                                                   
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");
+    SRL::VDP2::NBG1::LoadBitmap(logo);
+    delete logo;
 
-    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
-    SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);
+    SRL::VDP2::NBG1::ScrollEnable();
 
-    // Main program loop
     while(1)
     {       
-            SRL::Core::Synchronize();                                   //Refresh screen                                           
+            SRL::Core::Synchronize();
     }
 
     return 0;
@@ -111,30 +109,29 @@ For example, move our screen along the Y axis, this is what our `main()` functio
 ```cpp
 int main()
 {
-    // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "08_Tutorial");
      
-    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
-    SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
-    delete logo;                                                //free original bitmap from work ram                                                                                   
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");
+    SRL::VDP2::NBG1::LoadBitmap(logo);
+    delete logo;
 
-    Vector2D offset = Vector2D(0.0, -50.0);                     //offset vector
-    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
-    SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+    Vector2D offset = Vector2D(0.0, -50.0);
+    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);
+    SRL::VDP2::NBG1::ScrollEnable();
 
-    // Main program loop
-	while(1)
-	{       
+    while(1)
+    {       
         SRL::VDP2::NBG1::SetPosition(offset);
-        SRL::Core::Synchronize();                                   //Refresh screen                                           
+        SRL::Core::Synchronize();
         offset.Y = offset.Y - 1.0;
-	}
+    }
 
-	return 0;
+    return 0;
 }
 
 ```
+
 And this is the result:
 
 ![](img/first_background_02.gif)
@@ -151,30 +148,28 @@ To test our scaling, below there is an example of our `main` function:
 
 int main()
 {
-    // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "08_Tutorial");
      
-    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
-    SRL::VDP2::NBG1::LoadBitmap(logo);                          // Load Bitmap into NGB1                                        
-    delete logo;                                                //free original bitmap from work ram                                                                                   
+    SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA");
+    SRL::VDP2::NBG1::LoadBitmap(logo);                                      
+    delete logo;                                                                                   
 
     Vector2D scale = Vector2D(0.1);
-    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);  //set NBG1 priority
-    SRL::VDP2::NBG1::ScrollEnable();                            //enable display of NBG1
+    SRL::VDP2::NBG1::SetPriority(SRL::VDP2::Priority::Layer2);
+    SRL::VDP2::NBG1::ScrollEnable();
 
     Fxp Cnt = 0.0;
 
-    // Main program loop
-	while(1)
-	{       
+    while(1)
+    {       
         SRL::VDP2::NBG1::SetScale(scale);
-        SRL::Core::Synchronize();                                   //Refresh screen                                           
+        SRL::Core::Synchronize();                                         
         scale =  SRL::Math::Trigonometry::Sin(SRL::Math::Angle::FromDegrees(Cnt)*0.5);
         Cnt = Cnt + 0.5;       
-	}
+    }
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -230,7 +225,7 @@ Is is done by, for example:
 ```cpp
 SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("TITLE.TGA"); 
 SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
-delete MyBmp;//no longer need original bitmap in memory
+delete MyBmp;
 ```
 
 And now we can Load the resulting tilemap into VDP2. In this case we can use `NGB0`.
@@ -244,25 +239,22 @@ The resulting code is:
 ```cpp
 int main()
 {
-    // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Core::Initialize(HighColor::Colors::Black);
     SRL::Debug::Print(1,1, "08_Tutorial"); 
     SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("TITLE.TGA"); 
     SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
-    delete MyBmp;//no longer need original bitmap in memory
+    delete MyBmp;
     
-    //We will display right hand on NBG1 Layer in this example:
     SRL::VDP2::NBG0::LoadTilemap(*Tile);
     SRL::VDP2::NBG0::SetPriority(SRL::VDP2::Priority::Layer3);
     SRL::VDP2::NBG0::ScrollEnable();
   
-    // Main program loop
-	while(1)
-	{       
+    while(1)
+    {       
        SRL::Core::Synchronize();
-	}
+    }
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -327,8 +319,7 @@ The resulting code is:
 ```cpp
 int main()
 {
-    // Initialize library
-	SRL::Core::Initialize(HighColor::Colors::Blue);
+    SRL::Core::Initialize(HighColor::Colors::Blue);
     SRL::Debug::Print(1,1, "08_Tutorial"); 
 
     auto tile = new SRL::Tilemap::Interfaces::CubeTile("TILEMAP1.BIN");
@@ -338,13 +329,12 @@ int main()
     SRL::VDP2::NBG0::SetPriority(SRL::VDP2::Priority::Layer3);
     SRL::VDP2::NBG0::ScrollEnable();
   
-    // Main program loop
-	while(1)
-	{       
+    while(1)
+    {       
        SRL::Core::Synchronize();                                                 
-	}
+    }
 
-	return 0;
+    return 0;
 }
 
 ```
