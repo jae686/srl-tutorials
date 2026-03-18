@@ -1,7 +1,7 @@
 # A Primer on VDP2
 
 While the VDP1 is responsible to draw the sprites in the foreground, the VDP2 is, in general, responsible to handle the backgrounds.
-On the sega saturn, after the VDP1 draws the frame buffer, the image is handled over to the VDP2 for further processing.
+On the Sega Saturn, after the VDP1 draws the frame buffer, the image is handed over to the VDP2 for further processing.
 
 The images on the VDP2 are referred to as screens.
 
@@ -36,9 +36,9 @@ There are 2 screen formats:
 This is the most simple way to have a image into the VDP2.
 The bitmap data is placed into a VDP2 screen.
 
-SRL provides, through the `SRL::VDP2` namespace the methods to interact and set VDP2 scroll screens.
+SRL providesthe methods to interact and set VDP2 scroll screens through the `SRL::VDP2` namespace.
 
-On SRL, we can do so by, for example, for the NBG1 screen:
+For example, on the NBG1 screen we can do so by:
 
 ```cpp
 SRL::Bitmap::TGA* logo = new SRL::Bitmap::TGA("TITLE.TGA"); //Load Bitmap image to work RAM
@@ -98,7 +98,7 @@ And this is the result:
 
 ![](img/first_background_01.png)
 
-However we will want to manipulate out scroll screen (move, rotate, scale..)
+However we will want to manipulate our scroll screen (move, rotate, scale..)
 
 ### Translation
 
@@ -200,12 +200,12 @@ There are several was to create cell format scroll screens:
 
 - Using `SRL::Tilemap::Interfaces::Bmp2Tile`
 - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) plug-in
-- Using sega's map editor for windows 95. (no, we wont be covering that)
+- Using Sega's map editor for Windows 95. (no, we wont be covering that)
 
 ### Notes on Sega's map editor
 
-Due to existence of alternatives, we wont cover the official sega MapEdtor. However, documentation is provided below.
-Documentation regarding sega map editor:
+Due to existence of alternatives, we wont cover the official Sega MapEdtor. However, documentation is provided below.
+Documentation regarding Sega map editor:
 
 - [Mapeditor 1.81E Readme](https://antime.kapsi.fi/sega/files/MapEdit.pdf)
 - [SS-SDK Win95 Graphic Tools - ver 1.0j](https://antime.kapsi.fi/sega/files/WGT_MAN.pdf)
@@ -260,7 +260,7 @@ int main()
 
 ![](img/first_background_06.png)
 
-The Tile interface allows for, programmatically, create several pages associated with a given tilemap, and copy data between pages.
+The Tile interface allows for programmatically creating several pages associated with a given tilemap, and copying data between pages.
 This will be covered in a future tutorial covering the VDP2.
 
 ### Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
