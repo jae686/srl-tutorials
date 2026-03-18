@@ -36,7 +36,7 @@ There are 2 screen formats:
 This is the most simple way to have a image into the VDP2.
 The bitmap data is placed into a VDP2 screen.
 
-SRL providesthe methods to interact and set VDP2 scroll screens through the `SRL::VDP2` namespace.
+SRL provides the methods to interact and set VDP2 scroll screens through the `SRL::VDP2` namespace.
 
 For example, on the NBG1 screen we can do so by:
 
@@ -205,7 +205,7 @@ There are several was to create cell format scroll screens:
 ### Notes on Sega's map editor
 
 Due to existence of alternatives, we wont cover the official Sega MapEdtor. However, documentation is provided below.
-Documentation regarding Sega map editor:
+Documentation regarding Sega MapEdtor:
 
 - [Mapeditor 1.81E Readme](https://antime.kapsi.fi/sega/files/MapEdit.pdf)
 - [SS-SDK Win95 Graphic Tools - ver 1.0j](https://antime.kapsi.fi/sega/files/WGT_MAN.pdf)
