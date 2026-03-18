@@ -79,7 +79,7 @@
     - Using `SRL::Tilemap::Interfaces::Bmp2Tile` Interface
     - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
 
-## 09 - 3D Model pipeline
+## 09 - [3D Model pipeline](09_3D_model_pipeline/09_3D_model_pipeline.md)
 
 - Description of the use of the tools for 3d mesh importing
 - the NYA Format
