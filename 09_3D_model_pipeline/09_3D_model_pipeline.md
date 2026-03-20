@@ -33,18 +33,18 @@ And we export it to `.obj` with the following settings :
 To convert our `.obj` to `.NYA` we use the following command :
 
 ```bash
-PS D:\Development\Saturn\ModelConverter> .\ModelConverter.exe -i "..\SaturnRingLib\Projects\09_3D model_pipeline\assets\cube_01.obj" -o "..\SaturnRingLib\Projects\09_3D model_pipeline\assets\cube_01.NYA"
+PS D:\Development\Saturn\ModelConverter> .\ModelConverter.exe -i "..\SaturnRingLib\Projects\09_3D model_pipeline\assets\cube_01.obj" -o "..\SaturnRingLib\Projects\09_3D model_pipeline\cd\data\CUBE01.NYA"
 Input files:
 cube_01.obj
-Output file: D:\Development\Saturn\SaturnRingLib\Projects\09_3D model_pipeline\assets\cube_01.NYA
+Output file: D:\Development\Saturn\SaturnRingLib\Projects\09_3D model_pipeline\cd\data\CUBE01.NYA
 Using import plugin 'Wavefront' for 'cube_01.obj'
 Using export plugin: NyaExport
 Exporting type: 'NoLight'
 UV mapping enabled: 'True'
 UV mapping generated 0 texture
 Texture data size 0 bytes
-Export done.
- ```
+Export done
+```
 
 ### Getting the model into our saturn project
 
@@ -105,6 +105,73 @@ And this is the result :
 But its not very interesting, isn't it ?
 
 ### Basic lightning
+
+Now we will make our cube *flat shaded*.
+
+First we must export the model again, but with the `-t Flat` option.
+
+```bash
+PS D:\Development\Saturn\ModelConverter> .\ModelConverter.exe -i "..\SaturnRingLib\Projects\09_3D model_pipeline\assets\cube_01.obj" -o "..\SaturnRingLib\Projects\09_3D model_pipeline\cd\data\CUBE01.NYA" -t Flat
+Input files:
+cube_01.obj
+Output file: D:\Development\Saturn\SaturnRingLib\Projects\09_3D model_pipeline\cd\data\CUBE01.NYA
+Using import plugin 'Wavefront' for 'cube_01.obj'
+Using export plugin: NyaExport
+Exporting type: 'Flat'
+UV mapping enabled: 'True'
+UV mapping generated 0 texture
+Texture data size 0 bytes
+Export done.
+```
+
+And on the source file, we must add a light coordinate and enable the lightening:
+
+```cpp
+// Setup light, we can use scale of the vector to manipulate light intensity
+Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+SRL::Scene3D::SetDirectionalLight(lightDirection);
+```
+
+The resulting main function now becomes:
+
+```cpp
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "09_Tutorial"); 
+  
+    ModelObject cube = ModelObject("CUBE01.NYA");
+    Vector3D cameraLocation = Vector3D(12.5);
+  
+    // Setup light, we can use scale of the vector to manipulate light intensity
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+
+
+    // Main program loop
+    while(1)
+    {       
+       // Load identity matrix
+       SRL::Scene3D::LoadIdentity();
+
+       // Set camera location and direction
+       SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+
+       cube.Draw();
+       SRL::Core::Synchronize();                                                
+    }
+
+    return 0;
+}
+```
+
+![](img/09_3D_model_pipeline_04.png)
+
+Much better!
+
+However, you might have notices our mesh is....upside down.
+
 
 ## `SRL::Scene3D` namespace
 
