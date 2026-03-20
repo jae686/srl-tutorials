@@ -5,6 +5,7 @@ Before starting to use 3D into the sega saturn, there are some limitations to co
 - There are no triangles - only quads (distorted sprites)
 - There are no UV maps in the classical sense - each texture is fully mapped to the sprite / quad.
 - Matrix operations are done on the CPU , drawing is done by VDP1
+- Oh and -Y. 
 
 For using 3D models with SRL, there are 2 main tools we will be using in order to get 3D models into our saturn project :
 
@@ -53,7 +54,7 @@ We copy the resulting `.NYA` to the `cd/data` folder of our saturn project.
 First we must include the `modelObject.hpp` at the top of our source file, and in our main function we instantiate the class.
 
 ```cpp
-ModelObject teapot = ModelObject("cube_01.NYA");
+ModelObject cube = ModelObject("CUBE01.NYA");
 ```
 
 We will also need coordinates for out camera. For this we use the `SRL::Math::Types::Vector3D` :
@@ -170,7 +171,28 @@ int main()
 
 Much better!
 
-However, you might have notices our mesh is....upside down.
+However, you might have notices our mesh is....upside down. on the sega saturn, -Y is up.
+However, we can always, upon export to set -Y as UP.
+
+![](img/09_3D_model_pipeline_05.png)
+
+And the result:
+
+![](img/09_3D_model_pipeline_06.png)
+
+And of course, you can infer that we were looking at the cube from underneath due to the positive Y coordinate on the vector `(12.5, 12.5, 12.5)`.
+
+> [!NOTE]
+> `Vector3D(12.5)` is the same as `Vector3D(12.5, 12.5, 12.5)`
+
+Lets change the Y to -Y :
+
+```cpp
+Vector3D cameraLocation = Vector3D(12.5, -12.5, 12.5);
+```
+The result:
+
+![](img/09_3D_model_pipeline_07.png)
 
 
 ## `SRL::Scene3D` namespace
