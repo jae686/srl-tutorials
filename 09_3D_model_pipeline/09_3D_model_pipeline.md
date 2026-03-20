@@ -81,6 +81,13 @@ SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
 > [!NOTE]
 > `Vector3D()` = `Vector3D(0.0)` = `Vector3D(0.0 , 0.0 , 0.0)`. Documentation can be found [here](https://srl.reye.me/structSRL_1_1Math_1_1Types_1_1Vector3D.html). 
 
+And finally, to get out 3D model drawn, we invoke the `Draw()` method of our `ModelObject` instance, and then , at the end, call `SRL::Core::Synchronize();` at the end of the render loop.
+
+```cpp
+cube.Draw();
+SRL::Core::Synchronize();   
+```
+
 Our source file then becomes :
 
 ```cpp
@@ -197,7 +204,7 @@ And the result:
 
 ![](img/09_3D_model_pipeline_06.png)
 
-And of course, you can infer that we were looking at the cube from underneath due to the positive Y coordinate on the vector `(12.5, 12.5, 12.5)`.
+And of course, you can infer that we were looking at the cube from underneath due to the positive Y coordinate on the `cameraLocation` vector : `(12.5, 12.5, 12.5)`.
 
 > [!NOTE]
 > `Vector3D(12.5)` is the same as `Vector3D(12.5, 12.5, 12.5)`
