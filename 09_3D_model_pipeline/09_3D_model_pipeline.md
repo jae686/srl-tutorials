@@ -5,7 +5,7 @@ Before starting to use 3D into the sega saturn, there are some limitations to co
 - There are no triangles - only quads (distorted sprites)
 - There are no UV maps in the classical sense - each texture is fully mapped to the sprite / quad.
 - Matrix operations are done on the CPU , drawing is done by VDP1
-- Oh and -Y. 
+- Oh and up is -Y.
 
 For using 3D models with SRL, there are 2 main tools we will be using in order to get 3D models into our saturn project :
 
@@ -63,7 +63,25 @@ We will also need coordinates for out camera. For this we use the `SRL::Math::Ty
 Vector3D cameraLocation = Vector3D(12.5);
 ```
 
-Our file becomes :
+Operations regarding 3D Scenes are handled by the `SRL::Scene3D` namespace.
+
+`SRL::Scene3D` namespace is responsible for the managing of 3D scene related resources. Its through this namespace that we access the 3D related functions.
+
+`SRL::Scene3D` has an internal matrix stack, and a `LookAt` function , similar to OpenGl glu / glm.
+
+At the start of our render loop we must load the *identity* matrix into the matrix stack. This is a matrix without transforms applied.
+This is done via `SRL::Scene3D::LoadIdentity();`
+
+To handle our camera, we must specify the camera´s coordinates, the position the camera is looking at, and the roll angle:
+
+```cpp
+SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+```
+
+> [!NOTE]
+> `Vector3D()` = `Vector3D(0.0)` = `Vector3D(0.0 , 0.0 , 0.0)`. Documentation can be found [here](https://srl.reye.me/structSRL_1_1Math_1_1Types_1_1Vector3D.html). 
+
+Our source file then becomes :
 
 ```cpp
 #include <srl.hpp>
@@ -125,7 +143,7 @@ Texture data size 0 bytes
 Export done.
 ```
 
-And on the source file, we must add a light coordinate and enable the lightening:
+And on the source file, we must add a coordinate for the light and enable the lightening:
 
 ```cpp
 // Setup light, we can use scale of the vector to manipulate light intensity
@@ -149,7 +167,6 @@ int main()
     Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
     SRL::Scene3D::SetDirectionalLight(lightDirection);
 
-
     // Main program loop
     while(1)
     {       
@@ -172,7 +189,7 @@ int main()
 Much better!
 
 However, you might have notices our mesh is....upside down. on the sega saturn, -Y is up.
-However, we can always, upon export to set -Y as UP.
+However, we can always, upon export to set -Y as UP in blender.
 
 ![](img/09_3D_model_pipeline_05.png)
 
@@ -195,6 +212,4 @@ The result:
 ![](img/09_3D_model_pipeline_07.png)
 
 
-## `SRL::Scene3D` namespace
-
-SRL::Scene3D namespace is responsible for the rendering of 3D objects. This includes the camera , and the matrix stack, etc.
+## Transforms
