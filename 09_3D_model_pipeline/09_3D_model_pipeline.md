@@ -382,4 +382,6 @@ For example, if we take ou previous example , and swap the order of `SRL::Scene3
 
 ![](img/09_3D_model_pipeline_11.gif)
 
+And you might have noticed, on the last animation, the when the object is too close to the camera, its faces disappeared.
+Its is due to faces getting over the near clipping plane of the camera.
 
