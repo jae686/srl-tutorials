@@ -385,9 +385,9 @@ For example, if we take ou previous example , and swap the order of `SRL::Scene3
 And you might have noticed, on the last animation, the when the object is too close to the camera, its faces disappeared.
 Its is due to faces getting over the near clipping plane of the camera.
 
-We can use the [`SRL::Scene3D::SetDepthDisplayLevel`](https://srl.reye.me/classSRL_1_1Scene3D_ac03e23772e5d362dd4a3f7b77d02b797.html#ac03e23772e5d362dd4a3f7b77d02b797) function.
+We can use the [`SRL::Scene3D::SetDepthDisplayLevel`](https://srl.reye.me/classSRL_1_1Scene3D_ac03e23772e5d362dd4a3f7b77d02b797.html#ac03e23772e5d362dd4a3f7b77d02b797) function to rectify this problem.
 
-In our example, we set `SRL::Scene3D::SetDepthDisplayLevel(4);`  , before the main loop, in order to set our Near Clipping plane (Forward boundary surface in the documentation) in such a way that our object is kept within the far and near clipping planes.
+In our example, we call `SRL::Scene3D::SetDepthDisplayLevel(4);`, before the main loop, in order to set our Near Clipping plane (Forward boundary surface in the documentation) in such a way that our object is kept within the far and near clipping planes.
 
 And now we have the expected result:
 
