@@ -220,3 +220,62 @@ The result:
 
 
 ## Transforms
+
+### Rotation
+
+For rotation, we must define an `SRL::Math::Types::Angle` variable. We also declare a variable to define by how much the angle must increase at each frame.
+
+```cpp
+Angle rotation = 0;
+Angle rotationStep = Angle::FromDegrees(1);
+```
+
+For the rotation we can use the `SRL::3DScene::RotateX` , `SRL::3DScene::RotateY`, `SRL::3DScene::RotateZ` functions. Behind the scenes the `Rotation` functions create a rotation matrix and applies it to the current scene.
+
+For example, to rotate along the Y axis we do so by :
+
+```cpp
+ SRL::Scene3D::RotateY(rotation);
+```
+
+If we take a look at out main function now :
+
+```cpp
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "09_Tutorial"); 
+  
+    ModelObject cube = ModelObject("CUBE01.NYA");
+    Vector3D cameraLocation = Vector3D(12.5, -12.5, 12.5);
+  
+    // Setup light, we can use scale of the vector to manipulate light intensity
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+
+    // Initialize rotation angle
+    Angle rotation = 0;
+    Angle rotationStep = Angle::FromDegrees(1);
+
+    // Main program loop
+    while(1)
+    {       
+       // Load identity matrix
+       SRL::Scene3D::LoadIdentity();
+       // Set camera location and direction
+       SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+       SRL::Scene3D::RotateY(rotation);
+       cube.Draw();
+       SRL::Core::Synchronize();       
+       rotation+= rotationStep;
+    }
+
+    return 0;
+}
+```
+
+The Result:
+
+![](img/09_3D_model_pipeline_08.gif)
+
