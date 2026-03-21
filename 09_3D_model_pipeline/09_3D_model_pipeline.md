@@ -323,3 +323,63 @@ int main()
 ```
 
 ![](img/09_3D_model_pipeline_09.gif)
+
+## Translation
+
+For translation , `SRL::Scene3D` provides the `SRL::Scene3D::Translate` function. It can take a `SRL::Type::Vector3D` or 3 discrete `Fxp` scalars.
+
+```cpp
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "09_Tutorial"); 
+  
+    ModelObject cube = ModelObject("CUBE01.NYA");
+    Vector3D cameraLocation = Vector3D(12.5, -12.5, 12.5);
+  
+    // Setup light, we can use scale of the vector to manipulate light intensity
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+
+    // Initialize rotation angle
+    Angle rotation = 0;
+    Angle rotationStep = Angle::FromDegrees(1);
+
+    //Vector for translation
+    Vector3D position = Vector3D();
+
+// Main program loop
+    while(1)
+    {       
+       position.X = -2.0 ;
+       position.Z = 3.0 ;
+       // Load identity matrix
+       SRL::Scene3D::LoadIdentity();
+       // Set camera location and direction
+       SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+       SRL::Scene3D::Translate(position);
+       SRL::Scene3D::RotateY(rotation);
+       cube.Draw();
+       SRL::Core::Synchronize();       
+    }
+
+    return 0;
+}
+```
+
+The result:
+
+![](img/09_3D_model_pipeline_10.gif)
+
+## Be mindful of Transform order
+
+The 3D Transforms are nothing more that a product of matrices, and the programmer must remember that matrix operations are not commutative.
+
+For example, if we take ou previous example , and swap the order of `SRL::Scene3D::Translate(position);` and `SRL::Scene3D::RotateY(rotation);`, the end result is very different :
+
+![](img/09_3D_model_pipeline_08.gif)
+
+![](img/09_3D_model_pipeline_11.gif)
+
+
