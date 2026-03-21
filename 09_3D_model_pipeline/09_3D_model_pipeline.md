@@ -1,6 +1,6 @@
 # 3D Model pipeline in SRL
 
-Before starting to use 3D into the sega saturn, there are some limitations to consider :
+Before starting to use 3D into the sega saturn, there are some limitations to consider:
 
 - There are no triangles - only quads (distorted sprites)
 - There are no UV maps in the classical sense - each texture is fully mapped to the sprite / quad.
@@ -27,11 +27,11 @@ For the Model we will start with a simple, slightly deformed cube, created in bl
 
 ![](img/09_3D_model_pipeline_01.png)
 
-And we export it to `.obj` with the following settings :
+And we export it to `.obj` with the following settings:
 
 ![](img/09_3D_model_pipeline_02.png)
 
-To convert our `.obj` to `.NYA` we use the following command :
+To convert our `.obj` to `.NYA` we use the following command:
 
 ```bash
 PS D:\Development\Saturn\ModelConverter> .\ModelConverter.exe -i "..\SaturnRingLib\Projects\09_3D model_pipeline\assets\cube_01.obj" -o "..\SaturnRingLib\Projects\09_3D model_pipeline\cd\data\CUBE01.NYA"
@@ -57,7 +57,7 @@ First we must include the `modelObject.hpp` at the top of our source file, and i
 ModelObject cube = ModelObject("CUBE01.NYA");
 ```
 
-We will also need coordinates for out camera. For this we use the `SRL::Math::Types::Vector3D` :
+We will also need coordinates for out camera. For this we use the `SRL::Math::Types::Vector3D`:
 
 ```cpp
 Vector3D cameraLocation = Vector3D(12.5);
@@ -88,7 +88,7 @@ cube.Draw();
 SRL::Core::Synchronize();   
 ```
 
-Our source file then becomes :
+Our source file then becomes:
 
 ```cpp
 #include <srl.hpp>
@@ -124,7 +124,7 @@ int main()
 }
 ```
 
-And this is the result :
+And this is the result:
 
 ![](img/09_3D_model_pipeline_03.png)
 
@@ -238,7 +238,7 @@ For example, to rotate along the Y axis we do so by :
  SRL::Scene3D::RotateY(rotation);
 ```
 
-If we take a look at out main function now :
+If we take a look at out main function now:
 
 ```cpp
 int main()
@@ -279,3 +279,47 @@ The Result:
 
 ![](img/09_3D_model_pipeline_08.gif)
 
+## Scaling
+
+For scaling , `SRL::Scene3D` provides the `SRL::Scene3D::Scale` function.
+
+There are 3 overrides for the `SRL::Scene3D::Scale`, that can be found in SRL's [documentation](https://srl.reye.me/classSRL_1_1Scene3D.html)
+
+```cpp
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor::Colors::Black);
+    SRL::Debug::Print(1,1, "09_Tutorial"); 
+  
+    ModelObject cube = ModelObject("CUBE01.NYA");
+    Vector3D cameraLocation = Vector3D(12.5, -12.5, 12.5);
+  
+    // Setup light, we can use scale of the vector to manipulate light intensity
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+
+    // Initialize rotation angle
+    Angle rotation = 0;
+    Angle rotationStep = Angle::FromDegrees(1);
+
+    Fxp scale = 2.0;
+        // Main program loop
+    while(1)
+    {       
+       // Load identity matrix
+       SRL::Scene3D::LoadIdentity();
+       // Set camera location and direction
+       SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+       SRL::Scene3D::Scale(scale);
+       SRL::Scene3D::RotateY(rotation);
+       cube.Draw();
+       SRL::Core::Synchronize();       
+       rotation+= rotationStep;
+    }
+
+    return 0;
+}
+```
+
+![](img/09_3D_model_pipeline_09.gif)
