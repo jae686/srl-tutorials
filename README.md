@@ -94,15 +94,22 @@
   - Be mindful of Transform order
   - Fixing the clipping issue
 
-## 10 - Backgrounds and tile maps (VDP2) - Revisited
+## 10 - 3D Model pipeline part 2
+
+- The matrix stack
+- Textures and UV maps
+- Face Properties
+- Animation?
+
+## 11 - Backgrounds and tile maps (VDP2) - Revisited
 
 - Cell Screens manipulation
 - `RGB0` and `RGB1` Screens
 
-## 11 - Input Handling - Revisited
+## 12 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 12 - 2nd Interlude : putting everything together
+## 13 - 2nd Interlude : putting everything together
