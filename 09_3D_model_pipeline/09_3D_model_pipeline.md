@@ -1,5 +1,7 @@
 # 3D Model pipeline in SRL
 
+
+
 Before starting to use 3D into the sega saturn, there are some limitations to consider:
 
 - There are no triangles - only quads (distorted sprites)
@@ -83,7 +85,7 @@ SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
 
 And finally, to get out 3D model drawn, we invoke the `Draw()` method of our `ModelObject` instance, and then , at the end, call `SRL::Core::Synchronize();` at the end of the render loop.
 
-> [!INFO]
+> [!NOTE]
 > The `Draw()` method adds to the VDP1 command table the list of quads that makes up the `ModelObject` 3D mesh. The actual render happens on `SRL::Core::Synchronize();`
 
 ```cpp
@@ -408,4 +410,4 @@ On this chapter you learned:
 - How to set flat shading
 - How to set a camera
 - How to apply transforms (rotation , scaling and translation)
-- Clipping issues
+- How to use `SRL::Scene3D::SetDepthDisplayLevel` to mitigate Clipping issues
