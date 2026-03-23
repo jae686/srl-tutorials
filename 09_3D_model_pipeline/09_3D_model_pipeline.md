@@ -83,6 +83,9 @@ SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
 
 And finally, to get out 3D model drawn, we invoke the `Draw()` method of our `ModelObject` instance, and then , at the end, call `SRL::Core::Synchronize();` at the end of the render loop.
 
+> [!INFO]
+> The `Draw()` method adds to the VDP1 command table the list of quads that makes up the `ModelObject` 3D mesh. The actual render happens on `SRL::Core::Synchronize();`
+
 ```cpp
 cube.Draw();
 SRL::Core::Synchronize();   
@@ -117,7 +120,7 @@ int main()
        SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
 
        cube.Draw();
-       SRL::Core::Synchronize();                                                
+       SRL::Core::Synchronize();
     }
 
     return 0;
@@ -395,3 +398,14 @@ And now we have the expected result:
 
 ![](img/09_3D_model_pipeline_12.gif)
 
+## Summary
+
+On this chapter you learned:
+
+- Use the `ModelObject` helper class to load models into an SRL project
+- The blender settings for `.obj` export
+- How to use the *model converter tool* to convert `.obj` to `.nya` format
+- How to set flat shading
+- How to set a camera
+- How to apply transforms (rotation , scaling and translation)
+- Clipping issues
