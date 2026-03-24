@@ -1,7 +1,5 @@
 # 3D Model pipeline in SRL
 
-
-
 Before starting to use 3D into the sega saturn, there are some limitations to consider:
 
 - There are no triangles - only quads (distorted sprites)
