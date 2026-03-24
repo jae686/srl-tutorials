@@ -79,7 +79,7 @@
     - Using `SRL::Tilemap::Interfaces::Bmp2Tile` Interface
     - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
 
-## [09 - 3D Model pipeline](09_3D_model_pipeline/09_3D_model_pipeline.md)
+## [09 - 3D Model pipeline](09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md)
 
 - Caveats
 - Description of the use of the tools for 3d mesh importing
@@ -94,7 +94,7 @@
   - Be mindful of Transform order
   - Fixing the clipping issue
 
-## 10 - 3D Model pipeline part 2
+## [10 - 3D Model pipeline part 2](10_3D_model_pipeline_part_2/10_3D_model_pipeline_part_2.md)
 
 - The matrix stack
 - Textures and UV maps
