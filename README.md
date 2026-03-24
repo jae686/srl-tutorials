@@ -72,22 +72,44 @@
 
 - Screen Formats
   - Bitmap Format
+    - Translate
+    - Scale
   - Cell Format
+    - Notes on SEGA's Editor
+    - Using `SRL::Tilemap::Interfaces::Bmp2Tile` Interface
+    - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
 
-## 09 - 3D Model pipeline
+## [09 - 3D Model pipeline](09_3D_model_pipeline/09_3D_model_pipeline.md)
 
+- Caveats
 - Description of the use of the tools for 3d mesh importing
-- the NYA Format
-- Limitations
+- Obtaining the converter tool
+- Preparing the our first model
+- Getting the model into our saturn project
+- Basic lightning
+- Transforms
+  - Rotation
+  - Scaling
+  - Translation
+  - Be mindful of Transform order
+  - Fixing the clipping issue
 
-## 10 - Backgrounds and tile maps (VDP2) - Revisited
+## 10 - 3D Model pipeline part 2
 
+- The matrix stack
+- Textures and UV maps
+- Face Properties
+- Animation?
 
-## 11 - Input Handling - Revisited
+## 11 - Backgrounds and tile maps (VDP2) - Revisited
+
+- Cell Screens manipulation
+- `RGB0` and `RGB1` Screens
+
+## 12 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-
-
+## 13 - 2nd Interlude : putting everything together
