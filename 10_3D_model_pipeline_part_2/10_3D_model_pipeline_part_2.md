@@ -100,7 +100,8 @@ int main()
 }
 ```
 
-On the code example above, we push (by calling `SRL::Scene3D::PushMatrix();`) a copy of the active matrix into the matrix stack before doing further transforms.
-After we are done, we revert to out initial position by performing a pop (by calling `SRL::Scene3D::PopMatrix();`), were we retrieve our saved matrix from the stack and set it as active.
+On the code example above, we push , by calling `SRL::Scene3D::PushMatrix();` , a copy of the active matrix into the matrix stack before doing further transforms.
+After we are done, we revert to out initial position by performing a pop ,by calling `SRL::Scene3D::PopMatrix();`, where we retrieve our saved matrix from the stack and set it as active. Then we translate to `(-10.0, 0.0, 0.0)` and call `Draw()` to draw our 3rd mesh.
 
 ![](img/10_3D_model_pipeline_part_2_03.png)
+
