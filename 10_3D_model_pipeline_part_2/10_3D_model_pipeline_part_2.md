@@ -2,9 +2,9 @@
 
 ## The Matrix Stack
 
-As we described on the [previous chapter](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md), when you call `SRL::Scene3D::Translate` , `SRL::Scene3D::Scale` and `SRL::Scene3D::Rotate`, that SRL does behind the scenes is multiply the corresponding transform matrix with the SRL active matrix.
+As we described on the [previous chapter](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md), when you call `SRL::Scene3D::Translate` , `SRL::Scene3D::Scale` and `SRL::Scene3D::Rotate`, what SRL does behind the scenes is to multiply the corresponding transform matrix with the SRL active matrix.
 
-Then the mesh is transformed by this matrix when you call `Draw` : At this point SRL applies this matrix into the vertices of the model and then adds them to the VDP1 command table the transformed vertices for rendering.
+Then the mesh is transformed by this matrix when you call `Draw`: At this point SRL applies this matrix into the vertices of the model and then adds the VDP1 command table the transformed vertices for rendering.
 
 However, as you draw multiple objects, it might be useful to store the active matrix for later. There is an example below:
 
@@ -56,7 +56,7 @@ We have only 2 meshes despite having 3 `Draw()` calls.
 This is because all transform operations are done on top of all previous ones.
 On this example, by doing `SRL::Scene3D::Translate(Vector3D(-10.0, 0.0, 0.0));` from `(10.0, 0.0, 0.0)`, we get back to `(0.0, 0.0, 0.0)`. Therefore drawing the 3rd mesh on top of the 1st one.
 
-In order to work around this we save the current active matrix into a matrix stack. Think of a matrix stack as a stack where we save our current transform, and allows us to easily revert back to it.
+In order to work around this we save the current active matrix into a matrix stack. Think of a matrix stack as a stack where we save our current transforms, and allows us to easily revert back to it.
 
 We can only do 2 operations with SRL's matrix stack : we can push a copy of the current active matrix into it, or retrieve it (pop).
 
@@ -100,7 +100,7 @@ int main()
 }
 ```
 
-On the code example above, we push (by calling `SRL::Scene3D::PushMatrix();`) current transform into the matrix stack before doing further transforms.
-After we are done, we revert to out initial position by performing a pop (by calling `SRL::Scene3D::PopMatrix();`), were we retrieve our saved transforms from the stack.
+On the code example above, we push (by calling `SRL::Scene3D::PushMatrix();`) a copy of the active matrix into the matrix stack before doing further transforms.
+After we are done, we revert to out initial position by performing a pop (by calling `SRL::Scene3D::PopMatrix();`), were we retrieve our saved matrix from the stack and set it as active.
 
 ![](img/10_3D_model_pipeline_part_2_03.png)
