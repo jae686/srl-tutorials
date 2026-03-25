@@ -54,7 +54,7 @@ int main()
 
 We have only 2 meshes despite having 3 `Draw()` calls.
 This is because all transform operations are done on top of all previous ones.
-On this example, by doing `SRL::Scene3D::Translate(Vector3D(-10.0, 0.0, 0.0));` from `(10.0, 0.0, 0.0)`, we get back to `(0.0, 0.0, 0.0)`.
+On this example, by doing `SRL::Scene3D::Translate(Vector3D(-10.0, 0.0, 0.0));` from `(10.0, 0.0, 0.0)`, we get back to `(0.0, 0.0, 0.0)`. Therefore drawing the 3rd mesh on top of the 1st one.
 
 In order to work around this we save the current active matrix into a matrix stack. Think of a matrix stack as a stack where we save our current transform, and allows us to easily revert back to it.
 
