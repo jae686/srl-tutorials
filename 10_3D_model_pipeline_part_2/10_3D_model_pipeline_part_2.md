@@ -100,6 +100,7 @@ int main()
 }
 ```
 
-
+On the code example above, we push (by calling `SRL::Scene3D::PushMatrix();`) current transform into the matrix stack before doing further transforms.
+After we are done, we revert to out initial position by performing a pop (by calling `SRL::Scene3D::PopMatrix();`), were we retrieve our saved transforms from the stack.
 
 ![](img/10_3D_model_pipeline_part_2_03.png)
