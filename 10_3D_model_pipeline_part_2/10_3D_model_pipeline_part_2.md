@@ -58,9 +58,12 @@ On this example, by doing `SRL::Scene3D::Translate(Vector3D(-10.0, 0.0, 0.0));` 
 
 In order to work around this we save the current active matrix into a matrix stack. Think of a matrix stack as a stack where we save our current transforms, and allows us to easily revert back to it.
 
-We can only do 2 operations with SRL's matrix stack : we can push a copy of the current active matrix into it, or retrieve it (pop).
+You will be mostly doing 2 operations with SRL's matrix stack : we can push a copy of the current active matrix into it, or retrieve it (pop).
 
 When you pop a matrix from the stack, you remove the matrix from the top of the stack and set it as the active matrix.
+
+> [!NOTE]
+> The active matrix is the matrix that results from all the transforms applied to the scene !
 
 You can push and pop the matrix stack using the `SRL::Scene3D::PushMatrix();` and `SRL::Scene3D::PopMatrix();`.
 
