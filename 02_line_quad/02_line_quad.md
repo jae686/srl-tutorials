@@ -138,7 +138,7 @@ In this example we will draw a quad according to the picture :
 ![](img/Quad_2D.png)
 
 
-To draw a quad, at the center of the screen, we must define the points. Order is not relevant.
+To draw a quad, at the center of the screen, we must define the points. Points must be specified clockwise.
 
 ```cpp
 
