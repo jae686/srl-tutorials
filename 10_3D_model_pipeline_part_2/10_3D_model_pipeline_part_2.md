@@ -123,7 +123,7 @@ To assign a texture, create a material, add a texture to the color slot :
 ![](img/10_3D_model_pipeline_part_2_04.png)
 
 The we use the model exporter to convert the OBJ to NYA.
-Notice that on the `mtl` file refers to the texture file of the material. And that the `obj` , `mtl`, and the texture file (in this case a `tga`) on the same folder.
+Notice that on the `mtl` file refers to the texture file of the material. And that the `obj` , `mtl`, and the texture file (in this case a `tga`) are on the same folder.
 
 ![](img/10_3D_model_pipeline_part_2_05.png)
 
@@ -132,5 +132,5 @@ Notice that on the `mtl` file refers to the texture file of the material. And th
 
 The final result (in ths case I've scaled the 3D mesh by a factor of 2 for better clarity):
 
-|[](img/10_3D_model_pipeline_part_2_06.png)
+![](img/10_3D_model_pipeline_part_2_06.png)
 
