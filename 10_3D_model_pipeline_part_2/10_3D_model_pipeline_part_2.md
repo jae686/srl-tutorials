@@ -139,7 +139,7 @@ The final result (in ths case I've scaled the 3D mesh by a factor of 2 for bette
 
 ## Face Attributes
 
-As explained on [06_second_sprite](../07_sprite_effects/07_sprite_effects.md), sprites can have several attributes that define how the sprite is rendered, such has half transparency, screen doors effect, etc.
+As explained on [06_second_sprite](../07_sprite_effects/07_sprite_effects.md), sprites can have several attributes that define how the sprite is rendered, such has half transparency, screen doors effect, etc. This also applies, to an extent, to 3D model faces.
 
 The attribute can be set by face, and are defined, in blender, by a suffix on the material name in the forma `_F` , there `F` is a flag defining the attribute of the face where the material is applied.
 
@@ -155,3 +155,7 @@ N       | Force no light
 B       | Half-bright (50% color brightness)
 W       | Mesh face is rendered as outline wires (rendered as closed polyline)
 C,L,-,+ | ``C`` = Sort by center of quad (default if -sort not set)<br/>``L`` = Same sort as last rendered quad<br/>``-`` = Sort by closest point<br/>``+`` = Sort by furthest point<br/>If not specified, sorting by center point is used
+
+Example of material names in blender :
+
+![](img/10_3D_model_pipeline_part_2_07.png)
