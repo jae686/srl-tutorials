@@ -159,3 +159,7 @@ C,L,-,+ | ``C`` = Sort by center of quad (default if -sort not set)<br/>``L`` = 
 Example of material names in blender :
 
 ![](img/10_3D_model_pipeline_part_2_07.png)
+
+> [!WARNING]
+> When Using the W attribute, the material must have only a solid color!
+> If a texture is used with the W flag, the model will NOT be rendered!
