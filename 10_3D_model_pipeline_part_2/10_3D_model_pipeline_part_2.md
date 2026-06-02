@@ -163,3 +163,8 @@ Example of material names in blender :
 > [!WARNING]
 > When Using the W attribute, the material must have only a solid color!
 > If a texture is used with the W flag, the model will NOT be rendered!
+
+Also, a single model can have different different attributes on each face:
+
+![](img/10_3D_model_pipeline_part_2_08.gif)
+
