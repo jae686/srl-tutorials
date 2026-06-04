@@ -177,7 +177,9 @@ Also, a single model can have different different attributes on each face:
 
 ![](img/10_3D_model_pipeline_part_2_08.gif)
 
-An example for the use of the `D` Flag (double sided) is shown below (rotors of the helicopter). :
+An example for the use of the `D` Flag (double sided) is shown below , on rotors of the helicopter. :
+
+(Thanks to [reyeme](https://github.com/ReyeMe) for the 3D model.)
 
 ![Model supplied by reyeme](img/10_3D_model_pipeline_part_2_09.gif)
 
