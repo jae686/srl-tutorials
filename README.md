@@ -79,7 +79,7 @@
     - Using `SRL::Tilemap::Interfaces::Bmp2Tile` Interface
     - Using [buhan's saturn-aseprite](https://github.com/buhman/saturn-aseprite) [Aseprite](https://www.aseprite.org/) python script
 
-## [09 - 3D Model pipeline](09_3D_model_pipeline/09_3D_model_pipeline.md)
+## [09 - 3D Model pipeline](09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md)
 
 - Caveats
 - Description of the use of the tools for 3d mesh importing
@@ -94,22 +94,25 @@
   - Be mindful of Transform order
   - Fixing the clipping issue
 
-## 10 - 3D Model pipeline part 2
+## [10 - 3D Model pipeline part 2](10_3D_model_pipeline_part_2/10_3D_model_pipeline_part_2.md)
 
 - The matrix stack
 - Textures and UV maps
 - Face Properties
-- Animation?
 
 ## 11 - Backgrounds and tile maps (VDP2) - Revisited
 
 - Cell Screens manipulation
 - `RGB0` and `RGB1` Screens
 
-## 12 - Input Handling - Revisited
+## 12 - 3D Model Animation
+
+- T.B.D.
+
+## 13 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 13 - 2nd Interlude : putting everything together
+## 14 - 2nd Interlude : putting everything together
