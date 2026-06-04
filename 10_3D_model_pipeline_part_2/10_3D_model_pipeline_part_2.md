@@ -113,7 +113,7 @@ This applies to all transforms (rotation, scale, translate)
 ## Textures and UV maps
 
 The sega saturn does not natively support UV maps.
-The `NYA` format allows for texture storage, and UV mapping. However, since the saturn does not natively supports UV maps  the [`ModelConverter-linux`](https://github.com/ReyeMe/ModelConverter-linux) generates a new sprite texture for each unique UV region.
+The `NYA` format allows for texture storage, and UV mapping. However, since the saturn does not natively supports UV maps  the [`ModelConverter-linux`](https://github.com/ReyeMe/ModelConverter-linux) generates a new sprite texture for each quad.
 
 Therefore you can get a lot of texture memory being used if you are not careful.
 
@@ -128,7 +128,7 @@ Notice that on the `mtl` file refers to the texture file of the material. And th
 ![](img/10_3D_model_pipeline_part_2_05.png)
 
 > [!NOTE]
-> Notice the exporter output : The tool generated 4 distinct texture for our model, in order to match the original model UV map!
+> Notice the exporter output : The tool generated 4 distinct textures for our model, in order to match the original model UV map!
 
 > [!NOTE]
 > As of 29.05.2026 only RGBA images are supported (no palette textures).
@@ -156,6 +156,10 @@ B       | Half-bright (50% color brightness)
 W       | Mesh face is rendered as outline wires (rendered as closed polyline)
 C,L,-,+ | ``C`` = Sort by center of quad (default if -sort not set)<br/>``L`` = Same sort as last rendered quad<br/>``-`` = Sort by closest point<br/>``+`` = Sort by furthest point<br/>If not specified, sorting by center point is used
 
+> [!NOTE]
+> A face can also have multiple attributes simultaneously. This can be done by adding several attribute flags after the _.
+> For example would could name a material  "material_MF" and the faces with that attribute would have mesh checkerboard transparency AND flat shaded.
+
 Example of material names in blender :
 
 ![](img/10_3D_model_pipeline_part_2_07.png)
@@ -168,3 +172,6 @@ Also, a single model can have different different attributes on each face:
 
 ![](img/10_3D_model_pipeline_part_2_08.gif)
 
+An example for the use of the `D` Flag (double sided) is shown below (rotors of the helicopter). :
+
+![](img/10_3D_model_pipeline_part_2_09.gif)
