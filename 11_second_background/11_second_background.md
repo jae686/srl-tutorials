@@ -1,3 +1,8 @@
+
+# Note
+
+> [!NOTE] Chapter not complete. T.B.C. during the summer
+
 ## Rotation
 
 Only `RGB0` and `RGB1` can rotate.

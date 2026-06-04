@@ -99,17 +99,20 @@
 - The matrix stack
 - Textures and UV maps
 - Face Properties
-- Animation?
 
 ## 11 - Backgrounds and tile maps (VDP2) - Revisited
 
 - Cell Screens manipulation
 - `RGB0` and `RGB1` Screens
 
-## 12 - Input Handling - Revisited
+## 12 - 3D Model Animation
+
+- T.B.D.
+
+## 13 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 13 - 2nd Interlude : putting everything together
+## 14 - 2nd Interlude : putting everything together
