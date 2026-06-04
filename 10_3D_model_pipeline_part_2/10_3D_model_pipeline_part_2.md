@@ -117,6 +117,8 @@ The `NYA` format allows for texture storage, and UV mapping. However, since the 
 
 Therefore you can get a lot of texture memory being used if you are not careful.
 
+
+
 First lets us prepare a 3D model.
 To assign a texture, create a material, add a texture to the color slot :
 
@@ -126,6 +128,9 @@ The we use the model exporter to convert the OBJ to NYA.
 Notice that on the `mtl` file refers to the texture file of the material. And that the `obj` , `mtl`, and the texture file (in this case a `tga`) are on the same folder.
 
 ![](img/10_3D_model_pipeline_part_2_05.png)
+
+> [!NOTE]
+> The `NYA` file has the textures embedded into it, therefore when the `NYA` file is loaded, the textures are loaded with it.
 
 > [!NOTE]
 > Notice the exporter output : The tool generated 4 distinct textures for our model, in order to match the original model UV map!
@@ -175,3 +180,11 @@ Also, a single model can have different different attributes on each face:
 An example for the use of the `D` Flag (double sided) is shown below (rotors of the helicopter). :
 
 ![](img/10_3D_model_pipeline_part_2_09.gif)
+
+## Summary
+
+In this chapter you learned :
+
+- How to use SRL matrix stack
+- How to import textured 3D models into the saturn.
+- How to apply Attributes to the faces of your 3D model in Blender.
