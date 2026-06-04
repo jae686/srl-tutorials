@@ -2,19 +2,19 @@
 
 ## The Matrix Stack
 
-As we described on the [previous chapter](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md), when you call `SRL::Scene3D::Translate` , `SRL::Scene3D::Scale` and `SRL::Scene3D::Rotate`, what SRL does behind the scenes is to multiply the corresponding transform matrix with the SRL active matrix.
+As we described on the [previous chapter](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md), when you call `SRL::Scene3D::Translate`, `SRL::Scene3D::Scale` and `SRL::Scene3D::Rotate`, what SRL does what happens behind the scenes is: for translation it adds, and for scale and rotation it multiplies the currently active matrix.
 
 Then the mesh is transformed by this matrix when you call `Draw`: At this point SRL applies this matrix into the vertices of the model and then adds to the VDP1 command table the transformed vertices for rendering.
 
 However, as you draw multiple objects, it might be useful to store the active matrix for later. There is an example below:
 
-Lets go back to our baseline from chapter 10 :
+Lets go back to our baseline from chapter 10:
 
 ![](img/10_3D_model_pipeline_part_2_01.png)
 
 Currently our model sits at `(0.0, 0.0, 0.0)`.
 
-Lets draw another mesh at `(10.0, 0.0, 0.0)` , and another at `(-10, 0.0, 0.0)`.
+Lets draw another mesh at `(10.0, 0.0, 0.0)`, and another at `(-10, 0.0, 0.0)`.
 
 ```cpp
 int main()
@@ -103,29 +103,29 @@ int main()
 }
 ```
 
-On the code example above, we push , by calling `SRL::Scene3D::PushMatrix();` , a copy of the active matrix into the matrix stack before doing further transforms.
-After we are done, we revert to out initial position by performing a pop ,by calling `SRL::Scene3D::PopMatrix();`, where we retrieve our saved matrix from the stack and set it as active. Then we translate to `(-10.0, 0.0, 0.0)` and call `Draw()` to draw our 3rd mesh.
+On the code example above, we push, by calling `SRL::Scene3D::PushMatrix();`, a copy of the active matrix into the matrix stack before doing further transforms.
+After we are done, we revert to out initial position by performing a pop, by calling `SRL::Scene3D::PopMatrix();`, where we retrieve our saved matrix from the stack and set it as active. Then we translate to `(-10.0, 0.0, 0.0)` and call `Draw()` to draw our 3rd mesh.
 
 ![](img/10_3D_model_pipeline_part_2_03.png)
 
-This applies to all transforms (rotation, scale, translate)
+This applies to all transforms (rotation, scale, translate).
 
 ## Textures and UV maps
 
 The sega saturn does not natively support UV maps.
-The `NYA` format allows for texture storage, and UV mapping. However, since the saturn does not natively supports UV maps  the [`ModelConverter-linux`](https://github.com/ReyeMe/ModelConverter-linux) generates a new sprite texture for each quad.
+The `NYA` format allows for texture storage, and UV mapping. However, since the saturn does not natively supports UV maps the [`ModelConverter-linux`](https://github.com/ReyeMe/ModelConverter-linux) generates a new sprite texture for each quad.
 
 Therefore you can get a lot of texture memory being used if you are not careful.
 
 
 
 First lets us prepare a 3D model.
-To assign a texture, create a material, add a texture to the color slot :
+To assign a texture, create a material, add a texture to the color slot:
 
 ![](img/10_3D_model_pipeline_part_2_04.png)
 
 The we use the model exporter to convert the OBJ to NYA.
-Notice that on the `mtl` file refers to the texture file of the material. And that the `obj` , `mtl`, and the texture file (in this case a `tga`) are on the same folder.
+Notice that on the `mtl` file refers to the texture file of the material. And that the `obj`, `mtl`, and the texture file (in this case a `tga`) are on the same folder.
 
 ![](img/10_3D_model_pipeline_part_2_05.png)
 
@@ -146,7 +146,7 @@ The final result (in ths case I've scaled the 3D mesh by a factor of 2 for bette
 
 As explained on [06_second_sprite](../07_sprite_effects/07_sprite_effects.md), sprites can have several attributes that define how the sprite is rendered, such has half transparency, screen doors effect, etc. This also applies, to an extent, to 3D model faces.
 
-The attribute can be set by face, and are defined, in blender, by a suffix on the material name in the forma `_F` , there `F` is a flag defining the attribute of the face where the material is applied.
+The attribute can be set by face, and are defined, in blender, by a suffix on the material name in the forma `_F`, there `F` is a flag defining the attribute of the face where the material is applied.
 
 The supported flags are listed in the table below (table taken directly from the [`ModelConverter-linux`](https://github.com/ReyeMe/ModelConverter-linux) readme.md):
 
@@ -177,7 +177,7 @@ Also, a single model can have different different attributes on each face:
 
 ![](img/10_3D_model_pipeline_part_2_08.gif)
 
-An example for the use of the `D` Flag (double sided) is shown below , on rotors of the helicopter. :
+An example for the use of the `D` Flag (double sided) is shown below, on rotors of the helicopter. :
 
 (Thanks to [reyeme](https://github.com/ReyeMe) for the 3D model.)
 
