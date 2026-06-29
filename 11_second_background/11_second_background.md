@@ -1,5 +1,5 @@
 
-# A Primer on VDP2 RGB0 and RGB1
+# A Primer on VDP2 RBG0 and RBG1
 
 A reminder on VDP2 layers, covered on the [08_first_background](../08_first_background/08_first_background.md) :
 
@@ -19,36 +19,9 @@ This allows for effects such as the famous "MODE 7" effect on games like Mario K
 
 ### Diferences between Rotation scroll screen and normal scroll screens
 
-
 While on the normal scroll screens, there are dedicated functions for translation, and scaling if applicable. For the rotation scroll screen, Scaling, Translation and Rotation are done by manipulation the SRL matrix stack, the same way you manipulate 3D scenes / objects, via `SRL::Scene3D::Scale()` , `SRL::Scene3D::Translate()` and `SRL::Scene3D::Rotate_()` functions.
 
 You must call `SRL::VDP2::RBG0::SetCurrentTransform();` to apply the transform to rotation scroll screen.
-
-
-## Rotation axis
-
-First me must set the rotation axis. This is done via the `SetRotationMode()`.
-
-There are 3 modes available :
-
-| Enumerator | Description | Notes |
-| -------- | -------------- | ---------- |
-| OneAxis | 2d rotation with only roll and zoom | No additional VRAM requirements |
-| TwoAxis | 3d rotation with pitch and yaw, but no roll (modified per line) | Requires 0x2000-0x18000 bytes in arbitrary VRAM Bank (No cycles) |
-| ThreeAxis | Full 3d rotation with pitch, yaw and roll (modified per pixel) | Requires 0x2000-0x18000 bytes in Reserved VRAM bank (8 cycles) |
-
-For the rotation, we use the  [`SetScale()`](https://srl.reye.me/classSRL_1_1VDP2_1_1NBG1_adcbf7bf416f13ef79e4462f83cdbe5e3.html#adcbf7bf416f13ef79e4462f83cdbe5e3) function.
-
-Lets begin with a `OneAxis` rotation.
-
-> [!NOTE]
-> Be mindfull of the `SetRotationMode()` selected, and the respective rotation axis!
-
-| Rotation Mode | Rotate X | Rotate Y | Rotate Z |
-| ------------- | --------|  -------- | -------- |
-| OneAxis      |  ?       | ?        | Rotates as expected |
-| TwoAxis      | ?        | ?        | ? |
-| ThreeAxis    | ?        | ?        | ? |
 
 ## Baseline
 
@@ -66,7 +39,7 @@ using namespace SRL::Math::Types;
 int main()
 {
     // Initialize library
-	SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
     SRL::Debug::Print(1,1, "VDP2 - RGB0 Tutorial");
 
     SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("CHK.TGA"); 
@@ -99,5 +72,85 @@ This is the result :
 ![](img/11_second_background_01.png)
 
 Note that we loaded the Identity Matrix into the SRL matrix stack. Then we applied it to RBG0 rotating plane by using `SRL::VDP2::RBG0::SetCurrentTransform();`
+
+## Filling the scroll screen
+
+As you noticed, having just a single image on VDP2 is not very interesting. You can make your own tilemaps as shown on [08_first_background](../08_first_background/08_first_background.md), or we can do it programatically.
+
+SRL provides the [`CopyMap()`](https://srl.reye.me/structSRL_1_1Tilemap_1_1Interfaces_1_1Bmp2Tile_aadc8863cc9ea5ae0c4f1bfc663f06cde.html#aadc8863cc9ea5ae0c4f1bfc663f06cde) function to copy tilemap data *before* we load it into the corresponding VDP2 scroll screen.
+
+For example :
+
+```cpp
+for(int i = 0 ; i < 16 ; i++)
+    {
+        for(int j = 0 ; j < 16 ; j++)
+        {
+           Tile->CopyMap(0,SRL::Tilemap::Coord(0,0), SRL::Tilemap::Coord(1,1), 0,SRL::Tilemap::Coord(i,j) );
+        }
+    }
+```
+
+Will copy our initial image along the tilemap : 16 times along x and 16 times along y.
+
+The result :
+
+![](img/11_second_background_02.png)
+
+However, where will be situations where you might want the image to tile along the *whole* scroll screen.
+
+To do so, the total tile size must be 512 * 512.
+
+Since out original tile map is 16*16, to cover 512x512 we must copy the original tile 32 times (512/16).
+
+So if we modify our code to :
+
+```cpp
+for(int i = 0 ; i < 32 ; i++)
+{
+    for(int j = 0 ; j < 32 ; j++)
+    {
+        Tile->CopyMap(0,SRL::Tilemap::Coord(0,0), SRL::Tilemap::Coord(1,1), 0,SRL::Tilemap::Coord(i,j) );
+    }
+}
+```
+
+We now get :
+
+![](img/11_second_background_03.png)
+
+
+
+
+
+
+
+
+
+## Rotation axis
+
+First me must set the rotation axis. This is done via the `SetRotationMode()`.
+
+There are 3 modes available :
+
+| Enumerator | Description | Notes |
+| -------- | -------------- | ---------- |
+| OneAxis | 2d rotation with only roll and zoom | No additional VRAM requirements |
+| TwoAxis | 3d rotation with pitch and yaw, but no roll (modified per line) | Requires 0x2000-0x18000 bytes in arbitrary VRAM Bank (No cycles) |
+| ThreeAxis | Full 3d rotation with pitch, yaw and roll (modified per pixel) | Requires 0x2000-0x18000 bytes in Reserved VRAM bank (8 cycles) |
+
+
+> [!NOTE]
+> Be mindfull of the `SetRotationMode()` selected, and the respective rotation axis!
+
+| Rotation Mode | Rotate X | Rotate Y | Rotate Z |
+| ------------- | --------|  -------- | -------- |
+| OneAxis      |  ?       | ?        | Rotates as expected |
+| TwoAxis      | ?        | ?        | ? |
+| ThreeAxis    | ?        | ?        | ? |
+
+### OneAxis Rotation
+
+
 
 
