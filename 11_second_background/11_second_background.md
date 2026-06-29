@@ -226,7 +226,7 @@ Causes distortion on X axis.
 
 ##### Rotation on both axis
 
-Combination of the both distortions above. Aparent rotation depends on transform order.
+Combination of the both distortions above. Aparent rotation direction depends on transform order.
 
 ![](img/11_second_background_07.gif)
 
