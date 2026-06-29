@@ -101,7 +101,7 @@ However, where will be situations where you might want the image to tile along t
 
 To do so, the total tile size must be 512 * 512.
 
-Since out original tile map is 16*16, to cover 512x512 we must copy the original tile 32 times (512/16).
+Since our original tile map is 16*16, to cover 512x512 we must copy the original tile 32 times (512/16).
 
 So if we modify our code to :
 
@@ -118,12 +118,6 @@ for(int i = 0 ; i < 32 ; i++)
 We now get :
 
 ![](img/11_second_background_03.png)
-
-
-
-
-
-
 
 
 
@@ -151,6 +145,67 @@ There are 3 modes available :
 
 ### OneAxis Rotation
 
+The plane is on the XY plane.
+Therefore, to perform the expected rotation, we must rotate-it to the axis perpendicular to the XY plane : the Z axis.
 
+In this example, we declare an angle variable and increment it at each frame.
+
+The resulting code is :
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+// Main program entry
+int main()
+{
+    // Initialize library
+	SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Debug::Print(1,1, "VDP2 - RGB0 Tutorial");
+
+    SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("CHK.TGA"); 
+    SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+    delete MyBmp;
+
+
+
+    for(int i = 0 ; i < 32 ; i++)
+    {
+        for(int j = 0 ; j < 32 ; j++)
+        {
+           Tile->CopyMap(0,SRL::Tilemap::Coord(0,0), SRL::Tilemap::Coord(1,1), 0,SRL::Tilemap::Coord(i,j) );
+        }
+    }
+    
+    SRL::VDP2::RBG0::LoadTilemap(*Tile);
+    SRL::VDP2::RBG0::SetPriority(SRL::VDP2::Priority::Layer2);
+    SRL::VDP2::RBG0::SetRotationMode(SRL::VDP2::RotationMode::OneAxis);
+    SRL::VDP2::RBG0::ScrollEnable();
+
+
+    Angle angle = 0;
+
+    // Main program loop
+	while(1)
+	{
+        SRL::Scene3D::LoadIdentity();
+        SRL::Scene3D::RotateZ(angle);
+        SRL::VDP2::RBG0::SetCurrentTransform();
+        
+        // Refresh screen
+        SRL::Core::Synchronize();
+        angle += Angle::FromDegrees(0.5);
+	}
+
+	return 0;
+}
+```
+
+And this is the resulting image :
+
+![](img/11_second_background_04.gif)
 
 
