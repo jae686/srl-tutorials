@@ -45,7 +45,7 @@ Lets begin with a `OneAxis` rotation.
 > Be mindfull of the `SetRotationMode()` selected, and the respective rotation axis!
 
 | Rotation Mode | Rotate X | Rotate Y | Rotate Z |
-| ------------- | -------- ! -------- ! -------- !
+| ------------- | -------- ! -------- ! -------- |
 | OneAxis      |  ?       | ?        | Rotates as expected |
 | TwoAxis      | ?        | ?        | ? |
 | ThreeAxis    | ?        | ?        | ? |
