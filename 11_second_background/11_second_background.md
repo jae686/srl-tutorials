@@ -210,7 +210,7 @@ And this is the resulting image :
 
 #### Rotations on non-perpendicular axis
 
-What would happen if we rotated on a differnet axis than Z ?
+What would happen if we rotated on a different axis than Z ?
 
 ##### Rotation no X
 
