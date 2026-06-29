@@ -139,7 +139,7 @@ There are 3 modes available :
 
 | Rotation Mode | Rotate X | Rotate Y | Rotate Z |
 | ------------- | --------|  -------- | -------- |
-| OneAxis      |  ?       | ?        | Rotates as expected |
+| OneAxis      |  Scales in Y       | Scales in X        | Rotates as expected |
 | TwoAxis      | ?        | ?        | ? |
 | ThreeAxis    | ?        | ?        | ? |
 
@@ -207,5 +207,21 @@ int main()
 And this is the resulting image :
 
 ![](img/11_second_background_04.gif)
+
+#### Rotations on non-perpendicular axis
+
+What would happen if we rotated on a differnet axis than Z ?
+
+##### Rotation no X
+
+Causes distortion on Y axis.
+
+![](img/11_second_background_05.gif)
+
+##### Rotation on Y axis
+
+Causes distortion on X axis.
+
+![](img/11_second_background_06.gif)
 
 
