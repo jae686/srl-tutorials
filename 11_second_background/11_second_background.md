@@ -224,4 +224,14 @@ Causes distortion on X axis.
 
 ![](img/11_second_background_06.gif)
 
+##### Rotation on both axis
+
+Combination of the both distortions above. Aparent rotation depends on transform order.
+
+![](img/11_second_background_07.gif)
+
+
+
+
+
 
