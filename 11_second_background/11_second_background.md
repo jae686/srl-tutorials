@@ -242,7 +242,7 @@ If you just take the code from the One Axis rotation, and set the rotation mode 
 
 In order to see the plane properly , we need to transform the plane.
 
-> ![NOTE]
+> [!NOTE]
 > We are assuming -Y is up
 > We are assuming the standard rotation order : RotX , Rot Y and Rot Z.
 
