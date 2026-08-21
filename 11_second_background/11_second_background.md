@@ -147,6 +147,7 @@ There are 3 modes available :
 
 The plane is on the XY plane.
 Therefore, to perform the expected rotation, we must rotate-it to the axis perpendicular to the XY plane : the Z axis.
+In order to make the `Scene3D` transforms affect the RBG plane, we must call `SRL::VDP2::RBG0::SetCurrentTransform();`.
 
 In this example, we declare an angle variable and increment it at each frame.
 
@@ -230,8 +231,6 @@ Combination of the both distortions above. Apparent rotation direction depends o
 
 ![](img/11_second_background_07.gif)
 
-
-
 ### Two Axis Rotation
 
 If you just take the code from the One Axis rotation, and set the rotation mode to  `SRL::VDP2::RotationMode::TwoAxis` , you will simply get a distorted image, in this case red (due to the sprite used).
@@ -243,108 +242,31 @@ If you just take the code from the One Axis rotation, and set the rotation mode 
 In order to see the plane properly , we need to transform the plane.
 
 > [!NOTE]
-> We are assuming -Y is up
+> We are assuming -Y is up.
+>
 > We are assuming the standard rotation order : RotX , Rot Y and Rot Z.
 
+Since the `SRL::Scene3D` transforms can affect the RBG plane, we can simply set a camera like we would on a 3D scene.
 
-
-
-
-
-
-
-### Three Axis Rotation
-
-To use the 3 Axis mode we must set our rotation mode by using `SRL::VDP2::RBG0::SetRotationMode(SRL::VDP2::RotationMode::ThreeAxis);`.
-After we set the transforms for our scene, we apply the transforms by using `SRL::VDP2::RBG0::SetCurrentTransform();`.
-
-### A very simple plane
-
-
-
-
-
-
-
-In our example, we will set a scene with a textured cube in the center, including lightning, with the RBG0 plane, with synchronized rotation between the cube and the plane. 
-
-- Set a scene with a textured cube in the center, including lightning.
-- Set the RBG0 plane.
-- 
-- And then render the cube on top of it.
-
-
-
-Example code below :
+Out main loop now looks like this :
 
 ```cpp
-#include <srl.hpp>
-#include "modelObject.hpp"
-
-// Using to shorten names for Vector and HighColor
-using namespace SRL::Types;
-using namespace SRL::Math::Types;
-
-// Main program entry
-int main()
+while(1)
 {
-    // Initialize library
-	SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
-    SRL::Debug::Print(1,1, "VDP2 - RGB0 Tutorial");
-
-    ModelObject cube;
-    cube.LoadFile("CUBE_X.NYA");
-    Vector3D cameraLocation = Vector3D(12.5, -5.5, 12.5);
-
-    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
-    SRL::Scene3D::SetDirectionalLight(lightDirection);
-    SRL::Scene3D::SetDepthDisplayLevel(4);
-
-
-    SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("CHK.TGA"); 
-    SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
-    delete MyBmp;
-
-
-    for(int i = 0 ; i < 32 ; i++)
-    {
-        for(int j = 0 ; j < 32 ; j++)
-        {
-           Tile->CopyMap(0,SRL::Tilemap::Coord(0,0), SRL::Tilemap::Coord(1,1), 0,SRL::Tilemap::Coord(i,j) );
-        }
-    }
-    
-    SRL::VDP2::RBG0::LoadTilemap(*Tile);
-    SRL::VDP2::RBG0::SetPriority(SRL::VDP2::Priority::Layer2);
-    SRL::VDP2::RBG0::SetRotationMode(SRL::VDP2::RotationMode::ThreeAxis);
-    SRL::VDP2::RBG0::ScrollEnable();
-
-    Angle angle = 0;
-
-
-    // Main program loop
-	while(1)
-	{
-        SRL::Scene3D::LoadIdentity();
-        SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
-        SRL::Scene3D::RotateX(Angle::FromDegrees(90.0));
-        SRL::Scene3D::RotateZ(angle);
-        SRL::VDP2::RBG0::SetCurrentTransform();        
-        SRL::Scene3D::Scale(Vector3D(2.0)); 
-        
-        cube.Draw();
- 
-        // Refresh screen
-        SRL::Core::Synchronize();
-        
-        angle += Angle::FromDegrees(0.5);
-               
-	}
-
-	return 0;
+    SRL::Scene3D::LoadIdentity();
+    SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+    SRL::Scene3D::RotateX(Angle::FromDegrees(90.0)); // go from XY to XZ plane!
+    SRL::VDP2::RBG0::SetCurrentTransform();        
+      
+    // Refresh screen
+    SRL::Core::Synchronize();           
 }
 
 ```
+
+And this is the result :
+
+![](img/11_second_background_09.png)
 
 
 
