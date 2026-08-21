@@ -269,4 +269,17 @@ And this is the result :
 ![](img/11_second_background_09.png)
 
 
+If we now rotate on the Z axis, we get the expected rotation :
+
+![](img/11_second_background_10.gif)
+
+What happens if we rotate by Y ?
+
+![](img/11_second_background_11.gif)
+
+If we rotate by Y, we don't get an actual rotation of the plane since we are on `TwoAxis` mode.
+
+Furthermore, since we are using the same functions to transform both the RBG planes and 3D Space....
+
+![](img/11_second_background_12.gif)
 
