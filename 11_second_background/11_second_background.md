@@ -368,7 +368,7 @@ Since our plane is on the XZ , translations on X and Z , as expected, translate 
 
 ![](img/11_second_background_14.gif)
 
-Scale in Y Axis applies a perspective to the plane.
+Scale in Y Axis applies a perspective to the plane (as in the camera is going upwards), but the horizon does not move.
 
 ![](img/11_second_background_15.gif)
 
@@ -378,7 +378,19 @@ The Three Axis mode allows for full rotation of the RBG plate at the expense of 
 
 Lets start with the previous transforms, but with the `SRL::VDP2::RotationMode::ThreeAxis`.
 
+Translation on X :
+
+![](img/11_second_background_16.gif)
+
+Translation on Y :
+
+![](img/11_second_background_17.gif)
+
+Translation on Z :
+
+|[](img/11_second_background_18.gif)
+
 However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
 
-![](img/11_second_background_14.gif)
+![](img/11_second_background_14xx.gif)
 
