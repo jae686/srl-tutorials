@@ -470,4 +470,4 @@ int main()
 
 ```
 
-The code can be downloaded [here](files/11_second_background.zip).
+[Example project files](files/11_second_background.zip).
