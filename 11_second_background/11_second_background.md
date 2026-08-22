@@ -388,7 +388,7 @@ Translation on Y :
 
 Translation on Z :
 
-|[](img/11_second_background_18.gif)
+![](img/11_second_background_18.gif)
 
 However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
 
