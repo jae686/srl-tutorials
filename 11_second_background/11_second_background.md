@@ -362,15 +362,21 @@ int main()
 
 ```
 
+#### A note on translations
+
+Since our plane is on the XZ , translations on X and Z , as expected, translate the bitmap across the plane.
+
+![](img/11_second_background_14.gif)
+
+Scale in Y Axis applies a perspective to the plane.
+
+![](img/11_second_background_15.gif)
+
 ### Three Axis Rotation
 
 The Three Axis mode allows for full rotation of the RBG plate at the expense of more VRAM.
 
 Lets start with the previous transforms, but with the `SRL::VDP2::RotationMode::ThreeAxis`.
-
-
-
-
 
 However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
 
