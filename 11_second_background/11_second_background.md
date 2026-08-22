@@ -123,7 +123,7 @@ We now get :
 
 ## Rotation axis
 
-First me must set the rotation axis. This is done via the `SetRotationMode()`.
+First me must set the rotation mode. This is done via the `SetRotationMode()` function.
 
 There are 3 modes available :
 
@@ -239,7 +239,7 @@ If you just take the code from the One Axis rotation, and set the rotation mode 
 
 #### Applying transforms
 
-In order to see the plane properly , we need to transform the plane.
+In order to see the plane properly , we need to apply some transforms to the plane.
 
 > [!NOTE]
 > We are assuming -Y is up.
@@ -255,7 +255,7 @@ while(1)
 {
     SRL::Scene3D::LoadIdentity();
     SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
-    SRL::Scene3D::RotateX(Angle::FromDegrees(90.0)); // go from XY to XZ plane!
+    SRL::Scene3D::RotateX(Angle::FromDegrees(90.0)); // rotate RBG from XY to XZ plane!
     SRL::VDP2::RBG0::SetCurrentTransform();        
       
     // Refresh screen
@@ -372,6 +372,11 @@ Scale in Y Axis applies a perspective to the plane (as in the camera is going up
 
 ![](img/11_second_background_15.gif)
 
+### Scaling
+
+Scaling sill simply change the size of the bitmap on the plane.
+
+
 ### Three Axis Rotation
 
 The Three Axis mode allows for full rotation of the RBG plate at the expense of more VRAM.
@@ -390,7 +395,87 @@ Translation on Z :
 
 ![](img/11_second_background_18.gif)
 
-However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
+
+
+#### A note on interaction with images from VDP1
+
+One must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a rotation with a 3D mesh "on" a RBG plane on the same scene.
 
 ![](img/11_second_background_14xx.gif)
 
+#### Final Example code
+
+![](img/11_second_background_19.gif)
+
+The final code for the example : 
+
+```cpp
+#include <srl.hpp>
+#include "modelObject.hpp"
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Debug::Print(1,1, "VDP2 - RGB0 Tutorial");
+
+    ModelObject cube;
+    cube.LoadFile("CUBE_X.NYA");
+    Vector3D cameraLocation = Vector3D(12.5, -5.5, 12.5);
+
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+    SRL::Scene3D::SetDepthDisplayLevel(4);
+
+
+    SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("CHK.TGA"); 
+    SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+    delete MyBmp;
+
+
+    for(int i = 0 ; i < 32 ; i++)
+    {
+        for(int j = 0 ; j < 32 ; j++)
+        {
+           Tile->CopyMap(0,SRL::Tilemap::Coord(0,0), SRL::Tilemap::Coord(1,1), 0,SRL::Tilemap::Coord(i,j) );
+        }
+    }
+    
+    SRL::VDP2::RBG0::LoadTilemap(*Tile);
+    SRL::VDP2::RBG0::SetPriority(SRL::VDP2::Priority::Layer2);
+    SRL::VDP2::RBG0::SetRotationMode(SRL::VDP2::RotationMode::ThreeAxis);
+    SRL::VDP2::RBG0::ScrollEnable();
+
+    Angle angle = 0;
+
+
+    // Main program loop
+    while(1)
+    {
+        SRL::Scene3D::LoadIdentity();
+        SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+        SRL::Scene3D::RotateX(Angle::FromDegrees(90.0));
+        SRL::Scene3D::RotateZ(angle);
+        SRL::VDP2::RBG0::SetCurrentTransform();        
+        SRL::Scene3D::Scale(Vector3D(2.0)); 
+        
+        cube.Draw();
+ 
+        // Refresh screen
+        SRL::Core::Synchronize();
+        
+        angle += Angle::FromDegrees(0.5);
+        cameraLocation.Y = cameraLocation.Y - (SRL::Math::Trigonometry::Sin(angle) * 1);
+               
+    }
+
+    return 0;
+}
+
+```
+
+The code can be downloaded ![here](files/11_second_background.zip).
