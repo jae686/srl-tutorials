@@ -266,7 +266,7 @@ And this is the result :
 > [!NOTE]
 > On the below examples, I'm using the `SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));` before applying the remaining transforms.
 
-If we now rotate on the Z axis, *after rotating by 90 on X axis*, we get the expected rotation :
+If we now rotate on the Z axis, *after rotating by 90 degrees on X axis*, we get the expected rotation :
 
 ![](img/11_second_background_10.gif)
 
