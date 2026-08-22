@@ -279,7 +279,7 @@ If we now rotate on the Z axis, *after rotating by 90 on X axis*, we get the exp
 
 If we just rotate on the Z axis, we get :
 
-![]![](img/11_second_background_10b.gif)
+![](img/11_second_background_10b.gif)
 
 What happens if we rotate by Y ?
 
