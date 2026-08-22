@@ -276,11 +276,17 @@ What happens if we rotate by Y ?
 
 ![](img/11_second_background_11.gif)
 
-Furthermore, since we are using the same functions to transform both the RBG planes and 3D Space we can draw 3D models and they will share the same transforms.
+We get an distorted effect : notice that the horizon is always horizontal!
+
+And the corresponding rotation on X
 
 ![](img/11_second_background_12.gif)
 
-However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
+Furthermore, since we are using the same functions to transform both the RBG planes and 3D Space we can draw 3D models and they will share the same transforms.
 
 ![](img/11_second_background_13.gif)
+
+However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
+
+![](img/11_second_background_14.gif)
 
