@@ -282,5 +282,5 @@ Furthermore, since we are using the same functions to transform both the RBG pla
 
 However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
 
-![](img/11_second_background_12.gif)
+![](img/11_second_background_13.gif)
 
