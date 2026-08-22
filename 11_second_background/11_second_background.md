@@ -268,6 +268,8 @@ And this is the result :
 
 ![](img/11_second_background_09.png)
 
+##### Rotation effects
+
 If we now rotate on the Z axis, we get the expected rotation :
 
 ![](img/11_second_background_10.gif)
@@ -276,15 +278,91 @@ What happens if we rotate by Y ?
 
 ![](img/11_second_background_11.gif)
 
-We get an distorted effect : notice that the horizon is always horizontal!
-
 And the corresponding rotation on X
 
 ![](img/11_second_background_12.gif)
 
+Notice that the horizon is always horizontal!
+
+
 Furthermore, since we are using the same functions to transform both the RBG planes and 3D Space we can draw 3D models and they will share the same transforms.
 
 ![](img/11_second_background_13.gif)
+
+
+```cpp
+
+#include <srl.hpp>
+#include "modelObject.hpp"
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Debug::Print(1,1, "VDP2 - RGB0 Tutorial");
+
+    ModelObject cube;
+    cube.LoadFile("CUBE_X.NYA");
+    Vector3D cameraLocation = Vector3D(12.5, -5.5, 12.5);
+
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+    SRL::Scene3D::SetDepthDisplayLevel(4);
+
+    SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("CHK.TGA"); 
+    SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+    delete MyBmp;
+
+    for(int i = 0 ; i < 32 ; i++)
+    {
+        for(int j = 0 ; j < 32 ; j++)
+        {
+           Tile->CopyMap(0,SRL::Tilemap::Coord(0,0), SRL::Tilemap::Coord(1,1), 0,SRL::Tilemap::Coord(i,j) );
+        }
+    }
+    
+    SRL::VDP2::RBG0::LoadTilemap(*Tile);
+    SRL::VDP2::RBG0::SetPriority(SRL::VDP2::Priority::Layer2);
+    SRL::VDP2::RBG0::SetRotationMode(SRL::VDP2::RotationMode::TwoAxis);
+    SRL::VDP2::RBG0::ScrollEnable();
+
+    Angle angle = 0;
+
+    // Main program loop
+    while(1)
+    {
+        SRL::Scene3D::LoadIdentity();
+        SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));
+        SRL::Scene3D::RotateX(Angle::FromDegrees(90.0));
+        SRL::Scene3D::RotateZ(angle);
+        SRL::VDP2::RBG0::SetCurrentTransform();        
+        SRL::Scene3D::Scale(Vector3D(2.0)); 
+        
+        cube.Draw();
+ 
+        SRL::Core::Synchronize();
+        
+        angle += Angle::FromDegrees(0.5);          
+    }
+
+    return 0;
+}
+
+```
+
+### Three Axis Rotation
+
+The Three Axis mode allows for full rotation of the RBG plate at the expense of more VRAM.
+
+Lets start with the previous transforms, but with the `SRL::VDP2::RotationMode::ThreeAxis`.
+
+
+
+
 
 However, one must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a X rotation with a 3D mesh on the same scene.
 
