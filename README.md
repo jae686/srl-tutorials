@@ -100,10 +100,25 @@
 - Textures and UV maps
 - Face Properties
 
-## 11 - Backgrounds and tile maps (VDP2) - Revisited
+## [11 - A Primer on VDP2 Rotation Scroll Screen (VDP2)](11_second_background/11_second_background.md)
 
-- Cell Screens manipulation
-- `RGB0` and `RGB1` Screens
+- A Primer on VDP2 Rotation Scroll Screen
+  - Differences between rotation scroll screen and normal scroll screens
+  - Filling the scroll screen
+  - Rotation axis
+  - OneAxis Rotation
+    - Rotations on non-perpendicular axis
+      - Rotation no X axis
+      - Rotation on Y axis
+      - Rotation on both axis
+    - Two Axis Rotation
+      - Applying transforms
+      - Rotation effects
+      - A note on translations
+      - Scaling
+  - Three Axis Rotation
+    - A note on interaction with images from VDP1
+    - Final Example code
 
 ## 12 - 3D Model Animation
 
