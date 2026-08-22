@@ -244,7 +244,7 @@ In order to see the plane properly , we need to transform the plane.
 > [!NOTE]
 > We are assuming -Y is up.
 >
-> We are assuming the standard rotation order : RotX , Rot Y and Rot Z.
+> We are assuming the standard rotation order : RotX , RotY and RotZ.
 
 Since the `SRL::Scene3D` transforms can affect the RBG plane, we can simply set a camera like we would on a 3D scene.
 
@@ -270,9 +270,16 @@ And this is the result :
 
 ##### Rotation effects
 
-If we now rotate on the Z axis, we get the expected rotation :
+> [!NOTE]
+> On the below examples, I'm using the `SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));` before applying the remaining transforms.
+
+If we now rotate on the Z axis, *after rotating by 90 on X axis*, we get the expected rotation :
 
 ![](img/11_second_background_10.gif)
+
+If we just rotate on the Z axis, we get :
+
+![]![](img/11_second_background_10b.gif)
 
 What happens if we rotate by Y ?
 
@@ -282,13 +289,14 @@ And the corresponding rotation on X
 
 ![](img/11_second_background_12.gif)
 
-Notice that the horizon is always horizontal!
-
+> [!NOTE]
+> Notice that the horizon is always horizontal in Two Axis Rotation Mode!
 
 Furthermore, since we are using the same functions to transform both the RBG planes and 3D Space we can draw 3D models and they will share the same transforms.
 
 ![](img/11_second_background_13.gif)
 
+Below is the source code.
 
 ```cpp
 
