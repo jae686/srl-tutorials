@@ -17,7 +17,7 @@ In the table below there is an overview:
 What makes the `RBG0` and `RBG1` layers distinct is the ability to rotate.
 This allows for effects such as the famous "MODE 7" effect on games like Mario Kart on the SNES.
 
-### Diferences between Rotation scroll screen and normal scroll screens
+### Diferences between rotation scroll screen and normal scroll screens
 
 While on the normal scroll screens, there are dedicated functions for translation, and scaling if applicable. For the rotation scroll screen, Scaling, Translation and Rotation are done by manipulation the SRL matrix stack, the same way you manipulate 3D scenes / objects, via `SRL::Scene3D::Scale()` , `SRL::Scene3D::Translate()` and `SRL::Scene3D::Rotate_()` functions.
 
@@ -75,7 +75,7 @@ Note that we loaded the Identity Matrix into the SRL matrix stack. Then we appli
 
 ## Filling the scroll screen
 
-As you noticed, having just a single image on VDP2 is not very interesting. You can make your own tilemaps as shown on [08_first_background](../08_first_background/08_first_background.md), or we can do it programatically.
+As you noticed, having just a single image on VDP2 is not very interesting. You can make your own tilemaps as shown on [08_first_background](../08_first_background/08_first_background.md), or we can do it programmatically.
 
 SRL provides the [`CopyMap()`](https://srl.reye.me/structSRL_1_1Tilemap_1_1Interfaces_1_1Bmp2Tile_aadc8863cc9ea5ae0c4f1bfc663f06cde.html#aadc8863cc9ea5ae0c4f1bfc663f06cde) function to copy tilemap data *before* we load it into the corresponding VDP2 scroll screen.
 
@@ -137,16 +137,11 @@ There are 3 modes available :
 > [!NOTE]
 > Be mindfull of the `SetRotationMode()` selected, and the respective rotation axis!
 
-| Rotation Mode | Rotate X | Rotate Y | Rotate Z |
-| ------------- | --------|  -------- | -------- |
-| OneAxis      |  Scales in Y       | Scales in X        | Rotates as expected |
-| TwoAxis      | ?        | ?        | ? |
-| ThreeAxis    | ?        | ?        | ? |
 
 ### OneAxis Rotation
 
 The plane is on the XY plane.
-Therefore, to perform the expected rotation, we must rotate-it to the axis perpendicular to the XY plane : the Z axis.
+Therefore, to perform a rotation, we must rotate it on the axis perpendicular to the XY plane : the Z axis.
 In order to make the `Scene3D` transforms affect the RBG plane, we must call `SRL::VDP2::RBG0::SetCurrentTransform();`.
 
 In this example, we declare an angle variable and increment it at each frame.
@@ -170,8 +165,6 @@ int main()
     SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("CHK.TGA"); 
     SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
     delete MyBmp;
-
-
 
     for(int i = 0 ; i < 32 ; i++)
     {
@@ -242,7 +235,7 @@ If you just take the code from the One Axis rotation, and set the rotation mode 
 In order to see the plane properly , we need to apply some transforms to the plane.
 
 > [!NOTE]
-> We are assuming -Y is up.
+> We are want the up direction to be -Y , to match the SRL default coordinate system in 3D space. This implies getting our plane from XY to XZ plane.
 >
 > We are assuming the standard rotation order : RotX , RotY and RotZ.
 
@@ -374,7 +367,7 @@ Scale in Y Axis applies a perspective to the plane (as in the camera is going up
 
 ### Scaling
 
-Scaling sill simply change the size of the bitmap on the plane.
+Scaling will simply change the size of the bitmap on the plane.
 
 
 ### Three Axis Rotation
@@ -396,10 +389,9 @@ Translation on Z :
 ![](img/11_second_background_18.gif)
 
 
-
 #### A note on interaction with images from VDP1
 
-One must be mindful of the side effects of the sega saturn architecture : the VDP2 image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a rotation with a 3D mesh "on" a RBG plane on the same scene.
+One must be mindful of the side effects of the sega saturn architecture : the VDP2 RBG image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a rotation with a 3D mesh "on" a RBG plane on the same scene.
 
 ![](img/11_second_background_14xx.gif)
 
@@ -407,7 +399,7 @@ One must be mindful of the side effects of the sega saturn architecture : the VD
 
 ![](img/11_second_background_19.gif)
 
-The final code for the example : 
+The final code for the example :
 
 ```cpp
 #include <srl.hpp>
