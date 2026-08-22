@@ -1,7 +1,7 @@
 
-# A Primer on VDP2 RBG0 and RBG1
+# A Primer on VDP2 Rotation Scroll Screen
 
-A reminder on VDP2 layers, covered on the [08_first_background](../08_first_background/08_first_background.md) :
+A reminder on VDP2 layers, covered on the [08_first_background](../08_first_background/08_first_background.md):
 
 In the table below there is an overview:
 
@@ -17,9 +17,12 @@ In the table below there is an overview:
 What makes the `RBG0` and `RBG1` layers distinct is the ability to rotate.
 This allows for effects such as the famous "MODE 7" effect on games like Mario Kart on the SNES.
 
-### Diferences between rotation scroll screen and normal scroll screens
+> [!NOTE]
+> Currently SRL does not provide an interface for RBG1
 
-While on the normal scroll screens, there are dedicated functions for translation, and scaling if applicable. For the rotation scroll screen, Scaling, Translation and Rotation are done by manipulation the SRL matrix stack, the same way you manipulate 3D scenes / objects, via `SRL::Scene3D::Scale()` , `SRL::Scene3D::Translate()` and `SRL::Scene3D::Rotate_()` functions.
+## Differences between rotation scroll screen and normal scroll screens
+
+While on the normal scroll screens, there are dedicated functions for translation, and scaling if applicable. For the rotation scroll screen, Scaling, Translation and Rotation are done by manipulation the SRL matrix stack, the same way you manipulate 3D scenes / objects, via `SRL::Scene3D::Scale()`, `SRL::Scene3D::Translate()` and `SRL::Scene3D::Rotate_()` functions.
 
 You must call `SRL::VDP2::RBG0::SetCurrentTransform();` to apply the transform to rotation scroll screen.
 
@@ -67,7 +70,7 @@ int main()
 
 This Loads a simple 16x16 tile into VDP2.
 
-This is the result :
+This is the result:
 
 ![](img/11_second_background_01.png)
 
@@ -79,7 +82,7 @@ As you noticed, having just a single image on VDP2 is not very interesting. You 
 
 SRL provides the [`CopyMap()`](https://srl.reye.me/structSRL_1_1Tilemap_1_1Interfaces_1_1Bmp2Tile_aadc8863cc9ea5ae0c4f1bfc663f06cde.html#aadc8863cc9ea5ae0c4f1bfc663f06cde) function to copy tilemap data *before* we load it into the corresponding VDP2 scroll screen.
 
-For example :
+For example:
 
 ```cpp
 for(int i = 0 ; i < 16 ; i++)
@@ -91,9 +94,9 @@ for(int i = 0 ; i < 16 ; i++)
     }
 ```
 
-Will copy our initial image along the tilemap : 16 times along x and 16 times along y.
+Will copy our initial image along the tilemap: 16 times along x and 16 times along y.
 
-The result :
+The result:
 
 ![](img/11_second_background_02.png)
 
@@ -103,7 +106,7 @@ To do so, the total tile size must be 512 * 512.
 
 Since our original tile map is 16*16, to cover 512x512 we must copy the original tile 32 times (512/16).
 
-So if we modify our code to :
+So if we modify our code to:
 
 ```cpp
 for(int i = 0 ; i < 32 ; i++)
@@ -115,7 +118,7 @@ for(int i = 0 ; i < 32 ; i++)
 }
 ```
 
-We now get :
+We now get:
 
 ![](img/11_second_background_03.png)
 
@@ -125,7 +128,7 @@ We now get :
 
 First me must set the rotation mode. This is done via the `SetRotationMode()` function.
 
-There are 3 modes available :
+There are 3 modes available:
 
 | Enumerator | Description | Notes |
 | -------- | -------------- | ---------- |
@@ -141,12 +144,12 @@ There are 3 modes available :
 ### OneAxis Rotation
 
 The plane is on the XY plane.
-Therefore, to perform a rotation, we must rotate it on the axis perpendicular to the XY plane : the Z axis.
+Therefore, to perform a rotation, we must rotate it on the axis perpendicular to the XY plane: the Z axis.
 In order to make the `Scene3D` transforms affect the RBG plane, we must call `SRL::VDP2::RBG0::SetCurrentTransform();`.
 
 In this example, we declare an angle variable and increment it at each frame.
 
-The resulting code is :
+The resulting code is:
 
 ```cpp
 #include <srl.hpp>
@@ -198,7 +201,7 @@ int main()
 }
 ```
 
-And this is the resulting image :
+And this is the resulting image:
 
 ![](img/11_second_background_04.gif)
 
@@ -206,7 +209,7 @@ And this is the resulting image :
 
 What would happen if we rotated on a different axis than Z ?
 
-##### Rotation no X
+##### Rotation no X axis
 
 Causes distortion on Y axis.
 
@@ -226,22 +229,22 @@ Combination of the both distortions above. Apparent rotation direction depends o
 
 ### Two Axis Rotation
 
-If you just take the code from the One Axis rotation, and set the rotation mode to  `SRL::VDP2::RotationMode::TwoAxis` , you will simply get a distorted image, in this case red (due to the sprite used).
+If you just take the code from the One Axis rotation, and set the rotation mode to  `SRL::VDP2::RotationMode::TwoAxis`, you will simply get a distorted image, in this case red (due to the sprite used).
 
 ![](img/11_second_background_08.png)
 
 #### Applying transforms
 
-In order to see the plane properly , we need to apply some transforms to the plane.
+In order to see the plane properly, we need to apply some transforms to the plane.
 
 > [!NOTE]
-> We are want the up direction to be -Y , to match the SRL default coordinate system in 3D space. This implies getting our plane from XY to XZ plane.
+> We are want the up direction to be -Y, to match the SRL default coordinate system in 3D space. This implies getting our plane from XY to XZ plane.
 >
-> We are assuming the standard rotation order : RotX , RotY and RotZ.
+> We are assuming the standard rotation order: RotX, RotY and RotZ.
 
 Since the `SRL::Scene3D` transforms can affect the RBG plane, we can simply set a camera like we would on a 3D scene.
 
-Out main loop now looks like this :
+Out main loop now looks like this:
 
 ```cpp
 while(1)
@@ -257,7 +260,7 @@ while(1)
 
 ```
 
-And this is the result :
+And this is the result:
 
 ![](img/11_second_background_09.png)
 
@@ -266,11 +269,11 @@ And this is the result :
 > [!NOTE]
 > On the below examples, I'm using the `SRL::Scene3D::LookAt(cameraLocation, Vector3D(), Angle::FromDegrees(0.0));` before applying the remaining transforms.
 
-If we now rotate on the Z axis, *after rotating by 90 degrees on X axis*, we get the expected rotation :
+If we now rotate on the Z axis, *after rotating by 90 degrees on X axis*, we get the expected rotation:
 
 ![](img/11_second_background_10.gif)
 
-If we just rotate on the Z axis, we get :
+If we just rotate on the Z axis, we get:
 
 ![](img/11_second_background_10b.gif)
 
@@ -357,7 +360,7 @@ int main()
 
 #### A note on translations
 
-Since our plane is on the XZ , translations on X and Z , as expected, translate the bitmap across the plane.
+Since our plane is on the XZ, translations on X and Z, as expected, translate the bitmap across the plane.
 
 ![](img/11_second_background_14.gif)
 
@@ -365,7 +368,7 @@ Scale in Y Axis applies a perspective to the plane (as in the camera is going up
 
 ![](img/11_second_background_15.gif)
 
-### Scaling
+#### Scaling
 
 Scaling will simply change the size of the bitmap on the plane.
 
@@ -376,22 +379,22 @@ The Three Axis mode allows for full rotation of the RBG plate at the expense of 
 
 Lets start with the previous transforms, but with the `SRL::VDP2::RotationMode::ThreeAxis`.
 
-Translation on X :
+Translation on X:
 
 ![](img/11_second_background_16.gif)
 
-Translation on Y :
+Translation on Y:
 
 ![](img/11_second_background_17.gif)
 
-Translation on Z :
+Translation on Z:
 
 ![](img/11_second_background_18.gif)
 
 
 #### A note on interaction with images from VDP1
 
-One must be mindful of the side effects of the sega saturn architecture : the VDP2 RBG image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a rotation with a 3D mesh "on" a RBG plane on the same scene.
+One must be mindful of the side effects of the sega saturn architecture: the VDP2 RBG image is layered behind the VDP1 frame. This can lead to some interesting inconsistencies as seen below on a rotation with a 3D mesh "on" a RBG plane on the same scene.
 
 ![](img/11_second_background_14xx.gif)
 
@@ -399,7 +402,7 @@ One must be mindful of the side effects of the sega saturn architecture : the VD
 
 ![](img/11_second_background_19.gif)
 
-The final code for the example :
+The final code for the example:
 
 ```cpp
 #include <srl.hpp>
