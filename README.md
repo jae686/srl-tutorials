@@ -120,14 +120,33 @@
     - A note on interaction with images from VDP1
     - Final Example code
 
-## 12 - 3D Model Animation
+## 12 -   2nd Interlude : putting everything together in a simple project
+
+- Main Goals
+- A primer on state machines
+- Phase 1 (move cube along vdp2 plane)
+  - Goals
+  - Design
+  - Implementation
+- Phase 2 (background parallax)
+  - Goals
+  - Implementation
+- Phase 3 (placing objects on top VDP2 plane)
+  - Goals
+  - Implementation
+- Phase 4 (game logic)
+  - Goals
+- Phase 5 (fine tunning)
+
+
+## 13 - 3D Model Animation
 
 - T.B.D.
 
-## 13 - Input Handling - Revisited
+## 14 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 14 - 2nd Interlude : putting everything together
+## 15 - 2nd Interlude : putting everything together
