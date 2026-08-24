@@ -32,6 +32,7 @@ At this point we have 2 elements in the project :
 - The cube.
 - The VDP2 RBG0 plane.
 
+The cube will be representing our *kart*, that will be represented into its own class, and the VDP2 RBG plane will represent the ground / track.
 
 
 ## Milestone 2
