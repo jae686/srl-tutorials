@@ -138,15 +138,83 @@ This is the result :
 
 
 At this point , have we Kart at location (0.0 , 0.0 , 0.0) and the camera is at (0.0, -5.5, -12.5).
+The VDP2 RBG Plane is rotated 90º on the X axis, and it will be our ground plane.
 
 > [!NOTE]
 > Remember that our UP is -Y
 
+Part of this code is based on a [VDP2 plane demo](https://github.com/johannes-fetz/joengine/blob/556d081146211b6a1cfa6591d70f9487d406758b/Samples/demo%20-%20vdp2%20plane/main.c) for jo_engine
 
-#### Input
+#### Input implementation
 
-We will take a 
+In our case, we will transform the VDP2 plane (rotation and translation) while keeping our camera and kart still.
 
+We will do this in the following steps :
+
+- Set the angle of rotation , based on player input
+- Set the movement speed, also based on player input
+- Based on the angle and movement speed, determine the translation we must apply to the RBG plane.
+- Apply the corresponding transforms.
+- draw the kart
+- profit.
+
+##### Variables
+
+```cpp
+Digital port(0); // our controler port class
+
+Angle rotY;                 // Angle of rotatiom
+int movement_speed = 0;     // Movement speed
+Fxp angle_increment = 0.0f; // Angle increment
+
+```
+
+##### Input Handling
+
+Input handling at this time is pretty strait forward (this code is inside the program loop).
+
+```cpp
+
+if(port.IsConnected())
+        {
+            SRL::Debug::Print(1,2, "Connected");
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Up))
+            {
+                if(movement_speed < 60)
+                {
+                    movement_speed += 10;
+                }  
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Down))
+            {
+                if(movement_speed > 0)
+                {
+                    movement_speed -= 10;
+                }                
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Left))
+            {
+                angle_increment -= 1.0;
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Right))
+            {
+                angle_increment += 1.0;
+            }
+        }
+
+``` 
+
+##### Calculate the transforms
+
+```cpp
+rotZ += SRL::Math::Angle::FromDegrees(angle_increment / 2); // update the rotation angle
+angle_increment = angle_increment * 4.0 / 5.0; // ??
+myTranslation -= Vector3D(SRL::Math::Trigonometry::Sin(rotZ) * movement_speed / 10 , SRL::Math::Trigonometry::Cos(rotZ) * movement_speed / 10, 0.0);    // calculate our new translation
+```
 
 
 
