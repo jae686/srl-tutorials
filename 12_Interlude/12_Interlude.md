@@ -486,6 +486,37 @@ int main()
 
 The goal of this milestone is to set a NGB plane (or planes) on the background and make them rotate to give a parallax effect.
 
+As the source of our background , we will be using a background image from [freestylized.com](https://freestylized.com/all-skybox/) (thank you for the suggestion @reyeme).
+We will process the image in order to make it acceptable for use on the sega saturn : We will resize it to 512 x 128 at 8bpp
+
+![](img/resized.png)
+
+And since we only want to scroll, but not scale or rotate, we will use NGB2 plane.
+
+We will load it with just a few lines of code :
+
+```cpp
+
+ // init our NGB2 plane
+
+    SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("SKY.TGA"); 
+    SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+    delete MyBmp;
+
+    SRL::VDP2::NBG2::LoadTilemap(*Tile);
+    SRL::VDP2::NBG2::ScrollEnable();
+
+```
+
+This is the result :
+
+![](img/12_Interlude_03.gif)
+
+Now we have to pan background the left / right to add depth to our game.
+
+
+
+
 ## Milestone 3
 
 The goal of this milestone is to add objects on top of the VDP2 plane
