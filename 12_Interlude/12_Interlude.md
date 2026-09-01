@@ -576,6 +576,149 @@ This is the result :
 
 ![](img/12_Interlude_04.gif)
 
+And since we have placed the RBG0 plane inside a class, we shall do the same for the background :
+
+```cpp
+
+class backgroundPlane
+{
+    public :
+    backgroundPlane(char * name)
+    {
+        SRL::Bitmap::TGA* MyBmp = new SRL::Bitmap::TGA("SKY.TGA"); 
+        SRL::Tilemap::Interfaces::Bmp2Tile* Tile = new SRL::Tilemap::Interfaces::Bmp2Tile(*MyBmp,1);
+        delete MyBmp;
+        SRL::VDP2::NBG2::LoadTilemap(*Tile);
+    }
+
+    void enable()
+    {
+        SRL::VDP2::NBG2::ScrollEnable();
+    }
+
+    void disable()
+    {
+        SRL::VDP2::NBG2::ScrollDisable();
+    }
+
+    void setPosition(Vector2D & pos)
+    {
+        SRL::VDP2::NBG2::SetPosition(pos);
+    }
+
+};
+
+```
+
+And the final code at the end of the second milestone :
+
+```cpp
+
+#include <srl.hpp>
+#include "modelObject.hpp"
+#include "kart.hpp"
+#include "planes.hpp"
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Math::Types;
+using namespace SRL::Input;
+
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Debug::Print(1,1, "VDP2 - Interlude");
+
+    Digital port(0);
+
+    kart k("CUBE_X.NYA");
+    floorPlane floor("CHK.TGA");
+    floor.enable();    
+
+    backgroundPlane background("SKY.TGA");
+    background.enable();    
+    // init our NGB2 plane
+
+    Vector2D backgroundOffset = Vector2D();
+    Fxp backgroundOffsetIncrement = 0.0;
+    Vector3D cameraLocation = Vector3D(0, -5.5, -12.5);
+    Vector3D lightDirection = Vector3D(0.2, 0.0, 0.2);
+    Vector3D myTranslation = Vector3D();
+
+    Angle rotZ;
+    int movement_speed = 0;
+    Fxp angle_increment = 0.0f;
+
+    SRL::Scene3D::SetDirectionalLight(lightDirection);
+    SRL::Scene3D::SetDepthDisplayLevel(4);
+
+    // Main program loop
+    while(1)
+    {
+        SRL::Debug::Print(1,2, "RotZ %f", rotZ.ToDegrees());
+        if(port.IsConnected())
+        {
+            if(port.IsHeld(SRL::Input::Digital::Button::Up))
+            {
+                if(movement_speed < 60)
+                {
+                    movement_speed += 3;
+                }  
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Down))
+            {
+                if(movement_speed > 0)
+                {
+                    movement_speed -= 3;
+                }                
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Left))
+            {
+                angle_increment -= 1.0;
+                backgroundOffsetIncrement -= 5.0;
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Right))
+            {
+                angle_increment += 1.0;
+                backgroundOffsetIncrement += 5.0;
+            }
+        }
+               
+        rotZ += SRL::Math::Angle::FromDegrees(angle_increment / 2);
+        angle_increment = angle_increment * 4.0 / 5.0;
+
+        backgroundOffset.X += backgroundOffsetIncrement;
+        backgroundOffsetIncrement = backgroundOffsetIncrement * 4.0 / 5.0;
+        background.setPosition(backgroundOffset);
+
+        myTranslation -= Vector3D(SRL::Math::Trigonometry::Sin(rotZ) * movement_speed / 10 , SRL::Math::Trigonometry::Cos(rotZ) * movement_speed / 10, 0.0);        
+        SRL::Scene3D::LoadIdentity();
+        SRL::Scene3D::LookAt(cameraLocation, Vector3D() , Angle::FromDegrees(0.0));
+        SRL::Scene3D::RotateX(Angle::FromDegrees(90.0));
+        SRL::Scene3D::PushMatrix();
+        SRL::Scene3D::RotateZ(rotZ);             
+        SRL::Scene3D::Translate(myTranslation);      
+        floor.SetCurrentTransform();
+        SRL::Scene3D::PopMatrix();
+        SRL::Scene3D::RotateZ(SRL::Math::Angle::FromDegrees(90));
+        SRL::Scene3D::Scale(Vector3D(2.0)); 
+        
+        k.Draw();
+        
+        // Refresh screen
+        SRL::Core::Synchronize();
+             
+    }
+
+    return 0;
+}
+
+```
+
 ## Milestone 3
 
 The goal of this milestone is to add objects on top of the VDP2 plane
