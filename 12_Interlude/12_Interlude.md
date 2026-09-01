@@ -562,11 +562,11 @@ The input handling code now looks like this :
             }
         }
 
-´´´
+```
 
 And after the input handling code :
 
-´´´cpp
+```cpp
 backgroundOffset.X += backgroundOffsetIncrement; // add the increment
 backgroundOffsetIncrement = backgroundOffsetIncrement * 4.0 / 5.0; // makes the increment converge to 0 if you don´t press any button.
 SRL::VDP2::NBG2::SetPosition(backgroundOffset);
