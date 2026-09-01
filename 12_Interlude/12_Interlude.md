@@ -212,7 +212,7 @@ if(port.IsConnected())
 
 ```cpp
 rotZ += SRL::Math::Angle::FromDegrees(angle_increment / 2); // update the rotation angle
-angle_increment = angle_increment * 4.0 / 5.0; // ??
+angle_increment = angle_increment * 4.0 / 5.0; // this makes the increment smaller each frame, making the rotating have a smoother standstill
 myTranslation -= Vector3D(SRL::Math::Trigonometry::Sin(rotZ) * movement_speed / 10 , SRL::Math::Trigonometry::Cos(rotZ) * movement_speed / 10, 0.0);    // calculate our new translation
 ```
 
@@ -512,10 +512,69 @@ This is the result :
 
 ![](img/12_Interlude_03.gif)
 
-Now we have to pan background the left / right to add depth to our game.
+Now we have to pan background the left or right to add depth to our game.
 
+We will declare 2 variables : a `Vector2D` containing the offset that will be passed to the `SRL::VDP2::NGB2::SetPosition`, and a `Fxp` variable containing the increment amount.
 
+```cpp
 
+Vector2D backgroundOffset = Vector2D();
+Fxp backgroundOffsetIncrement = 0.0;
+
+```
+
+And now we modify out increment when the Left or Right pad is pressed.
+
+The input handling code now looks like this :
+
+```cpp
+
+ if(port.IsConnected())
+        {
+            
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Up))
+            {
+                if(movement_speed < 60)
+                {
+                    movement_speed += 3;
+                }  
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Down))
+            {
+                if(movement_speed > 0)
+                {
+                    movement_speed -= 3;
+                }                
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Left))
+            {
+                angle_increment -= 1.0;
+                backgroundOffsetIncrement -= 5.0;
+            }
+
+            if(port.IsHeld(SRL::Input::Digital::Button::Right))
+            {
+                angle_increment += 1.0;
+                backgroundOffsetIncrement += 5.0;
+            }
+        }
+
+´´´
+
+And after the input handling code :
+
+´´´cpp
+backgroundOffset.X += backgroundOffsetIncrement; // add the increment
+backgroundOffsetIncrement = backgroundOffsetIncrement * 4.0 / 5.0; // makes the increment converge to 0 if you don´t press any button.
+SRL::VDP2::NBG2::SetPosition(backgroundOffset);
+```
+
+This is the result :
+
+![](img/12_Interlude_04.gif)
 
 ## Milestone 3
 
