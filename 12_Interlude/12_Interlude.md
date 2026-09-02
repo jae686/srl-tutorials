@@ -721,7 +721,44 @@ int main()
 
 ## Milestone 3
 
-The goal of this milestone is to add objects on top of the VDP2 plane
+The Goal of this milestone is to give some...polish.
+First we will replace the cube by a cart, and then we will make the model tilt slightly when we turn.
+
+We will use a model provided by reyme
+
+![](img/12_Interlude_05.png)
+
+We export it using the `ModelExporter` described [chapter 09](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md).
+
+We replace the filename in out kart class to load our exporter `NYA` file, from our cube to our "Kart".
+
+```cpp
+kart k("KART.NYA");
+```
+
+And after some rotations to get our kart to be upright and in the correct position, we get :
+
+![](img/12_Interlude_06.gif)
+
+However......it feels stiff.
+
+It would be nice to have the kart to tilt when we turn, returning to the centered position. For this is enough to use the `angle_increment` variable (since it returns to 0 if we don't press the RIGHT or LEFT on the DPAD).
+
+This can be done by applying a rotation before we draw our kart :
+
+```cpp
+
+ SRL::Scene3D::RotateY(SRL::Math::Angle::FromDegrees(angle_increment));
+
+```
+
+And this is the result so far :
+
+![](img/12_Interlude_07.gif)
+
+Adding this type of motion makes the project feel more polished.
+
+
 
 ## Milestone 4
 
