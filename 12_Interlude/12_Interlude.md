@@ -742,7 +742,7 @@ And after some rotations to get our kart to be upright and in the correct positi
 
 However......it feels stiff.
 
-It would be nice to have the kart to tilt when we turn, returning to the centered position. For this is enough to use the `angle_increment` variable (since it returns to 0 if we don't press the RIGHT or LEFT on the DPAD).
+It would be nice to have the kart to tilt when we turn, returning to the centered position when we stop turning. For this is enough to use the `angle_increment` variable (since it returns to 0 if we don't press the RIGHT or LEFT on the DPAD).
 
 This can be done by applying a rotation before we draw our kart :
 
