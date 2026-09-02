@@ -758,6 +758,24 @@ And this is the result so far :
 
 Adding this type of motion makes the project feel more polished.
 
+We can also vary the cart angle of turn according to the speed.
+
+We can define a variable to hold a factor depended on the movement speed :
+
+```cpp
+Fxp speed_factor = ((Fxp::Convert(movement_speed) / 60.0) * 6.0) + 1.0 ; 
+```
+
+Then we have to update the cart rotation function :
+
+```cpp
+SRL::Scene3D::RotateY(SRL::Math::Angle::FromDegrees(angle_increment * speed_factor));
+```
+
+And this is the result:
+
+![](img/12_Interlude_08.gif)
+
 
 
 ## Milestone 4
