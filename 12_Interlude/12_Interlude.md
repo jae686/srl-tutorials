@@ -486,7 +486,7 @@ int main()
 
 The goal of this milestone is to set a NGB plane (or planes) on the background and make them rotate to give a parallax effect.
 
-As the source of our background , we will be using a background image from [freestylized.com](https://freestylized.com/all-skybox/) (thank you for the suggestion @reyeme).
+As the source of our background , we will be using a background image from [freestylized.com](https://freestylized.com/all-skybox/) (thank you for the suggestion [reyeme](https://github.com/ReyeMe) ).
 We will process the image in order to make it acceptable for use on the sega saturn : We will resize it to 512 x 128 at 8bpp
 
 ![](img/resized.png)
@@ -780,7 +780,34 @@ And this is the result:
 
 ## Milestone 4
 
-The goal is to introduce a simple game logic
+The goal is to add a racing track. To do this, we will make a 512x512 tileset in aseprite :
+
+![](img/12_Interlude_09.png)
+
+We will use the process described on [chapter 08](../08_first_background/08_first_background.md).
+
+Therefore, we re-write the constructor of the class responsible for the floor, in order to load the tileset :
+
+```cpp
+floorPlane(char *name)
+    {
+        auto Tile = new SRL::Tilemap::Interfaces::CubeTile(name);
+        SRL::VDP2::RBG0::LoadTilemap(*Tile);
+        delete Tile;
+        SRL::VDP2::RBG0::SetPriority(SRL::VDP2::Priority::Layer2);
+        SRL::VDP2::RBG0::SetRotationMode(SRL::VDP2::RotationMode::TwoAxis);
+    }
+```
+
+Now we have our kart, on our track :
+
+![](img/12_Interlude_10.png)
+
+However, our kart is not on the track, at the start position. We can determine the correct staring position by printing the X and Y coords , move that cart to our desired start position and then initialize the initial position with those values:
+
+![](img/12_Interlude_11.png)
+
+
 
 ## Milestone 5
 
