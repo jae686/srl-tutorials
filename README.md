@@ -120,14 +120,37 @@
     - A note on interaction with images from VDP1
     - Final Example code
 
-## 12 - 3D Model Animation
+## 12 - Sounds
+
+- CDDA
+- Wave samples
+
+## [13 - 2nd Interlude : putting everything together in a simple project](13_Interlude/13_Interlude.md)
+
+- Main Goals
+- Milestone 1 (move cube along vdp2 plane with user input)
+  - Goals
+  - Design
+  - Implementation
+  - Baseline
+  - Input Implementation
+- Milestone 2 (background parallax)
+  - Goals
+  - Implementation
+- Milestone 3 (placing objects on top VDP2 plane)
+  - Goals
+  - Implementation
+- Milestone 4 (Adding race track)
+  - Goals
+
+## 13 - 3D Model Animation
 
 - T.B.D.
 
-## 13 - Input Handling - Revisited
+## 14 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 14 - 2nd Interlude : putting everything together
+## 15 - 3rd Interlude : putting everything together
