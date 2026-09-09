@@ -125,7 +125,7 @@
 - CDDA
 - Wave samples
 
-## 13 - 2nd Interlude : putting everything together in a simple project
+## [13 - 2nd Interlude : putting everything together in a simple project](13_Interlude/13_Interlude.md)
 
 - Main Goals
 - Milestone 1 (move cube along vdp2 plane with user input)
@@ -153,4 +153,4 @@
 - Analogue Gamepad
 - Light Pistol
 
-## 15 - 2nd Interlude : putting everything together
+## 15 - 3rd Interlude : putting everything together
