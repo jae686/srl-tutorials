@@ -803,12 +803,4 @@ Now we can drive our cart along our track.
 
 ![](img/13_Interlude_12.gif)
 
-However, we cave no collision, nor tracking of laps.
-
-## Milestone 5
-
-
-
-T.B.D.
-
-
+Since this interlude is getting quite long, we will leave the game logic, collisions, etc for a future chapter.
