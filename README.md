@@ -120,23 +120,28 @@
     - A note on interaction with images from VDP1
     - Final Example code
 
-## 12 - 2nd Interlude : putting everything together in a simple project
+## 12 - Sounds
+
+- CDDA
+- Wave samples
+
+## 13 - 2nd Interlude : putting everything together in a simple project
 
 - Main Goals
-- A primer on finite state machines
 - Milestone 1 (move cube along vdp2 plane with user input)
   - Goals
   - Design
   - Implementation
+  - Baseline
+  - Input Implementation
 - Milestone 2 (background parallax)
   - Goals
   - Implementation
 - Milestone 3 (placing objects on top VDP2 plane)
   - Goals
   - Implementation
-- Milestone 4 (game logic)
+- Milestone 4 (Adding race track)
   - Goals
-- Milestone 5 (fine tunning)
 
 ## 13 - 3D Model Animation
 
