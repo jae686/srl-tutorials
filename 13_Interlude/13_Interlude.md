@@ -134,7 +134,7 @@ int main()
 
 This is the result :
 
-![](img/12_Interlude_01.png)
+![](img/13_Interlude_01.png)
 
 
 At this point , have we Kart at location (0.0 , 0.0 , 0.0) and the camera is at (0.0, -5.5, -12.5).
@@ -332,7 +332,7 @@ int main()
 
 This is the end result for the 1st milestone:
 
-![](img/12_Interlude_02.gif)
+![](img/13_Interlude_02.gif)
 
 However, we can wrap out RBG0 initialization related functions into a separate class. This will allow us to have a smaller `main()` function.
 
@@ -510,7 +510,7 @@ We will load it with just a few lines of code :
 
 This is the result :
 
-![](img/12_Interlude_03.gif)
+![](img/13_Interlude_03.gif)
 
 Now we have to pan background the left or right to add depth to our game.
 
@@ -574,7 +574,7 @@ SRL::VDP2::NBG2::SetPosition(backgroundOffset);
 
 This is the result :
 
-![](img/12_Interlude_04.gif)
+![](img/13_Interlude_04.gif)
 
 And since we have placed the RBG0 plane inside a class, we shall do the same for the background :
 
@@ -726,7 +726,7 @@ First we will replace the cube by a cart, and then we will make the model tilt s
 
 We will use a model provided by reyme
 
-![](img/12_Interlude_05.png)
+![](img/13_Interlude_05.png)
 
 We export it using the `ModelExporter` described [chapter 09](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md).
 
@@ -738,7 +738,7 @@ kart k("KART.NYA");
 
 And after some rotations to get our kart to be upright and in the correct position, we get :
 
-![](img/12_Interlude_06.gif)
+![](img/13_Interlude_06.gif)
 
 However......it feels stiff.
 
@@ -754,7 +754,7 @@ This can be done by applying a rotation before we draw our kart :
 
 And this is the result so far :
 
-![](img/12_Interlude_07.gif)
+![](img/13_Interlude_07.gif)
 
 Adding this type of motion makes the project feel more polished.
 
@@ -774,13 +774,13 @@ SRL::Scene3D::RotateY(SRL::Math::Angle::FromDegrees(angle_increment * speed_fact
 
 And this is the result:
 
-![](img/12_Interlude_08.gif)
+![](img/13_Interlude_08.gif)
 
 ## Milestone 4
 
 The goal is to add a racing track. To do this, we will make a 512x512 tileset in aseprite :
 
-![](img/12_Interlude_09.png)
+![](img/13_Interlude_09.png)
 
 We will use the process described on [chapter 08](../08_first_background/08_first_background.md).
 
@@ -799,15 +799,15 @@ floorPlane(char *name)
 
 Now we have our kart, on our track :
 
-![](img/12_Interlude_10.png)
+![](img/13_Interlude_10.png)
 
 However, our kart is not on the track, at the start position. We can determine the correct staring position by printing the X and Y coords , move that cart to our desired start position and then initialize the initial position with those values:
 
-![](img/12_Interlude_11.png)
+![](img/13_Interlude_11.png)
 
 Now we can drive our cart along our track.
 
-![](img/12_Interlude_12.gif)
+![](img/13_Interlude_12.gif)
 
 However, we cave no collision, nor tracking of laps.
 
