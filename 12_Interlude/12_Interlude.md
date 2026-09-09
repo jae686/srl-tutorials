@@ -776,8 +776,6 @@ And this is the result:
 
 ![](img/12_Interlude_08.gif)
 
-
-
 ## Milestone 4
 
 The goal is to add a racing track. To do this, we will make a 512x512 tileset in aseprite :
@@ -786,7 +784,7 @@ The goal is to add a racing track. To do this, we will make a 512x512 tileset in
 
 We will use the process described on [chapter 08](../08_first_background/08_first_background.md).
 
-Therefore, we re-write the constructor of the class responsible for the floor, in order to load the tileset :
+Therefore, we re-write the constructor of the class responsible for the floor, in order to load the tileset:
 
 ```cpp
 floorPlane(char *name)
@@ -807,9 +805,15 @@ However, our kart is not on the track, at the start position. We can determine t
 
 ![](img/12_Interlude_11.png)
 
+Now we can drive our cart along our track.
 
+![](img/12_Interlude_12.gif)
+
+However, we cave no collision, nor tracking of laps.
 
 ## Milestone 5
+
+
 
 T.B.D.
 
