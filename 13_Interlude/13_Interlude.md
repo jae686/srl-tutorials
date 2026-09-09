@@ -2,7 +2,7 @@
 
 ## Main Goals
 
-The main goal is to consolidate the topics covered on the previous tutorial series into a *simple* mario kart clone :
+The main goal is to consolidate the topics covered on the previous tutorial series into a *simple* , very bare bones, mario kart clone :
 
 - Use VDP1 for sprites and 3D models
 - Use VDP2 for background ,  ground plane and GUI elements
@@ -10,12 +10,6 @@ The main goal is to consolidate the topics covered on the previous tutorial seri
 - Make extensive use of C++ features (OOP)
 
 In order to make this project we will start with the previous chapter as a baseline.
-
-We will have classes representing the major blocks of the project, and a simple FSM (Finite state machine), to manage the state of the entities on it.
-
-## A Primer on state machines
-
-TODO
 
 ## Milestone 1
 
@@ -34,15 +28,15 @@ At this point we have 2 elements in the project :
 - The cube.
 - The VDP2 RBG0 plane.
 
-The cube will be representing our *kart* (a cube for now), that will be represented into its own class, and the VDP2 RBG plane will represent the ground / track.
-~
-The camera will be behind the kart, and the kart will be at the center of the screen. Up and Down will move our cube forward and backward, relative to the cube's orientation, and Left and Right will rotate the cube along the Z axis.
+The cube will be representing our *cart* (a cube for now), that will be represented into its own class, and the VDP2 RBG plane will represent the ground / track.
+
+The camera will be behind the cart, and the cart will be at the center of the screen. Up and Down will move our cube forward and backward, relative to the cube's orientation, and Left and Right will rotate the cube along the Z axis.
 
 ### Implementation
 
 #### Baseline
 
-In order to represent the Kart, we will define the following class, into its own header :
+In order to represent the cart, we will define the following class, into its own header :
 
 ```cpp
 
@@ -137,7 +131,7 @@ This is the result :
 ![](img/13_Interlude_01.png)
 
 
-At this point , have we Kart at location (0.0 , 0.0 , 0.0) and the camera is at (0.0, -5.5, -12.5).
+At this point , have we cart at location (0.0 , 0.0 , 0.0) and the camera is at (0.0, -5.5, -12.5).
 The VDP2 RBG Plane is rotated 90º on the X axis, and it will be our ground plane.
 
 > [!NOTE]
@@ -147,7 +141,7 @@ Part of this code is based on a [VDP2 plane demo](https://github.com/johannes-fe
 
 #### Input implementation
 
-In our case, we will transform the VDP2 plane (rotation and translation) while keeping our camera and kart still.
+In our case, we will transform the VDP2 plane (rotation and translation) while keeping our camera and cart still.
 
 We will do this in the following steps :
 
@@ -155,7 +149,7 @@ We will do this in the following steps :
 - Set the movement speed, also based on player input
 - Based on the angle and movement speed, determine the translation we must apply to the RBG plane.
 - Apply the corresponding transforms.
-- draw the kart
+- draw the cart
 - profit.
 
 ##### Variables
@@ -730,21 +724,21 @@ We will use a model provided by reyme
 
 We export it using the `ModelExporter` described [chapter 09](../09_3D_model_pipeline_part_1/09_3D_model_pipeline_part_1.md).
 
-We replace the filename in out kart class to load our exporter `NYA` file, from our cube to our "Kart".
+We replace the filename in out cart class to load our exporter `NYA` file, from our cube to our "cart".
 
 ```cpp
 kart k("KART.NYA");
 ```
 
-And after some rotations to get our kart to be upright and in the correct position, we get :
+And after some rotations to get our cart to be upright and in the correct position, we get :
 
 ![](img/13_Interlude_06.gif)
 
 However......it feels stiff.
 
-It would be nice to have the kart to tilt when we turn, returning to the centered position when we stop turning. For this is enough to use the `angle_increment` variable (since it returns to 0 if we don't press the RIGHT or LEFT on the DPAD).
+It would be nice to have the cart to tilt when we turn, returning to the centered position when we stop turning. For this is enough to use the `angle_increment` variable (since it returns to 0 if we don't press the RIGHT or LEFT on the DPAD).
 
-This can be done by applying a rotation before we draw our kart :
+This can be done by applying a rotation before we draw our cart :
 
 ```cpp
 
@@ -797,11 +791,11 @@ floorPlane(char *name)
     }
 ```
 
-Now we have our kart, on our track :
+Now we have our cart, on our track :
 
 ![](img/13_Interlude_10.png)
 
-However, our kart is not on the track, at the start position. We can determine the correct staring position by printing the X and Y coords , move that cart to our desired start position and then initialize the initial position with those values:
+However, our cart is not on the track, at the start position. We can determine the correct staring position by printing the X and Y coords , move that cart to our desired start position and then initialize the initial position with those values:
 
 ![](img/13_Interlude_11.png)
 
