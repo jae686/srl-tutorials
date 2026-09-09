@@ -1,0 +1,67 @@
+# Audio
+
+As for the audio options on the sega saturn, we can place it in two categories :
+
+- CDDA audio (CD tracks)
+- PCM Audio
+
+## CDDA Audio
+
+### Overview
+
+CDDA audio is nothing more than music tracks stored on the CD. No CPU usage, very low memory requirements. Audio is streamed directly from the CD drive.
+
+You put mp3, ogg or WAV files into the `cd/music` folder. If you used a sample project as recommended on [chapter 01](../01_hello_world/01_hello_world.md), the compile scripts will take care of generating the ISO with the corresponding audio tracks.
+
+In order to interact with CDDA audio, SRL provides the [`SRL::Sound::Cdda`](https://srl.reye.me/classSRL_1_1Sound_1_1Cdda.html) class.
+
+With this class we can :
+
+- Play a single CD Audio track
+- Play a range of CD audio tracks
+- Set Volume
+- Stop / Pause 
+
+### CDDA usage
+
+In order to use the CDDA audio tracks in your SRL project , you must:
+
+- Set the option `SRL_USE_SGL_SOUND_DRIVER` to `1` in the `Makefile` of your project. Otherwise `SRL::Sound::Cdda` wont be available!
+- Add the audio files into the `cd/music` folder.
+- Call `SRL::Sound::Cdda::PlaySingle(TrackNumber, false);`
+
+> [!NOTE]
+> Track 1 is the DATA track of the CD !
+
+> [!NOTE]
+> Tracks are sorted by filename. In case of doubt , check the `.cue` file for track information.
+
+Its that simple!
+
+Sample code :
+
+```cpp
+
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Input;
+
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Debug::Print(1,1, "Audio");
+    SRL::Sound::Cdda::PlaySingle(2, false);
+
+    // Main program loop
+    while(1)
+    {
+        SRL::Core::Synchronize();      
+    }
+
+    return 0;
+}
+
+```
