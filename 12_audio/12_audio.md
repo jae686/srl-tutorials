@@ -30,7 +30,7 @@ In order to use the CDDA audio tracks in your SRL project , you must:
 - Add the audio files into the `cd/music` folder.
 - Call `SRL::Sound::Cdda::PlaySingle(TrackNumber, false);`
 
-> [!NOTE]
+> [!IMPORTANT]
 > Track 1 is the DATA track of the CD !
 
 > [!NOTE]
