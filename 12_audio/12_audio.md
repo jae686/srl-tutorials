@@ -98,14 +98,14 @@ int main()
 
 SRL also provides data analysis on the audio track being played.
 
-This is provided through the `SRL::Sound::Cdda::Analysis` class.
+This is provided through the [`SRL::Sound::Cdda::Analysis`](https://srl.reye.me/classSRL_1_1Sound_1_1Cdda_1_1Analysis.html) class.
 
 We can get trough this class, in real time:
 
 - The Volume Frequency Analysis (The volume of the High, Mid and Low Frequencies)
 - The Volume on Right and Left channels.
 
-To enable this, you must set the option `SRL_ENABLE_FREQ_ANALYSIS` to `1`.
+To enable this, you must set the option `SRL_ENABLE_FREQ_ANALYSIS` to `1` in the `Makefile` of your project.
 This will load a DSP program to perform this analysis. Obviously it requires the SGL sound driver.
 
 In you program, you must start the analysis program. is is done by :
@@ -114,3 +114,40 @@ In you program, you must start the analysis program. is is done by :
 SRL::Sound::Cdda::Analysis::Start();
 ```
 
+
+
+Then, inside the render loop, we can obtain the volume of each frequency rage (Low, Mid, High) by using :
+
+```cpp
+SRL::Sound::Cdda::Analysis::GetFrequencyVolume();
+```
+
+Example :
+
+```cpp
+auto volume = SRL::Sound::Cdda::Analysis::GetFrequencyVolume();
+auto highV = volume.Highs;
+auto midV = volume.Mids;
+auto lowV = volume.Lows;
+```
+
+> [!NOTE]
+> We are using the `auto` keyword for convenience (this is modern c++). 
+> The [`SRL::Sound::Cdda::Analysis::GetFrequencyVolume();`](https://srl.reye.me/classSRL_1_1Sound_1_1Cdda_1_1Analysis_ab2d7195e12d754ac5250584a3400fdf9.html#ab2d7195e12d754ac5250584a3400fdf9) returns a [`FrequencyVolume` struct](https://srl.reye.me/structSRL_1_1Sound_1_1Cdda_1_1Analysis_1_1FrequencyVolume.html). Inside this struck, resulting values for hig, mid and low have the `uint16_t` type.
+
+For the whole volume we use :
+
+```cpp
+auto volumeT = SRL::Sound::Cdda::Analysis::GetTotalVolume();
+```
+
+Example :
+
+```cpp
+auto volumeT = SRL::Sound::Cdda::Analysis::GetTotalVolume();
+auto leftC = volumeT.LeftChannel;
+auto rightC = volumeT.RightChannel;
+```
+
+> [!NOTE]
+> We are using the `auto` keyword for convenience (this is modern c++). The resulting values have the `uint16_t` type.
