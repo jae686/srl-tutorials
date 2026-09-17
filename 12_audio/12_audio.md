@@ -151,3 +151,44 @@ auto rightC = volumeT.RightChannel;
 
 > [!NOTE]
 > We are using the `auto` keyword for convenience (this is modern c++). The resulting values have the `uint16_t` type.
+
+It might be useful to get those return values in the Fxp format (Fixed Point) so that we can use it for scaling
+We can achieve this byte shifting to the left by 5 and creating a `Fxp` value from the result.
+
+For example :
+
+```cpp
+
+Fxp volF = Fxp::BuildRaw(volumeT << 5);
+
+```
+
+Now we can use this to scale a quad according to the sound that is playing on CDDA.
+
+We will get the sprite from [chapter 03](../03_first_sprite/03_sprites.md), and use the volume to scale the sprite:
+
+First we load the sprite like we did on [chapter 03](../03_first_sprite/03_sprites.md#sprite-loading), on our `main()` before the render loop:
+
+```cpp
+//Load TGA
+SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA("TEST.TGA"); // Loads TGA file into main RAM
+int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);    // Loads TGA into VDP1
+delete tga;
+```
+
+Then we get the volume from the `SRL::Sound::Cdda::Analysis`, get a fixed point value from it and use it to create a `Vector2D` with the scale factor:
+
+```cpp
+// get volume data
+auto volumeT = SRL::Sound::Cdda::Analysis::GetTotalVolume();
+auto leftC = volumeT.LeftChannel;
+auto rightC = volumeT.RightChannel;           
+Fxp VolF = Fxp::BuildRaw(leftC << 5);
+
+//use the volume to create the scale vector, and pass it to DrawSprite
+Vector2D scale = Vector2D(VolF + 1.0);
+SRL::Scene2D::ZoomPoint zp = SRL::Scene2D::ZoomPoint::Center;
+Angle SpriteAngle = Angle::FromDegrees(0.0);
+SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle, scale, zp);
+
+```
