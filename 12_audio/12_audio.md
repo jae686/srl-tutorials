@@ -193,7 +193,7 @@ SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle, sca
 
 ```
 
-![](https://github.com/user-attachments/assets/9d02f3dd-9917-4d5d-9c7d-63fd1bd442ae)
+https://github.com/user-attachments/assets/9d02f3dd-9917-4d5d-9c7d-63fd1bd442ae
 
 
 
