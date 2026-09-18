@@ -193,8 +193,4 @@ SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle, sca
 
 ```
 
-![](mp4/12_audio_01.mp4)
-
-<video width="320" height="240" controls>
-  <source src="mp4/12_audio_01.mp4" type="video/mp4">
-</video>
+![Video Here](mp4/12_audio_01.mp4)
