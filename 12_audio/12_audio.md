@@ -5,6 +5,9 @@ As for the audio options on the sega saturn, we can place it in two categories :
 - CDDA audio (CD tracks)
 - PCM Audio
 
+> [!IMPORTANT]
+> Advanced topics like `RawPCM` loading, `xorriso` options, audio panning will be covered at a later tutorial.
+
 ## CDDA Audio
 
 ### Overview
