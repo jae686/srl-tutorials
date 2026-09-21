@@ -196,7 +196,7 @@ https://github.com/user-attachments/assets/9d02f3dd-9917-4d5d-9c7d-63fd1bd442ae
 ## PCM Audio
 
 PCM (Pulse Code Modulation) audio allows to play sound samples in real time on the saturn.
-Currently SRL has support for 4 stereo channels.
+Currently SRL has support for 4 stereo channels. This means 4 stereo sounds can be played at the same time.
 
 SRL provides the `SRL::Sound::Pcm` class to manage PCM sounds playback.
 The samples are loaded into memory and then we play them as we need.
@@ -222,3 +222,35 @@ SRL::Sound::Pcm::WaveSound* copter = lwnew SRL::Sound::Pcm::WaveSound("COPTER.WA
 > The `new` allocator allocates the new object into hwram.
 > We will cover this in a later tutorial.
 
+In order to play the sound, we invoke the [`PlayOnChannel`](https://srl.reye.me/classSRL_1_1Sound_1_1Pcm_1_1IPcmFile_a4b088aaafc2a0707a0306aae0ae3429e.html#a4b088aaafc2a0707a0306aae0ae3429e) or the [`Play`](https://srl.reye.me/classSRL_1_1Sound_1_1Pcm_1_1IPcmFile_a097c1192e9b51d15ea462e9eef033acf.html#a097c1192e9b51d15ea462e9eef033acf) method.
+
+If you use the `Play` method, SRL will attempt to play on the first free channel.
+If you use the `PlayOnChannel` method, you will have to specify the channel you wish to use. 
+
+In both of these methods you can also define the volume (from 0 to 127) and the audio panning.
+
+> [!NOTE]
+> Audio panning will be covered at a late tutorial.
+
+Example :
+
+```cpp
+copter->PlayOnChannel(0);
+```
+
+Using the audio from the SRL samples, we will modify our example to play a sound upon a keypress:
+
+First we load our sound sample, inside our `main()` , before the render loop:
+
+```cpp
+ SRL::Sound::Pcm::WaveSound* copter = lwnew SRL::Sound::Pcm::WaveSound("COPTER.WAV"); // Stereo, 16bit
+```
+
+and inside our render loop, where we handle input we add:
+
+```cpp
+if(port.WasPressed(SRL::Input::Digital::Button::X))
+{
+    copter->Play();
+}
+```
