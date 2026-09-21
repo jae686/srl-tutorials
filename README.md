@@ -120,10 +120,12 @@
     - A note on interaction with images from VDP1
     - Final Example code
 
-## 12 - Sounds
+## [12 - Audio : A start](12_audio/12_audio.md)
 
-- CDDA
-- Wave samples
+- CDDA Usage
+- CDDA Audio Analysis
+- PCM Audio
+  - WAV Format
 
 ## [13 - 2nd Interlude : putting everything together in a simple project](13_Interlude/13_Interlude.md)
 
