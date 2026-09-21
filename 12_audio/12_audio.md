@@ -254,3 +254,103 @@ if(port.WasPressed(SRL::Input::Digital::Button::X))
     copter->Play();
 }
 ```
+
+Current example code for this tutorial:
+
+```cpp
+#include <srl.hpp>
+
+// Using to shorten names for Vector and HighColor
+using namespace SRL::Types;
+using namespace SRL::Input;
+using namespace SRL::Math::Types;
+
+int main()
+{
+    // Initialize library
+    SRL::Core::Initialize(HighColor(0x31, 0x14, 0x32));
+    SRL::Debug::Print(1,1, "Audio"); 
+
+    Digital port(0);
+
+    int track_nr = 2;
+
+    SRL::Sound::Cdda::Analysis::Start();
+
+    Fxp min = 0.0;
+    Fxp max = 0.0;
+
+    //Load TGA
+    SRL::Bitmap::TGA *tga = new SRL::Bitmap::TGA("TEST.TGA"); // Loads TGA file into main RAM
+    int32_t textureIndex = SRL::VDP1::TryLoadTexture(tga);    // Loads TGA into VDP1
+    delete tga;
+
+    SRL::Sound::Pcm::WaveSound* copter = lwnew SRL::Sound::Pcm::WaveSound("COPTER.WAV"); // Stereo, 16bit
+
+    // Main program loop
+    while(1)
+    {
+        SRL::Debug::Print(1,2, "Track nr %d", track_nr);
+        
+        if(port.IsConnected())
+        {
+            if(port.WasPressed(SRL::Input::Digital::Button::A))
+            {
+                SRL::Sound::Cdda::PlaySingle(track_nr, false);
+            }
+
+            if(port.WasPressed(SRL::Input::Digital::Button::B))
+            {
+                SRL::Sound::Cdda::StopPause();
+            }
+
+            if(port.WasPressed(SRL::Input::Digital::Button::X))
+            {
+                copter->Play();
+            }
+
+            if(port.WasPressed(SRL::Input::Digital::Button::Up))
+            {
+                track_nr < 4 ? track_nr++ : track_nr = 4; 
+                min = 0.0;
+                max = 0.0;
+            }
+
+            if(port.WasPressed(SRL::Input::Digital::Button::Down))
+            {
+                track_nr > 2 ? track_nr-- : track_nr = 2;
+                min = 0.0;
+                max = 0.0;
+            }
+        }
+        
+        auto volumeT = SRL::Sound::Cdda::Analysis::GetTotalVolume();
+        auto leftC = volumeT.LeftChannel;
+        auto rightC = volumeT.RightChannel;           
+              
+        Fxp VolF = Fxp::BuildRaw(leftC << 5);
+
+        if(VolF < min)
+        {
+            min = VolF;
+        }
+
+        if(VolF > max)
+        {
+          max = VolF;
+        }
+
+        SRL::Debug::Print(1,3, "curr %f , min %f, max %f", VolF, min, max);
+
+        Vector2D scale = Vector2D(VolF + 1.0);
+        SRL::Scene2D::ZoomPoint zp = SRL::Scene2D::ZoomPoint::Center;
+        Angle SpriteAngle = Angle::FromDegrees(0.0);
+        SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle, scale, zp);
+
+        SRL::Core::Synchronize();      
+    }
+
+    return 0;
+}
+
+```
