@@ -1,4 +1,4 @@
-# Audio
+# Audio: A start
 
 As for the audio options on the sega saturn, we can place it in two categories :
 
@@ -114,8 +114,6 @@ In you program, you must start the analysis program. is is done by :
 SRL::Sound::Cdda::Analysis::Start();
 ```
 
-
-
 Then, inside the render loop, we can obtain the volume of each frequency rage (Low, Mid, High) by using :
 
 ```cpp
@@ -195,6 +193,32 @@ SRL::Scene2D::DrawSprite(textureIndex, Vector3D(0.0, 0.0, 500), SpriteAngle, sca
 
 https://github.com/user-attachments/assets/9d02f3dd-9917-4d5d-9c7d-63fd1bd442ae
 
+## PCM Audio
 
+PCM (Pulse Code Modulation) audio allows to play sound samples in real time on the saturn.
+Currently SRL has support for 4 stereo channels.
 
+SRL provides the `SRL::Sound::Pcm` class to manage PCM sounds playback.
+The samples are loaded into memory and then we play them as we need.
+
+### File formats
+
+The file formats supported are WAV and PCM.
+The recommended sampling rate is 22Khz
+
+In order to play any sound, we must first load them from the CD.
+
+### WAV format
+
+In order to load a WAV file, SRL provides the `SRL::Sound::Pcm::WaveSound` class.
+Usage Example (code excerpt from SRL audio sample):
+
+```cpp
+SRL::Sound::Pcm::WaveSound* copter = lwnew SRL::Sound::Pcm::WaveSound("COPTER.WAV");
+```
+
+> [!NOTE]
+> SRL provides the `lwnew` allocator. This allocator allocates the object into the low working ram (lwram) of the sega saturn.
+> The `new` allocator allocates the new object into hwram.
+> We will cover this in a later tutorial.
 
