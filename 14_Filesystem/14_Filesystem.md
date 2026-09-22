@@ -6,7 +6,7 @@ On SRL, as of 09/2026, the only filesystem available is the filesystem present o
 
 On your SRL project, all files and directories placed under the `cd` directory are copied into the cd filesystem.
 
-File names are subject to the 8.3 format.
+*File names are subject to the 8.3 format.*
 
 ### CD specific options
 
