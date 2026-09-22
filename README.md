@@ -145,14 +145,16 @@
 - Milestone 4 (Adding race track)
   - Goals
 
-## 13 - 3D Model Animation
+## 14 - Filesystem
+
+## 14 - 3D Model Animation
 
 - T.B.D.
 
-## 14 - Input Handling - Revisited
+## 15 - Input Handling - Revisited
 
 - Peripheral management.
 - Analogue Gamepad
 - Light Pistol
 
-## 15 - 3rd Interlude : putting everything together
+## 16 - 3rd Interlude : putting everything together
